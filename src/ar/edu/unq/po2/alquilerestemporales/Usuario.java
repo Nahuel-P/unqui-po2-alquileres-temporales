@@ -2,6 +2,7 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.OptionalDouble;
 
 public class Usuario implements ICalificable{
 	
@@ -54,12 +55,7 @@ public class Usuario implements ICalificable{
 
 	@Override
 	public Double getPromedioCalificacion() {
-		Double sum = 0.0;
-	    for (Calificacion calificacion: this.calificaciones) {
-	        sum += calificacion.getCalificacion();
-	    }
-
-	    return (sum/calificaciones.size()); // Esto cambiarlo a stream
+		return calificaciones.stream().mapToDouble(calificacion-> calificacion.getCalificacion()).average().orElse(0.0);
 	}
 
 	@Override
