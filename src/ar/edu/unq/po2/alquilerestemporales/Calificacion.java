@@ -8,9 +8,9 @@ public class Calificacion {
 		return 1;
 	}
 	
-	public Object getComentario() {
+	public String getComentario() {
 		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	

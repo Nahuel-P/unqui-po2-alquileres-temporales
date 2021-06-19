@@ -59,8 +59,9 @@ public class Usuario implements ICalificable{
 
 	@Override
 	public ArrayList<String> getComentarios() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<String> comentarios = new ArrayList<String>();
+		calificaciones.stream().forEach(calificacion -> comentarios.add(calificacion.getComentario()));
+		return comentarios;
 	}
 
 	@Override
