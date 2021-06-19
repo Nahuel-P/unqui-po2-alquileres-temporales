@@ -24,6 +24,7 @@ class UsuarioTestCase {
 	@Mock Calificacion calificacion1;
 	@Mock Calificacion calificacion2;
 	@Mock Calificacion calificacion3;
+	private CasillaEmail casillaEmail;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -95,11 +96,4 @@ class UsuarioTestCase {
 		assertEquals(promedioCalificaciones, promedioUsuario);
 		assertEquals(comentarios, usuario.getComentarios());
 	}
-	
-	@Test
-	void testCasillaDeMail() {
-		
-	}
-	
-
 }
