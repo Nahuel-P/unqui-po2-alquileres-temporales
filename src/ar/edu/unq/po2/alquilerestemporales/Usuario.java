@@ -2,7 +2,6 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.OptionalDouble;
 
 public class Usuario implements ICalificable{
 	
