@@ -89,6 +89,20 @@ public class Publicacion {
 		// TODO Auto-generated method stub
 		return fotos;
 	}
+
+
+
+	public Object getInmueble() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public Object getPropietario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
