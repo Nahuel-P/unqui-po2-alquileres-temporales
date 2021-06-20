@@ -26,7 +26,6 @@ public class Publicacion {
 		this.setFotos(fotos);
 	}
 	
-	
 
 	public ArrayList<String> mostrarDatos() {
 		return null;
@@ -57,7 +56,10 @@ public class Publicacion {
 	}
 
 	public void setInmueble(Inmueble inm) {
-		// TODO Auto-generated method stub
+
+		//no se verifica si ya hay un inmueble elegido, porque se asume que el usuario puede
+		//cambiar y pisar el inmueble elegido anteriormente
+		
 		this.inmueble = inm;
 	}
 
@@ -65,16 +67,23 @@ public class Publicacion {
 		return checkIn;
 	}
 
-	public void setCheckIn(LocalTime checkIn) {
-		this.checkIn = checkIn;
+	public void setCheckIn(LocalTime chIn) {
+		
+			this.checkIn = chIn;
 	}
 
 	public LocalTime getCheckOut() {
 		return checkOut;
 	}
 
-	public void setCheckOut(LocalTime checkOut) {
-		this.checkOut = checkOut;
+	public void setCheckOut(LocalTime chOut) {
+		
+		if(chOut.isBefore(checkIn)) {
+			this.checkOut = chOut;
+		} else {
+			System.out.println("El horario de check-out, debe ser menor al horario de check-in");
+		}
+		
 	}
 
 	public double getPrecioBase() {
@@ -92,9 +101,9 @@ public class Publicacion {
 
 
 
-	public Object getInmueble() {
+	public Inmueble getInmueble() {
 		// TODO Auto-generated method stub
-		return null;
+		return inmueble;
 	}
 
 
