@@ -41,12 +41,21 @@ public class Publicacion {
 	}
 	
 	public void agregarUnaFoto(Foto foto) {
-		this.getFotos().add(foto);
+		
+		if((!this.getFotos().contains(foto)) &&
+				(!espacioParaFotosLleno())) {
+			this.getFotos().add(foto);
+		} else {
+			System.out.println("No es posible subir esta foto");
+		}
 	}
 
-	
+	private boolean espacioParaFotosLleno() {
+		return this.getFotos().size() >= 5;
+	}
+
+
 	public void setFormasDePago(ArrayList<FormaDePago> formDePago) {
-		// TODO Auto-generated method stub
 		this.formasDePago = formDePago;
 	}
 	
@@ -94,7 +103,7 @@ public class Publicacion {
 		this.precioBase = precioBase;
 	}
 	
-	private ArrayList<Foto> getFotos() {
+	public ArrayList<Foto> getFotos() {
 		// TODO Auto-generated method stub
 		return fotos;
 	}
