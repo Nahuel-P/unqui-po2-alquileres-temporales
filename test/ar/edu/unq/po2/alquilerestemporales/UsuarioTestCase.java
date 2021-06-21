@@ -103,3 +103,11 @@ class UsuarioTestCase {
 	}
 }
 
+<<<<<<< HEAD
+
+
+
+
+//PRUEBA
+=======
+>>>>>>> e44dc607e031c0d340a18f2d898fa60697eeac1f

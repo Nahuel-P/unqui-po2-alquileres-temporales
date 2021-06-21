@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class WebReservas {
 
 	private ArrayList<Usuario> usuarios;
-	private BibliotecaDeReservas bibliotecaReservas;
+	private BibliotecaDePublicaciones bibliotecaDePublicaciones;
 	private ArrayList<CategoriaCalificable> categoriasCalificables;
 	private ArrayList<TipoDeInmueble> tiposDeInmueble;
 	private ArrayList<Servicio> servicios;
 
 	public WebReservas() {
 		this.usuarios = new ArrayList<Usuario>();
-		this.bibliotecaReservas = new BibliotecaDeReservas();
+		this.bibliotecaDePublicaciones = new BibliotecaDePublicaciones();
 		this.categoriasCalificables = new ArrayList<CategoriaCalificable>();
 		this.tiposDeInmueble = new ArrayList<TipoDeInmueble>();
 		this.servicios = new ArrayList<Servicio>();
@@ -23,7 +23,7 @@ public class WebReservas {
 	}
 	
 	public ArrayList<Publicacion> getPublicaciones() {
-		return this.bibliotecaReservas.getPublicaciones();
+		return this.bibliotecaDePublicaciones.getPublicaciones();
 	}
 	
 	public ArrayList<CategoriaCalificable> getCategoriasCalificables() {
@@ -60,7 +60,7 @@ public class WebReservas {
 
 	public void publicar(Usuario usu, Publicacion publicacion) {
 		if(esUsuarioRegistado(usu) && esPropietarioDePublicacion(usu,publicacion)) {
-			this.bibliotecaReservas.cargarPublicacion(publicacion);
+			this.bibliotecaDePublicaciones.cargarPublicacion(publicacion);
 		}
 		else {
 			System.out.println("Usuario invalido para dar de alta publicacion");
