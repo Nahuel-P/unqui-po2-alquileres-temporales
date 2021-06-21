@@ -68,8 +68,30 @@ public class WebReservas {
 	}
 	
 	public void addTipoDeInmueble(String nuevoTipo) {
-		this.tiposDeInmueble.add(nuevoTipo);
-		
+		if(!hayTipoDeInmueble(nuevoTipo)) {
+			this.tiposDeInmueble.add(nuevoTipo);
+		}
+		else {
+			System.out.println("Ya existe el tipo de inmueble"+nuevoTipo);
+		}
+	}
+	
+	public void addCategoriaCalificable(String nombreCategoria) {
+		if(!hayCategoria(nombreCategoria)) {
+			this.tiposDeInmueble.add(nombreCategoria);
+		}
+		else {
+			System.out.println("Ya existe la categoria"+nombreCategoria);
+		}
+	}
+
+	public void addServicio(String nombreServicio) {
+		if(!hayServicio(nombreServicio)) {
+			this.tiposDeInmueble.add(nombreServicio);
+		}
+		else {
+			System.out.println("Ya existe el servicio"+nombreServicio);
+		}
 	}
 
 	// metodos privados de encapsulamiento
@@ -80,13 +102,19 @@ public class WebReservas {
 	private boolean esPropietarioDePublicacion(Usuario usu, Publicacion publicacion) {
 		return publicacion.getPropietario().equals(usu);
 	}
+	
+	private boolean hayTipoDeInmueble(String tipoDeInmueble) {
+		return this.getTiposDeInmueble().contains(tipoDeInmueble);
+	}
+	
+	private boolean hayCategoria(String nombreCategoria) {
+		return this.getCategoriasCalificables().contains(nombreCategoria);
+	}
+	
+	private boolean hayServicio(String nombreServicio) {
+		return this.getServicios().contains(nombreServicio);
+	}
 
 
-
-
-	
-	
-	
-	
 	
 }
