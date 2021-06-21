@@ -2,7 +2,9 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -29,6 +31,8 @@ class PublicacionTestCase {
 	private Debito debito;
 	private Credito credito;
 	private Efectivo efectivo;
+	private PrecioTemporal precioTemporal;
+	private Publicacion publicacion2;
 	
 
 	@BeforeEach
@@ -51,6 +55,11 @@ class PublicacionTestCase {
 		formasDePago = new ArrayList <FormaDePago>(); 
 		fotos = new ArrayList <Foto>() ;
 		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, formasDePago);
+		publicacion2 = mock(Publicacion.class);
+		/*desde = LocalDate.of(2021,06,20);
+		hasta = LocalDate.of(2021,10,20);
+		precioEspecial = 100;*/
+		precioTemporal = mock(PrecioTemporal.class);
 		
 	}
 	
@@ -141,6 +150,41 @@ class PublicacionTestCase {
 		assertTrue(resultado4.containsAll(formasDePago));
 	}
 	
+	@Test
 	
+	void testPublicacionConFechaCoincidenteConPrecioTemporal() {
+		double precioTest = 100;
+		when(this.precioTemporal.getPrecio()).thenReturn(precioTest);
+		when(this.precioTemporal.getInicio()).thenReturn(LocalDate.of(2021,01,01));
+		when(this.precioTemporal.getFinal()).thenReturn(LocalDate.of(2021,10,20));
+		
+		this.publicacion.establecerPrecioTemporal(precioTemporal);
+		this.publicacion.verificadorDePrecio();
+		
+		double precioFinal = this.publicacion.getPrecioBase();
+		
+		
+		assertEquals(precioFinal, precioTemporal.getPrecio());
+		
+	}
+	
+@Test
+	
+	void testPublicacionConFechaNOCoincidenteConPrecioTemporal() {
+		
+	double precioTest = 100;
+		when(this.precioTemporal.getPrecio()).thenReturn(precioTest);
+		when(this.precioTemporal.getInicio()).thenReturn(LocalDate.of(2021,10,20));
+		when(this.precioTemporal.getFinal()).thenReturn(LocalDate.of(2021,10,25));
+		
+		this.publicacion.establecerPrecioTemporal(precioTemporal);
+		this.publicacion.verificadorDePrecio();
+		
+		double precioFinal = this.publicacion.getPrecioBase();
+		
+		
+		assertEquals(precioFinal, 0);
+		
+	}
 
 }
