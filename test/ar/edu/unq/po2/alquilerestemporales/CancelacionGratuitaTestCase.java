@@ -21,16 +21,20 @@ class CancelacionGratuitaTestCase {
 	
 	@Test
 	void testCancelacionGratuitaEnPlazo() {
-		when(this.reserva.enPlazoDeCancelacion()).thenReturn(false);
-		double resultado = this.cancelacion.aplicarCostosDeCancelacion(reserva);
-		assertEquals(0, resultado);
+		when(this.reserva.enPlazoDeCancelacion()).thenReturn(true);
+		
+		float resultado = this.cancelacion.aplicarCostosDeCancelacion(reserva);
+		assertEquals(0f, resultado);
 	}
 	
 	@Test
-	void testCancelacionGratuitaFueraDelPlazo() {
+	void testCancelacionGratuitaFueraDePlazoSeCobraDosDias() {
 		when(this.reserva.enPlazoDeCancelacion()).thenReturn(false);
-		when(this.reserva.costoDeCancelacion()).thenReturn(200.00);
-		double resultado = this.cancelacion.aplicarCostosDeCancelacion(reserva);
-		assertEquals(200.00, resultado);
+		when(this.reserva.costoPorDia()).thenReturn(200f);
+		
+		float resultado = this.cancelacion.aplicarCostosDeCancelacion(reserva);
+		assertEquals(400f, resultado);
 	}
+	
+
 }

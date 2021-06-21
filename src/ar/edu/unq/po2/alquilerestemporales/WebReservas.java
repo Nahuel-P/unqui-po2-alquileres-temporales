@@ -6,16 +6,16 @@ public class WebReservas {
 
 	private ArrayList<Usuario> usuarios;
 	private BibliotecaDePublicaciones bibliotecaDePublicaciones;
-	private ArrayList<CategoriaCalificable> categoriasCalificables;
-	private ArrayList<TipoDeInmueble> tiposDeInmueble;
-	private ArrayList<Servicio> servicios;
+	private ArrayList<String> categoriasCalificables;
+	private ArrayList<String> tiposDeInmueble;
+	private ArrayList<String> servicios;
 
 	public WebReservas() {
 		this.usuarios = new ArrayList<Usuario>();
 		this.bibliotecaDePublicaciones = new BibliotecaDePublicaciones();
-		this.categoriasCalificables = new ArrayList<CategoriaCalificable>();
-		this.tiposDeInmueble = new ArrayList<TipoDeInmueble>();
-		this.servicios = new ArrayList<Servicio>();
+		this.categoriasCalificables = new ArrayList<String>();
+		this.tiposDeInmueble = new ArrayList<String>();
+		this.servicios = new ArrayList<String>();
 	}
 	
 	public ArrayList<Usuario> getUsuarios() {
@@ -26,15 +26,15 @@ public class WebReservas {
 		return this.bibliotecaDePublicaciones.getPublicaciones();
 	}
 	
-	public ArrayList<CategoriaCalificable> getCategoriasCalificables() {
+	public ArrayList<String> getCategoriasCalificables() {
 		return this.categoriasCalificables;
 	}
 	
-	public ArrayList<TipoDeInmueble> getTiposDeInmueble() {
+	public ArrayList<String> getTiposDeInmueble() {
 		return this.tiposDeInmueble;
 	}
 	
-	public ArrayList<Servicio> getServicios() {
+	public ArrayList<String> getServicios() {
 		return this.servicios;
 	}
 	
@@ -66,6 +66,11 @@ public class WebReservas {
 			System.out.println("Usuario invalido para dar de alta publicacion");
 		}
 	}
+	
+	public void addTipoDeInmueble(String nuevoTipo) {
+		this.tiposDeInmueble.add(nuevoTipo);
+		
+	}
 
 	// metodos privados de encapsulamiento
 	private boolean esUsuarioRegistado(Usuario usu) {
@@ -75,6 +80,8 @@ public class WebReservas {
 	private boolean esPropietarioDePublicacion(Usuario usu, Publicacion publicacion) {
 		return publicacion.getPropietario().equals(usu);
 	}
+
+
 
 
 	
