@@ -31,19 +31,19 @@ class UsuarioTestCase {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		this.nombreYApellidoDeUsuario = "Pepito Gómez";
+		this.nombreYApellidoDeUsuario = "Pepito Gï¿½mez";
 		this.direccion = "Calle Falsa 123";
 		this.telefono = "123654789";
 		this.fechaDeAlta = LocalDate.now();
-		this.nombreYApellidoDeUsuario2 = "Pepita Gómez";
+		this.nombreYApellidoDeUsuario2 = "Pepita Gï¿½mez";
 		this.direccion2="Avenida Siempre Viva 742";
 		this.telefono2= "987456321";
 		calificacion1 = mock(Calificacion.class);
 		calificacion2 = mock(Calificacion.class);
 		calificacion3 = mock(Calificacion.class);
-		comentarioCalificacionBaja = "Mal propietario, contestaba mal";
-		comentarioCalificacionMedia = "Propietario normal, me dejó las llaves y se fue";
-		comentarioCalificacionAlta = "Buen propietario, me hizo la cena y todo, re copado el tipo";
+		comentarioCalificacionBaja = "Mal propietario, contestaba mal.";
+		comentarioCalificacionMedia = "Propietario normal, me dejï¿½ las llaves y se fue.";
+		comentarioCalificacionAlta = "Buen propietario, me hizo la cena y todo, re copado el tipo.";
 		casillaEmail = mock(CasillaEmail.class);
 		this.usuario = new Usuario(nombreYApellidoDeUsuario, direccion, telefono, fechaDeAlta, casillaEmail);
 	}
@@ -101,6 +101,7 @@ class UsuarioTestCase {
 	void testUsuarioTieneCasillaDeMail(){
 		assertNotNull(this.usuario.getCasillaEmail());
 	}
+	
+	
+	// Testear usuario tiene biblioteca de calificaciones
 }
-
-

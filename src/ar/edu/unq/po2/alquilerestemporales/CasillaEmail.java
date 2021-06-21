@@ -11,5 +11,21 @@ public class CasillaEmail {
 		this.direccion = direccion;
 		inbox = new ArrayList<String>();
 	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public ArrayList<String> getInbox() {
+		return this.inbox;
+	}
+
+	public void recibirMail(String nuevoMail) {
+		this.inbox.add(nuevoMail);		
+	}
+
+	public void enviarMail(CasillaEmail casillaDeMail, String nuevoMail) {
+		casillaDeMail.recibirMail(nuevoMail);
+	}
 	
 }

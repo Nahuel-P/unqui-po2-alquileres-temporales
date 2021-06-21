@@ -104,22 +104,25 @@ public class Publicacion {
 	}
 	
 	public ArrayList<Foto> getFotos() {
-		// TODO Auto-generated method stub
 		return fotos;
 	}
 
 
 
 	public Inmueble getInmueble() {
-		// TODO Auto-generated method stub
 		return inmueble;
 	}
 
 
 
 	public Object getPropietario() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public ArrayList<FormaDePago> getFormasDePago() {
+		
+		return formasDePago;
 	}
 	
 

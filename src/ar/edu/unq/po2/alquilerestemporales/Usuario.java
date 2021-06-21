@@ -10,7 +10,7 @@ public class Usuario implements ICalificable{
 	private String direccion;
 	private String telefono;
 	private LocalDate fechaDeAlta;
-	private ArrayList<Calificacion> calificaciones;
+	private BibliotecaDeCalificaciones bibliotecaDeCalificaciones;
 	private CasillaEmail casillaEmail;
 	
 	public Usuario(String nombreYApellido, String direccion, String telefono, LocalDate fechaDeAlta, CasillaEmail casillaEmail) {
@@ -18,8 +18,8 @@ public class Usuario implements ICalificable{
 		this.setDireccion(direccion);
 		this.setTelefono(telefono);
 		this.fechaDeAlta = fechaDeAlta;
-		this.calificaciones = new ArrayList<Calificacion>();
 		this.casillaEmail = casillaEmail;
+		this.bibliotecaDeCalificaciones = new BibliotecaDeCalificaciones();
 	}
 
 	public String getNombreYApellido() {
@@ -52,22 +52,20 @@ public class Usuario implements ICalificable{
 
 	@Override
 	public Double getPromedioCalificacion() {
-		return calificaciones.stream().mapToDouble(calificacion-> calificacion.getCalificacion()).average().orElse(0.0);
+		return this.bibliotecaDeCalificaciones.getPromedioCalificacion();
 	}
 
 	@Override
 	public ArrayList<String> getComentarios() {
-		ArrayList<String> comentarios = new ArrayList<String>();
-		calificaciones.stream().forEach(calificacion -> comentarios.add(calificacion.getComentario()));
-		return comentarios;
+		return this.bibliotecaDeCalificaciones.getComentarios();
 	}
 
 	@Override
 	public void addCalificacion(Calificacion calificacion) {
-		this.calificaciones.add(calificacion);
-	}//esto esta mal
+		this.bibliotecaDeCalificaciones.addCalificacion(calificacion);
+	}
 
-	public Object getCasillaEmail() {
+	public CasillaEmail getCasillaEmail() {
 		return this.casillaEmail;
 	}
 			
