@@ -1,6 +1,7 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -9,7 +10,6 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 class UsuarioTestCase {
 	private String nombreYApellidoDeUsuario;
@@ -17,32 +17,35 @@ class UsuarioTestCase {
 	private String direccion;
 	private String telefono;
 	private LocalDate fechaDeAlta;
-	private Usuario usuarioSinDatos;
 	private Usuario usuario;
 	private String direccion2;
 	private String telefono2;
-	@Mock Calificacion calificacion1;
-	@Mock Calificacion calificacion2;
-	@Mock Calificacion calificacion3;
+	private Calificacion calificacion1;
+	private Calificacion calificacion2;
+	private Calificacion calificacion3;
+	private String comentarioCalificacionBaja;
+	private String comentarioCalificacionMedia;
+	private String comentarioCalificacionAlta;
 	private CasillaEmail casillaEmail;
+	
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		this.usuarioSinDatos = new Usuario();
 		this.nombreYApellidoDeUsuario = "Pepito Gómez";
 		this.direccion = "Calle Falsa 123";
 		this.telefono = "123654789";
 		this.fechaDeAlta = LocalDate.now();
-		this.usuario = new Usuario(nombreYApellidoDeUsuario, direccion, telefono, fechaDeAlta);
 		this.nombreYApellidoDeUsuario2 = "Pepita Gómez";
 		this.direccion2="Avenida Siempre Viva 742";
 		this.telefono2= "987456321";
-		MockitoAnnotations.initMocks(this);
-	}
-	
-	@Test
-	void testCreation() {
-		assertNotNull(this.usuarioSinDatos);
+		calificacion1 = mock(Calificacion.class);
+		calificacion2 = mock(Calificacion.class);
+		calificacion3 = mock(Calificacion.class);
+		comentarioCalificacionBaja = "Mal propietario, contestaba mal";
+		comentarioCalificacionMedia = "Propietario normal, me dejó las llaves y se fue";
+		comentarioCalificacionAlta = "Buen propietario, me hizo la cena y todo, re copado el tipo";
+		casillaEmail = mock(CasillaEmail.class);
+		this.usuario = new Usuario(nombreYApellidoDeUsuario, direccion, telefono, fechaDeAlta, casillaEmail);
 	}
 	
 	@Test
@@ -68,9 +71,6 @@ class UsuarioTestCase {
 	
 	@Test
 	void testDatosCalificaciones() {
-		String comentarioCalificacionBaja = "Mal propietario, contestaba mal";
-		String comentarioCalificacionMedia = "Propietario normal, me dejó las llaves y se fue";
-		String comentarioCalificacionAlta = "Buen propietario, me hizo la cena y todo, re copado el tipo";
 		//CalificacionBaja
 		when(this.calificacion1.getCalificacion()).thenReturn(1);
 		when(this.calificacion1.getComentario()).thenReturn(comentarioCalificacionBaja);
@@ -96,4 +96,10 @@ class UsuarioTestCase {
 		assertEquals(promedioCalificaciones, promedioUsuario);
 		assertEquals(comentarios, usuario.getComentarios());
 	}
+	
+	@Test
+	void testUsuarioTieneCasillaDeMail(){
+		assertNotNull(this.usuario.getCasillaEmail());
+	}
 }
+

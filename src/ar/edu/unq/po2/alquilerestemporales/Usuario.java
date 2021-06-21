@@ -11,17 +11,15 @@ public class Usuario implements ICalificable{
 	private String telefono;
 	private LocalDate fechaDeAlta;
 	private ArrayList<Calificacion> calificaciones;
-
-	public Usuario(String nombreYApellido, String direccion, String telefono, LocalDate fechaDeAlta) {
+	private CasillaEmail casillaEmail;
+	
+	public Usuario(String nombreYApellido, String direccion, String telefono, LocalDate fechaDeAlta, CasillaEmail casillaEmail) {
 		this.setNombreYApellido(nombreYApellido);
 		this.setDireccion(direccion);
 		this.setTelefono(telefono);
 		this.fechaDeAlta = fechaDeAlta;
 		this.calificaciones = new ArrayList<Calificacion>();
-	}
-
-	public Usuario() {
-		this("", "", "", LocalDate.now());
+		this.casillaEmail = casillaEmail;
 	}
 
 	public String getNombreYApellido() {
@@ -67,6 +65,10 @@ public class Usuario implements ICalificable{
 	@Override
 	public void addCalificacion(Calificacion calificacion) {
 		this.calificaciones.add(calificacion);
+	}//esto esta mal
+
+	public Object getCasillaEmail() {
+		return this.casillaEmail;
 	}
-		
+			
 }
