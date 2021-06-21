@@ -10,11 +10,10 @@ class AdministradorTestCase {
 
 	private WebReservas web;
 	private Administrador admin;
-	private CategoriaCalificable categoria;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		web= new WebReservas();
+		web= mock(WebReservas.class);
 		admin= new Administrador(web);
 	}
 	
