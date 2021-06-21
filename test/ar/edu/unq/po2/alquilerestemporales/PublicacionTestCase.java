@@ -26,6 +26,9 @@ class PublicacionTestCase {
 	private Foto foto6;
 	private Usuario usuario;
 	private ArrayList <FormaDePago> formasDePago;
+	private Debito debito;
+	private Credito credito;
+	private Efectivo efectivo;
 	
 
 	@BeforeEach
@@ -42,6 +45,10 @@ class PublicacionTestCase {
 		foto4 = new Foto (12,6);
 		foto5 = new Foto (12,6);
 		foto6 = new Foto (12,6);
+		debito = mock(Debito.class);
+		credito = mock(Credito.class);
+		efectivo = mock(Efectivo.class);
+		formasDePago = new ArrayList <FormaDePago>(); 
 		fotos = new ArrayList <Foto>() ;
 		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, formasDePago);
 		
@@ -120,6 +127,18 @@ class PublicacionTestCase {
 		
 		int resultado3 = this.publicacion.getFotos().size();
 		assertEquals(resultado3, 5);
+	}
+	
+	@Test
+	
+	void testPublicacionTieneTresFormasDePago() {
+		this.formasDePago.add(credito);
+		this.formasDePago.add(debito);
+		this.formasDePago.add(efectivo);
+		this.publicacion.setFormasDePago(formasDePago);
+		
+		ArrayList<FormaDePago> resultado4 = this.publicacion.getFormasDePago();
+		assertTrue(resultado4.containsAll(formasDePago));
 	}
 	
 	
