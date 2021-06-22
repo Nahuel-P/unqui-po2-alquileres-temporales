@@ -1,5 +1,6 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class Publicacion {
 	private ArrayList <Foto> fotos;
 	private Usuario usuario;
 	private ArrayList <FormaDePago> formasDePago;
+	private ArrayList <PrecioTemporal> temporadasEspeciales;
 	
 	
 	public Publicacion(Inmueble inmueble, Usuario usuario, double precioBase, LocalTime checkIn, LocalTime checkOut, 
@@ -24,22 +26,23 @@ public class Publicacion {
 		this.setPrecioBase(precioBase);
 		this.setFormasDePago(formasDePago);
 		this.setFotos(fotos);
+		this.temporadasEspeciales = new ArrayList<PrecioTemporal>();
 	}
-	
-
-	public ArrayList<String> mostrarDatos() {
-		return null;
 		
+	public void establecerPrecioTemporal(PrecioTemporal precioTemporal) {
+		this.getTemporadasEspeciales().add(precioTemporal);
 	}
 	
-	public void bajarDePrecio() {
+	public void verificadorDePrecio() {
 		
+		for (PrecioTemporal temporada : this.getTemporadasEspeciales()) {
+			if(LocalDate.now().isAfter(temporada.getInicio())
+					&& LocalDate.now().isBefore(temporada.getFinal())) {
+				this.setPrecioBase(temporada.getPrecio());
+			};
+		}
 	}
-	
-	public void notificar() {
 		
-	}
-	
 	public void agregarUnaFoto(Foto foto) {
 		
 		if((!this.getFotos().contains(foto)) &&
@@ -53,6 +56,19 @@ public class Publicacion {
 	private boolean espacioParaFotosLleno() {
 		return this.getFotos().size() >= 5;
 	}
+	
+	public ArrayList<String> mostrarDatos() {
+		return null;
+		//falta implementacion
+	}
+	
+	public void bajarDePrecio() {
+		//falta implementacion		
+	}
+	
+	public void notificar() {
+		//falta implementacion		
+	}
 
 
 	public void setFormasDePago(ArrayList<FormaDePago> formDePago) {
@@ -60,7 +76,6 @@ public class Publicacion {
 	}
 	
 	public void setFotos(ArrayList<Foto> fotos2) {
-		// TODO Auto-generated method stub
 		this.fotos = fotos2;
 	}
 
@@ -92,7 +107,6 @@ public class Publicacion {
 		} else {
 			System.out.println("El horario de check-out, debe ser menor al horario de check-in");
 		}
-		
 	}
 
 	public double getPrecioBase() {
@@ -107,23 +121,22 @@ public class Publicacion {
 		return fotos;
 	}
 
-
-
 	public Inmueble getInmueble() {
 		return inmueble;
 	}
 
-
-
 	public Object getPropietario() {
-		return null;
+		return usuario;
 	}
-
 
 	public ArrayList<FormaDePago> getFormasDePago() {
 		
 		return formasDePago;
 	}
 	
+	public ArrayList<PrecioTemporal> getTemporadasEspeciales() {
+		return temporadasEspeciales;
+	}
+
 
 }
