@@ -69,7 +69,7 @@ public class WebReservas {
 	
 	public void addTipoDeInmueble(String nuevoTipo) {
 		if(!hayTipoDeInmueble(nuevoTipo)) {
-			this.tiposDeInmueble.add(nuevoTipo);
+			this.darDeAltaTipoInmueble(nuevoTipo);
 		}
 		else {
 			System.out.println("Ya existe el tipo de inmueble"+nuevoTipo);
@@ -94,7 +94,7 @@ public class WebReservas {
 		}
 	}
 
-	// metodos privados de encapsulamiento
+	// metodos de encapsulamiento
 	private boolean esUsuarioRegistado(Usuario usu) {
 		return this.getUsuarios().contains(usu);
 	}
@@ -103,16 +103,20 @@ public class WebReservas {
 		return publicacion.getPropietario().equals(usu);
 	}
 	
-	private boolean hayTipoDeInmueble(String tipoDeInmueble) {
+	public boolean hayTipoDeInmueble(String tipoDeInmueble) {
 		return this.getTiposDeInmueble().contains(tipoDeInmueble);
 	}
 	
-	private boolean hayCategoria(String nombreCategoria) {
+	public boolean hayCategoria(String nombreCategoria) {
 		return this.getCategoriasCalificables().contains(nombreCategoria);
 	}
 	
-	private boolean hayServicio(String nombreServicio) {
+	public boolean hayServicio(String nombreServicio) {
 		return this.getServicios().contains(nombreServicio);
+	}
+	
+	public void darDeAltaTipoInmueble(String nombreServicio) {
+		this.tiposDeInmueble.add(nombreServicio);
 	}
 
 
