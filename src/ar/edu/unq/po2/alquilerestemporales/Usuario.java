@@ -68,5 +68,9 @@ public class Usuario implements ICalificable{
 	public CasillaEmail getCasillaEmail() {
 		return this.casillaEmail;
 	}
+	
+	public ArrayList<Calificacion> getCalificaciones(){
+		return this.bibliotecaDeCalificaciones.getCalificaciones();
+	}
 			
 }

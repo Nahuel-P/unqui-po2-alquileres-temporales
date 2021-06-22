@@ -12,7 +12,6 @@ public class BibliotecaDeCalificaciones {
 	
 	public void addCalificacion(Calificacion calificacion) {
 		this.calificaciones.add(calificacion);
-		
 	}
 
 	public ArrayList<String> getComentarios() {
@@ -23,6 +22,10 @@ public class BibliotecaDeCalificaciones {
 
 	public Double getPromedioCalificacion() {
 		return calificaciones.stream().mapToDouble(calificacion-> calificacion.getCalificacion()).average().orElse(0.0);
+	}
+
+	public ArrayList<Calificacion> getCalificaciones() {
+		return calificaciones;
 	}
 
 }
