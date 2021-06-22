@@ -62,8 +62,14 @@ public class Publicacion {
 		//falta implementacion
 	}
 	
-	public void bajarDePrecio() {
-		//falta implementacion		
+	public void bajarDePrecio(double nuevoPrecio) {
+		if (nuevoPrecio < this.getPrecioBase()) { //Cumple extrictamente la funcion de bajar, caso contrario 
+			this.setPrecioBase(nuevoPrecio);      //se deberia utilizar otro metodo.
+			this.notificar();	
+		} else {
+			System.out.println("El precio colocado es mayor al existente");
+		}
+		
 	}
 	
 	public void notificar() {

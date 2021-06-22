@@ -54,11 +54,9 @@ class PublicacionTestCase {
 		efectivo = mock(Efectivo.class);
 		formasDePago = new ArrayList <FormaDePago>(); 
 		fotos = new ArrayList <Foto>() ;
+		precioBase = 500;
 		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, formasDePago);
 		publicacion2 = mock(Publicacion.class);
-		/*desde = LocalDate.of(2021,06,20);
-		hasta = LocalDate.of(2021,10,20);
-		precioEspecial = 100;*/
 		precioTemporal = mock(PrecioTemporal.class);
 		
 	}
@@ -168,7 +166,7 @@ class PublicacionTestCase {
 		
 	}
 	
-@Test
+	@Test
 	
 	void testPublicacionConFechaNOCoincidenteConPrecioTemporal() {
 		
@@ -183,8 +181,26 @@ class PublicacionTestCase {
 		double precioFinal = this.publicacion.getPrecioBase();
 		
 		
-		assertEquals(precioFinal, 0);
+		assertEquals(precioFinal, 500);
 		
+	}
+
+	@Test
+	
+	void testPublicacionBajaDePrecio() {
+		this.publicacion.bajarDePrecio(50);
+		
+		double resultado = this.publicacion.getPrecioBase();
+		assertEquals(resultado, 50);
+	}
+	
+@Test
+	
+	void testPublicacionNoBajaDePrecioSiElImporteColocadoEsMayorAlExistente() {
+		this.publicacion.bajarDePrecio(1000);
+		
+		double resultado = this.publicacion.getPrecioBase();
+		assertEquals(resultado, 500);
 	}
 
 }
