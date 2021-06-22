@@ -2,6 +2,7 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -33,6 +34,7 @@ class PublicacionTestCase {
 	private Efectivo efectivo;
 	private PrecioTemporal precioTemporal;
 	private Publicacion publicacion2;
+	private Observer observador;
 	
 
 	@BeforeEach
@@ -58,7 +60,7 @@ class PublicacionTestCase {
 		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, formasDePago);
 		publicacion2 = mock(Publicacion.class);
 		precioTemporal = mock(PrecioTemporal.class);
-		
+		observador = mock(Observer.class);
 	}
 	
 	@Test
@@ -82,7 +84,6 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	
 	void testNoAgregaUnCheckoutMayorAlCheckin() {
 		this.publicacion.setCheckIn(checkIn);
 		this.publicacion.setCheckOut(checkOut2);
@@ -92,7 +93,6 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	
 	void testSetPrecioBase() {
 		this.publicacion.setPrecioBase(200);
 		
@@ -100,7 +100,6 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	
 	void testSeAgreganDosFotos() {
 		this.fotos.add(foto1);
 		this.fotos.add(foto2);
@@ -111,7 +110,6 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	
 	void testNoAgregaUnaFotoExistente() {
 		this.fotos.add(foto1);
 		this.fotos.add(foto2);
@@ -123,7 +121,6 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	
 	void testNoAgregaMasDe5Fotos(){
 		this.publicacion.agregarUnaFoto(foto1);
 		this.publicacion.agregarUnaFoto(foto2);
@@ -137,7 +134,6 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	
 	void testPublicacionTieneTresFormasDePago() {
 		this.formasDePago.add(credito);
 		this.formasDePago.add(debito);
@@ -149,7 +145,6 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	
 	void testPublicacionConFechaCoincidenteConPrecioTemporal() {
 		double precioTest = 100;
 		when(this.precioTemporal.getPrecio()).thenReturn(precioTest);
@@ -160,16 +155,12 @@ class PublicacionTestCase {
 		this.publicacion.verificadorDePrecio();
 		
 		double precioFinal = this.publicacion.getPrecioBase();
-		
-		
 		assertEquals(precioFinal, precioTemporal.getPrecio());
 		
 	}
 	
 	@Test
-	
 	void testPublicacionConFechaNOCoincidenteConPrecioTemporal() {
-		
 	double precioTest = 100;
 		when(this.precioTemporal.getPrecio()).thenReturn(precioTest);
 		when(this.precioTemporal.getInicio()).thenReturn(LocalDate.of(2021,10,20));
@@ -179,14 +170,10 @@ class PublicacionTestCase {
 		this.publicacion.verificadorDePrecio();
 		
 		double precioFinal = this.publicacion.getPrecioBase();
-		
-		
 		assertEquals(precioFinal, 500);
-		
 	}
 
 	@Test
-	
 	void testPublicacionBajaDePrecio() {
 		this.publicacion.bajarDePrecio(50);
 		
@@ -194,13 +181,20 @@ class PublicacionTestCase {
 		assertEquals(resultado, 50);
 	}
 	
-@Test
-	
+	@Test
 	void testPublicacionNoBajaDePrecioSiElImporteColocadoEsMayorAlExistente() {
 		this.publicacion.bajarDePrecio(1000);
 		
 		double resultado = this.publicacion.getPrecioBase();
 		assertEquals(resultado, 500);
+	}
+	
+	@Test
+	void testPublibacionBajaDePrecioYNotificaAObservador() {
+		when(this.publicacion2.getObservador()).thenReturn(this.observador);
+		this.publicacion2.bajarDePrecio(50);
+		
+		verify(this.observador).update(this.publicacion2);
 	}
 
 }

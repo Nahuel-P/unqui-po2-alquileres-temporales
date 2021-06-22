@@ -14,6 +14,7 @@ public class Publicacion {
 	private Usuario usuario;
 	private ArrayList <FormaDePago> formasDePago;
 	private ArrayList <PrecioTemporal> temporadasEspeciales;
+	private Observer observador;
 	
 	
 	public Publicacion(Inmueble inmueble, Usuario usuario, double precioBase, LocalTime checkIn, LocalTime checkOut, 
@@ -27,6 +28,7 @@ public class Publicacion {
 		this.setFormasDePago(formasDePago);
 		this.setFotos(fotos);
 		this.temporadasEspeciales = new ArrayList<PrecioTemporal>();
+		this.observador = new Observer();
 	}
 		
 	public void establecerPrecioTemporal(PrecioTemporal precioTemporal) {
@@ -69,13 +71,11 @@ public class Publicacion {
 		} else {
 			System.out.println("El precio colocado es mayor al existente");
 		}
-		
 	}
 	
 	public void notificar() {
-		//falta implementacion		
+		this.observador.update(this);		
 	}
-
 
 	public void setFormasDePago(ArrayList<FormaDePago> formDePago) {
 		this.formasDePago = formDePago;
@@ -144,5 +144,12 @@ public class Publicacion {
 		return temporadasEspeciales;
 	}
 
+	public void setObervador(Observer observador){
+		this.observador = observador;
+	}
+
+	public Observer getObservador() {
+		return observador;
+	}
 
 }
