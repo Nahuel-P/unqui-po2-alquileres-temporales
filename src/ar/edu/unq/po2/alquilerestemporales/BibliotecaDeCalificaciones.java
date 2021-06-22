@@ -20,8 +20,8 @@ public class BibliotecaDeCalificaciones {
 		return comentarios;
 	}
 
-	public Double getPromedioCalificacion() {
-		return calificaciones.stream().mapToDouble(calificacion-> calificacion.getCalificacion()).average().orElse(0.0);
+	public float getPromedioCalificacion() {
+		return (float) calificaciones.stream().mapToDouble(calificacion-> calificacion.getCalificacion()).average().orElse(0.0);
 	}
 
 	public ArrayList<Calificacion> getCalificaciones() {

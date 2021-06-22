@@ -28,8 +28,7 @@ class UsuarioTestCase {
 	private String comentarioCalificacionMedia;
 	private String comentarioCalificacionAlta;
 	private CasillaEmail casillaEmail;
-	private BibliotecaDeCalificaciones bibliotecaDeCalificaciones;
-	private ArrayList<Calificacion> listaDeCalificaciones;
+	ArrayList<String> comentarios;
 	
 	
 	@BeforeEach
@@ -48,8 +47,12 @@ class UsuarioTestCase {
 		comentarioCalificacionMedia = "Propietario normal, me dejo las llaves y se fue.";
 		comentarioCalificacionAlta = "Buen propietario, me hizo la cena y todo, re copado el tipo.";
 		casillaEmail = mock(CasillaEmail.class);
-		bibliotecaDeCalificaciones = mock(BibliotecaDeCalificaciones.class);
 		this.usuario = new Usuario(nombreYApellidoDeUsuario, direccion, telefono, fechaDeAlta, casillaEmail);
+		
+		comentarios = new ArrayList<String>();
+		comentarios.add(comentarioCalificacionBaja);
+		comentarios.add(comentarioCalificacionMedia);
+		comentarios.add(comentarioCalificacionAlta);
 		
 	}
 	
@@ -81,49 +84,37 @@ class UsuarioTestCase {
 		int num = this.usuario.getCalificaciones().size();
 		assertEquals(2, num);
 	}
-	/*
+	
 	@Test
-	void testDatosCalificaciones() {
-	//CalificacionBaja
+	void testUsuarioRecibeCalificacionYTieneUnPromedioDeCalificaciones() {
+		//CalificacionBaja
 		when(this.calificacion1.getCalificacion()).thenReturn(1);
-		when(this.calificacion1.getComentario()).thenReturn(comentarioCalificacionBaja);
 		//CalificacionMedia
 		when(this.calificacion2.getCalificacion()).thenReturn(3);
-		when(this.calificacion2.getComentario()).thenReturn(comentarioCalificacionMedia);
 		//CalificacionAlta
 		when(this.calificacion3.getCalificacion()).thenReturn(5);
-		when(this.calificacion3.getComentario()).thenReturn(comentarioCalificacionAlta);
-		//BibliotecaDeCalificaciones - Lista de calificaciones
-		this.listaDeCalificaciones.add(calificacion1);
-		this.listaDeCalificaciones.add(calificacion2);
-		this.listaDeCalificaciones.add(calificacion3);
-		when(this.bibliotecaDeCalificaciones.getCalificaciones()).thenReturn(listaDeCalificaciones);
-		when(this.bibliotecaDeCalificaciones.getPromedioCalificacion()).thenReturn(3.0);
-		//AgregarCalificacion
-		//this.usuario.addCalificacion(calificacion1);
-		//this.usuario.addCalificacion(calificacion2);
-		//this.usuario.addCalificacion(calificacion3);
-		//PromedioCalificacion
-		Double promedioUsuario = this.usuario.getPromedioCalificacion();
-		Double promedioCalificaciones = 3.0;
-		//Comentarios
-		ArrayList<String> comentarios = new ArrayList<String>();
-		comentarios.add(comentarioCalificacionBaja);
-		comentarios.add(comentarioCalificacionMedia);
-		comentarios.add(comentarioCalificacionAlta);
-		//BibliotecaDeCalificaciones - Comentarios
-		when(this.bibliotecaDeCalificaciones.getComentarios()).thenReturn(comentarios);
-		// Verify
+		//Recibir calificaciones
+		this.usuario.addCalificacion(calificacion1);
+		this.usuario.addCalificacion(calificacion2);
+		this.usuario.addCalificacion(calificacion3);
+		float promedioUsuario = this.usuario.getPromedioCalificacion();
+		float promedioCalificaciones = 3;
 		assertEquals(promedioCalificaciones, promedioUsuario);
+	}
+	@Test
+	void testUsuarioRecibeCalificacionYObtieneUnaListaDeComentarios() {
+		when(this.calificacion1.getComentario()).thenReturn(comentarioCalificacionBaja);
+		when(this.calificacion2.getComentario()).thenReturn(comentarioCalificacionMedia);
+		when(this.calificacion3.getComentario()).thenReturn(comentarioCalificacionAlta);
+		this.usuario.addCalificacion(calificacion1);
+		this.usuario.addCalificacion(calificacion2);
+		this.usuario.addCalificacion(calificacion3);
 		assertEquals(comentarios, usuario.getComentarios());
-	}*/
-	
+		
+	}	
 	@Test
 	void testUsuarioTieneCasillaDeMail(){
 		assertNotNull(this.usuario.getCasillaEmail());
 		assertEquals(this.usuario.getCasillaEmail(), this.casillaEmail);
 	}
-	
-	
-	// Testear usuario tiene biblioteca de calificaciones
 }

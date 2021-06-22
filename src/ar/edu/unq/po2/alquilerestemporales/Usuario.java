@@ -51,7 +51,7 @@ public class Usuario implements ICalificable{
 	}
 
 	@Override
-	public Double getPromedioCalificacion() {
+	public float getPromedioCalificacion() {
 		return this.bibliotecaDeCalificaciones.getPromedioCalificacion();
 	}
 
@@ -71,6 +71,5 @@ public class Usuario implements ICalificable{
 	
 	public ArrayList<Calificacion> getCalificaciones(){
 		return this.bibliotecaDeCalificaciones.getCalificaciones();
-	}
-			
+	}		
 }
