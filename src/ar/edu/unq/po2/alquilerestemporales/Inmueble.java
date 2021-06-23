@@ -6,6 +6,11 @@ public class Inmueble {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public String getServicios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

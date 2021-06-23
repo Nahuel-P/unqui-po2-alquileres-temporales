@@ -35,7 +35,7 @@ class PublicacionTestCase {
 	private PrecioTemporal precioTemporal;
 	private Publicacion publicacion2;
 	private Observer observador;
-	
+	private IPriceObserver iobservador;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -60,7 +60,8 @@ class PublicacionTestCase {
 		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, formasDePago);
 		publicacion2 = mock(Publicacion.class);
 		precioTemporal = mock(PrecioTemporal.class);
-		observador = mock(Observer.class);
+		observador = new Observer();
+		iobservador = mock(IPriceObserver.class);
 	}
 	
 	@Test
@@ -189,12 +190,13 @@ class PublicacionTestCase {
 		assertEquals(resultado, 500);
 	}
 	
-	/*@Test
+	@Test
 	void testPublibacionBajaDePrecioYNotificaAObservador() {
-		
+		this.publicacion.setObervador(observador);
+		this.observador.attach(iobservador);
 		this.publicacion.bajarDePrecio(50);
 		
-		verify(this.publicacion.getObservador()).update(this.publicacion);
-	}*/
+		verify(iobservador).update(this.publicacion);
+	}
 
 }

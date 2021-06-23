@@ -41,7 +41,7 @@ public class Publicacion {
 			if(LocalDate.now().isAfter(temporada.getInicio())
 					&& LocalDate.now().isBefore(temporada.getFinal())) {
 				this.setPrecioBase(temporada.getPrecio());
-			};
+			}
 		}
 	}
 		
@@ -59,9 +59,14 @@ public class Publicacion {
 		return this.getFotos().size() >= 5;
 	}
 	
-	public ArrayList<String> mostrarDatos() {
-		return null;
-		//falta implementacion
+	public void mostrarDatos() {
+		System.out.println("La publicacion seleccionada tiene un precio de: $"+ this.getPrecioBase() + 
+				". El inmueble cuenta con "+ this.getInmueble().getServicios() + ". Tiene como horario de"
+						+ "checkIn las "+ this.getCheckIn()+ " hs, y como checkOut las "+this.getCheckOut());
+		if (!this.getTemporadasEspeciales().isEmpty()) {
+			System.out.println("Actualmente cuenta con "+ this.getTemporadasEspeciales().size()+ " temporadas"
+					+ " con precio especial");			
+		}
 	}
 	
 	public void bajarDePrecio(double nuevoPrecio) {
@@ -86,10 +91,8 @@ public class Publicacion {
 	}
 
 	public void setInmueble(Inmueble inm) {
-
 		//no se verifica si ya hay un inmueble elegido, porque se asume que el usuario puede
 		//cambiar y pisar el inmueble elegido anteriormente
-		
 		this.inmueble = inm;
 	}
 

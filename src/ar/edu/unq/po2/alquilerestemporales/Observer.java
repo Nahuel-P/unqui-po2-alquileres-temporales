@@ -27,4 +27,5 @@ public class Observer {
 	public ArrayList <IPriceObserver> getObservadores() {
 		return observadores;
 	}
+	
 }
