@@ -12,9 +12,8 @@ public class Observer {
 
 	public void update(Publicacion publicacion) {
 		for(IPriceObserver observador : this.getObservadores()) {
-			this.update(publicacion);
+			observador.update(publicacion);
 		}
-		
 	}
 	
 	public void attach(IPriceObserver obs) {
@@ -25,10 +24,6 @@ public class Observer {
 		this.getObservadores().remove(obs);
 	}
 
-	public void notificar(IPriceObserver obs) {
-	
-	}
-	
 	public ArrayList <IPriceObserver> getObservadores() {
 		return observadores;
 	}
