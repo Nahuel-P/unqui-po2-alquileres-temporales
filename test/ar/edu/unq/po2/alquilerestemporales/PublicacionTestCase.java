@@ -198,5 +198,27 @@ class PublicacionTestCase {
 		
 		verify(iobservador).update(this.publicacion);
 	}
-
+	
+	@Test
+	void publicacionMuestraDatos() {
+		ArrayList<String> servicios = new ArrayList <String>();
+		servicios.add("Wifi");
+		servicios.add("Aire acondicionado");
+		
+		when(inmueble.getServicios()).thenReturn(servicios);
+		
+		this.publicacion.mostrarDatos();
+	}
+	
+	@Test
+	void publicacionContemporadasEspecialesMuestraDatosEIncluyeAvisoDeTemporada() {
+		ArrayList<String> servicios = new ArrayList <String>();
+		servicios.add("Wifi");
+		servicios.add("Aire acondicionado");
+		
+		when(inmueble.getServicios()).thenReturn(servicios);
+		
+		this.publicacion.establecerPrecioTemporal(precioTemporal);
+		this.publicacion.mostrarDatos();
+	}
 }

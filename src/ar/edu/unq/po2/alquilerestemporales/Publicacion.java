@@ -65,7 +65,7 @@ public class Publicacion {
 						+ "checkIn las "+ this.getCheckIn()+ " hs, y como checkOut las "+this.getCheckOut());
 		if (!this.getTemporadasEspeciales().isEmpty()) {
 			System.out.println("Actualmente cuenta con "+ this.getTemporadasEspeciales().size()+ " temporadas"
-					+ " con precio especial");			
+					+ " con precio especial.");			
 		}
 	}
 	
