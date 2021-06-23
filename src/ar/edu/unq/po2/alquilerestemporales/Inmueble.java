@@ -79,4 +79,8 @@ public class Inmueble {
 		return servicios;
 	}
 	
+	public void agregarServicio(String servicio) {
+		this.getServicios().add(servicio);
+	}
+	
 }
