@@ -2,7 +2,7 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import java.util.ArrayList;
 
-public class Inmueble {
+public class Inmueble implements ICalificable{
 	
 	private double superficie;
 	private String pais;
@@ -11,16 +11,37 @@ public class Inmueble {
 	private int capacidad;
 	private String tipoDeInmueble;
 	private ArrayList <String>servicios;
+	private BibliotecaDeCalificaciones bibliotecaDeCalificaciones;
 
 	public Inmueble(double superficie, String pais, String ciudad, String direccion, int capacidad,
 			String tipoDeInmueble, ArrayList<String> servicios) {
-		this.superficie = superficie;
-		this.pais = pais;
-		this.ciudad = ciudad;
-		this.direccion = direccion;
-		this.capacidad = capacidad;
-		this.tipoDeInmueble = tipoDeInmueble;
-		this.servicios = servicios;
+		this.setSuperficie(superficie);
+		this.setPais(pais);
+		this.setCiudad(ciudad);
+		this.setDireccion(direccion);
+		this.setCapacidad(capacidad);
+		this.setTipoDeInmueble(tipoDeInmueble);
+		this.setServicios(servicios);
+		this.bibliotecaDeCalificaciones = new BibliotecaDeCalificaciones();
+	}
+		
+	@Override
+	public float getPromedioCalificacion() {
+		return this.bibliotecaDeCalificaciones.getPromedioCalificacion();
+	}
+
+	@Override
+	public ArrayList<String> getComentarios() {
+		return this.bibliotecaDeCalificaciones.getComentarios();
+	}
+
+	@Override
+	public void addCalificacion(Calificacion calificacion) {
+		this.bibliotecaDeCalificaciones.addCalificacion(calificacion);
+	}
+	
+	public ArrayList<Calificacion> getCalificaciones(){
+		return this.bibliotecaDeCalificaciones.getCalificaciones();
 	}
 
 	public double getSuperficie() {

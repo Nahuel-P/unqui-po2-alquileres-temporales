@@ -1,6 +1,8 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,10 @@ class InmuebleTestCase {
 	private int capacidad;
 	private String tipoDeInmueble;
 	private ArrayList <String>servicios;
-	
+	private Calificacion calificacion;
+	private Calificacion calificacion2;
+	private ArrayList<String> comentarios;
+		
 	@BeforeEach
 	void setUp() throws Exception {
 		this.inmueble = new Inmueble(superficie, pais, ciudad, direccion, capacidad, tipoDeInmueble, servicios);
@@ -28,6 +33,9 @@ class InmuebleTestCase {
 		capacidad = 5;
 		tipoDeInmueble = "Departamento";
 		servicios = new ArrayList<String>();
+		calificacion = mock(Calificacion.class);
+		calificacion2 = mock(Calificacion.class);
+		comentarios = new ArrayList<String>();
 	}
 
 	@Test
@@ -48,6 +56,35 @@ class InmuebleTestCase {
 		assertEquals(this.inmueble.getCapacidad(), 5);
 		assertEquals(this.inmueble.getTipoDeInmueble(), "Departamento");
 		assertEquals(this.inmueble.getServicios(), servicios);
+	}
+	
+	@Test
+	void testInmuebleRecibeCalificacion() {
+		this.inmueble.addCalificacion(calificacion);
+		
+		assertEquals(this.inmueble.getCalificaciones().size(), 1);
+	}
+	
+	@Test
+	void testInmuebleRecibeCalificacionYArmaListaDeComentarios() {
+		when(calificacion.getComentario()).thenReturn("Excelente lugar");
+		
+		this.inmueble.addCalificacion(calificacion);
+		
+		ArrayList<String> comentarios = this.inmueble.getComentarios();
+		assertEquals(this.inmueble.getComentarios(), comentarios);
+	}
+	
+	@Test
+	void testInmuebleDevuelveSuPromedioDeCalificaciones() {
+		when(calificacion.getCalificacion()).thenReturn(10);
+		when(calificacion2.getCalificacion()).thenReturn(20);
+		
+		this.inmueble.addCalificacion(calificacion);
+		this.inmueble.addCalificacion(calificacion2);
+		
+		float resultado = this.inmueble.getPromedioCalificacion();
+		assertEquals(resultado, 15);
 	}
 
 }
