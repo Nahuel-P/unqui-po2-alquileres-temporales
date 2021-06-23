@@ -29,4 +29,10 @@ public class BibliotecaDePublicaciones {
 		
 	}
 
+
+	public void borrar(Publicacion publi1) {
+		this.publicaciones.remove(publi1);
+		
+	}
+
 }

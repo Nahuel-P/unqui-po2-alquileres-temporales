@@ -9,10 +9,12 @@ public class WebReservas {
 	private ArrayList<String> categoriasCalificables;
 	private ArrayList<String> tiposDeInmueble;
 	private ArrayList<String> servicios;
+	private BibliotecaDeReservas bibliotecaDeReservas;
 
 	public WebReservas() {
 		this.usuarios = new ArrayList<Usuario>();
 		this.bibliotecaDePublicaciones = new BibliotecaDePublicaciones();
+		this.bibliotecaDeReservas = new BibliotecaDeReservas();
 		this.categoriasCalificables = new ArrayList<String>();
 		this.tiposDeInmueble = new ArrayList<String>();
 		this.servicios = new ArrayList<String>();
@@ -67,6 +69,14 @@ public class WebReservas {
 		}
 	}
 	
+	public void eliminarPublicacion(Usuario usu, Publicacion publicacion) {
+		if(esPropietarioDePublicacion(usu,publicacion)) {
+			this.bibliotecaDePublicaciones.borrar(publicacion);
+		}else {
+			System.out.println("Usuario invalido para dar de eliminar publicacion");
+		}
+	}
+	
 	public void addTipoDeInmueble(String nuevoTipo) {
 		if(!hayTipoDeInmueble(nuevoTipo)) {
 			this.darDeAltaTipoInmueble(nuevoTipo);
@@ -118,6 +128,30 @@ public class WebReservas {
 	public void darDeAltaTipoInmueble(String nombreServicio) {
 		this.tiposDeInmueble.add(nombreServicio);
 	}
+
+	public void solicitarReserva(Usuario usu, Reserva reserva) {
+		
+		if(this.esUsuarioRegistado(usu)) {
+			this.bibliotecaDeReservas.crearReserva(usu,reserva);
+		}
+		else {
+			System.out.println("No existe el usuario en el sistema");
+		}
+		
+	}
+
+	public ArrayList<Reserva> getTodasLasReservas() {
+		return this.bibliotecaDeReservas.getTodasReservas();
+	}
+
+	public void aceptarReserva(Usuario usu, Reserva reserva) {
+		this.bibliotecaDeReservas.concretarReserva(usu,reserva);
+		
+	}
+
+
+
+
 
 
 	

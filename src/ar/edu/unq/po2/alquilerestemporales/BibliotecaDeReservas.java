@@ -4,28 +4,27 @@ import java.util.ArrayList;
 
 public class BibliotecaDeReservas {
 
-	private ArrayList<Publicacion> publicaciones;
+	private ArrayList<Reserva> reservas;
 
 	
 	
 	public BibliotecaDeReservas() {
-
-		this.publicaciones = new ArrayList<Publicacion>();
+		this.reservas = new ArrayList<Reserva>();
 	}
 
-
-	//Modificar para no anidar tanta logica
-	public void cargarPublicacion(Publicacion publi1) {
-		if(!this.getPublicaciones().stream().anyMatch(publicacion-> (publicacion.getInmueble().equals(publi1.getInmueble())))){
-			this.publicaciones.add(publi1);
-		}
-		else {
-			System.out.println("Error en la publicacion");
-		}
+	public void crearReserva(Usuario usu, Reserva reserva) {
+		this.reservas.add(reserva);
+		
 	}
 
-	public ArrayList<Publicacion> getPublicaciones() {
-		return this.publicaciones;
+	public ArrayList<Reserva> getTodasReservas() {
+		return this.reservas;
+	}
+
+	public void concretarReserva(Usuario usu, Reserva reserva) {
+		if(reserva.getPropietario().equals(usu)) {
+			reserva.setEstado(new Aceptada());
+		}
 		
 	}
 

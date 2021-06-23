@@ -15,5 +15,14 @@ public class Reserva {
 		return 0f;
 	}
 
+	public Usuario getPropietario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setEstado(Aceptada aceptada) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
