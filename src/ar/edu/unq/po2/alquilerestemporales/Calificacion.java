@@ -1,16 +1,36 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
 public class Calificacion {
-
+	
+	private int calificacion;
+	private String comentario;
+	
+	public Calificacion(int numeroCalificacion,String comentario) {
+		this.setCalificacion(numeroCalificacion);
+		this.setComentario(comentario);
+		
+	}
 	
 	public int getCalificacion() {
-		// TODO Auto-generated method stub
-		return 1;
+		return calificacion;
 	}
 	
 	public String getComentario() {
-		// TODO Auto-generated method stub
-		return "";
+		return comentario;
+	}
+	
+	public void setCalificacion(int numeroCalificacion) {
+		if (numeroCalificacion>=1 && numeroCalificacion<=5) {
+			this.calificacion = numeroCalificacion;
+		}
+		else {
+			System.out.println("No se ha indicado el valor correcto. Ingrese un número entre 1 y 5");
+			this.calificacion = 0;
+		}
+	}
+	
+	public void setComentario(String comentario) {
+		this.comentario=comentario;
 	}
 
 	
