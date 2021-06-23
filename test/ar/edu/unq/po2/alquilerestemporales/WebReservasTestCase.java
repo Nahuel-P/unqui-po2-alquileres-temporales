@@ -18,19 +18,19 @@ class WebReservasTestCase {
 	private Inmueble inmueble1;
 	private Reserva reserva1;
 	private BibliotecaDeReservas bibliotecaDeReserva;
-	private Aceptada aceptada;
 	
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		web= new WebReservas();
+		
 		usu1= mock(Usuario.class);
 		usu2= mock(Usuario.class);
 		publi1= mock(Publicacion.class);
 		inmueble1= mock(Inmueble.class);
 		reserva1=mock(Reserva.class);
 		bibliotecaDeReserva=mock(BibliotecaDeReservas.class);
-		aceptada=mock(Aceptada.class);
+		web= new WebReservas();
+		web.asignarNuevaBiblioteca(this.bibliotecaDeReserva);
 	}
 	
 	@Test
@@ -138,27 +138,75 @@ class WebReservasTestCase {
 	void testUsuarioCreaUnaReserva() {
 		this.web.registrarUsuario(usu1);
 		this.web.solicitarReserva(usu1,reserva1);	
-		int resultado = this.web.getTodasLasReservas().size();
-		assertEquals(1, resultado);
+		verify(bibliotecaDeReserva).crearReserva(usu1,reserva1);
 	}
 	
 	@Test
 	void testUsuarioNoRegistradoNoPuedeReservar() {
 		this.web.solicitarReserva(usu1,reserva1);	
-		int resultado = this.web.getTodasLasReservas().size();
-		assertEquals(0, resultado);
+		verify(bibliotecaDeReserva,never()).crearReserva(usu1,reserva1);
+	}
+	
+	@Test
+	void testAceptarUnaReserva() {
+		when(reserva1.getPropietario()).thenReturn(usu2);
+		
+		
+		this.web.aceptarReserva(usu2,reserva1);	
+		
+		verify(bibliotecaDeReserva).concretarReserva(usu2,reserva1);
 	}
 	
 	@Test
 	void testSoloPropietarioPuedeAceptarUnaReserva() {
 		when(reserva1.getPropietario()).thenReturn(usu2);
 		
-		this.web.registrarUsuario(usu1);
-		this.web.solicitarReserva(usu1,reserva1);	
-		this.web.aceptarReserva(usu2,reserva1);	
+		this.web.aceptarReserva(usu1,reserva1);	
 		
-		verify(this.bibliotecaDeReserva,never()).concretarReserva(usu2,reserva1);
+		verify(this.bibliotecaDeReserva,never()).concretarReserva(usu1,reserva1);
 	}
+		
+	@Test
+	void testSoloPropietarioPuedeRechazarUnaReserva() {
+		when(reserva1.getPropietario()).thenReturn(usu2);
+		this.web.rechazarReserva(usu1,reserva1);	
+		
+		verify(bibliotecaDeReserva,never()).declinarReserva(usu1,reserva1);
+	}
+	
+	@Test
+	void testUnInquilinoCancelaUnaReservaPropia() {
+		
+		when(reserva1.getPropietario()).thenReturn(usu2);
+		when(reserva1.getInquilino()).thenReturn(usu1);
+		
+		this.web.registrarUsuario(usu1);
+		this.web.registrarUsuario(usu2);
+		this.web.solicitarReserva(usu1,reserva1);
+		this.web.aceptarReserva(usu2,reserva1);
+		this.web.cancelarReserva(usu1,reserva1);	
+		
+		verify(bibliotecaDeReserva).cancelar(usu1,reserva1);
+	}
+	
+	@Test
+	void testNoSePuedeCancelarReservaAjena() {
+		
+		when(reserva1.getPropietario()).thenReturn(usu1);
+		when(reserva1.getInquilino()).thenReturn(usu2);
+		
+		this.web.registrarUsuario(usu1);
+		this.web.registrarUsuario(usu2);
+		this.web.solicitarReserva(usu1,reserva1);
+		this.web.aceptarReserva(usu2,reserva1);
+		this.web.cancelarReserva(usu1,reserva1);	
+		
+		verify(bibliotecaDeReserva,never()).cancelar(usu2,reserva1);
+	}
+	
+	
+	
+
 	
 	
 }

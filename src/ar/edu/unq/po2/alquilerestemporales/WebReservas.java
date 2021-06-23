@@ -40,6 +40,15 @@ public class WebReservas {
 		return this.servicios;
 	}
 	
+	public BibliotecaDeReservas biblioteca() {
+		return this.bibliotecaDeReservas;
+	}
+	
+	public void asignarNuevaBiblioteca(BibliotecaDeReservas repoReservas) {
+		this.bibliotecaDeReservas = repoReservas;
+	}
+	
+	/*--------------------------------------------------------*/
 	public void registrarUsuario(Usuario nuevoUsuario) {
 		if(!esUsuarioRegistado(nuevoUsuario)) {
 			this.usuarios.add(nuevoUsuario);
@@ -103,6 +112,43 @@ public class WebReservas {
 			System.out.println("Ya existe el servicio"+nombreServicio);
 		}
 	}
+	
+	public void solicitarReserva(Usuario usu, Reserva reserva) {
+		if(this.esUsuarioRegistado(usu)) {
+			this.bibliotecaDeReservas.crearReserva(usu,reserva);
+		}
+		else {
+			System.out.println("No existe el usuario en el sistema");
+		}
+	}
+	
+	public void aceptarReserva(Usuario usu, Reserva reserva) {
+		if(esPropietario(usu,reserva)) {
+			this.bibliotecaDeReservas.concretarReserva(usu,reserva);
+		}
+		else {
+			System.out.println("No es el propietario");
+		}
+		
+	}
+
+	public void rechazarReserva(Usuario usu, Reserva reserva) {
+		if(esPropietario(usu,reserva)) {
+			this.bibliotecaDeReservas.declinarReserva(usu,reserva);
+		}
+		else {
+			System.out.println("No es el propietario");
+		}
+	}
+	
+	public void cancelarReserva(Usuario usu, Reserva reserva) {
+		if(this.esUsuarioRegistado(usu) && esInquilino(usu,reserva)) {
+			this.bibliotecaDeReservas.cancelar(usu,reserva);
+		}
+		else {
+			System.out.println("No existe el usuario en el sistema");
+		}
+	}
 
 	// metodos de encapsulamiento
 	private boolean esUsuarioRegistado(Usuario usu) {
@@ -129,25 +175,25 @@ public class WebReservas {
 		this.tiposDeInmueble.add(nombreServicio);
 	}
 
-	public void solicitarReserva(Usuario usu, Reserva reserva) {
-		
-		if(this.esUsuarioRegistado(usu)) {
-			this.bibliotecaDeReservas.crearReserva(usu,reserva);
-		}
-		else {
-			System.out.println("No existe el usuario en el sistema");
-		}
-		
-	}
-
 	public ArrayList<Reserva> getTodasLasReservas() {
 		return this.bibliotecaDeReservas.getTodasReservas();
 	}
-
-	public void aceptarReserva(Usuario usu, Reserva reserva) {
-		this.bibliotecaDeReservas.concretarReserva(usu,reserva);
-		
+	
+	public boolean esPropietario(Usuario usu, Reserva reserva) {
+		return reserva.getPropietario().equals(usu);
 	}
+	
+	public boolean esInquilino(Usuario usu, Reserva reserva) {
+		return reserva.getInquilino().equals(usu);
+	}
+
+
+
+	
+	
+	
+
+	
 
 
 

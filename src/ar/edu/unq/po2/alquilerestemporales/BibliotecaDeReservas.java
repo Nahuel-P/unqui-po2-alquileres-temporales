@@ -28,4 +28,19 @@ public class BibliotecaDeReservas {
 		
 	}
 
+	public void declinarReserva(Usuario usu, Reserva reserva) {
+		if(reserva.getPropietario().equals(usu)) {
+			reserva.setEstado(new Rechazada());
+		}
+		
+	}
+
+	public void cancelar(Usuario usu, Reserva reserva) {
+		if(reserva.getInquilino().equals(usu)) {
+			reserva.setEstado(new Cancelada());
+		}
+		
+	}
+
+
 }

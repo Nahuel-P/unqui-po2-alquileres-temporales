@@ -15,6 +15,7 @@ public class Reserva {
 		return 0f;
 	}
 
+	//esto retorna el dueño de la publicacion
 	public Usuario getPropietario() {
 		// TODO Auto-generated method stub
 		return null;
@@ -24,5 +25,11 @@ public class Reserva {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public Object getInquilino() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
