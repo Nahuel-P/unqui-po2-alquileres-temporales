@@ -11,4 +11,11 @@ public class Foto {
 		this.width = width;
 	}
 	
+	public double getAltura() {
+		return this.height;
+	}
+	
+	public double getAncho() {
+		return this.width;
+	}
 }
