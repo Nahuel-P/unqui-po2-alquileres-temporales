@@ -2,25 +2,34 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import java.time.LocalDate;
 
-public class PrecioTemporal {
 
-	public PrecioTemporal(double precioEspecial, LocalDate desde, LocalDate hasta) {
+public class PrecioTemporal {
+	
+	private double precioEspecial;
+	private LocalDate desde;
+	private LocalDate hasta;
+
+	public PrecioTemporal(double precioEsp, LocalDate dsd, LocalDate hst) {
+		
+		this.precioEspecial = precioEsp;
+		this.desde = dsd;
+		this.hasta = hst;
 		
 	}
 
 	public LocalDate getInicio() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return desde;
 	}
 
 	public LocalDate getFinal() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return hasta;
 	}
 
 	public double getPrecio() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return precioEspecial;
 	}
 
 }
