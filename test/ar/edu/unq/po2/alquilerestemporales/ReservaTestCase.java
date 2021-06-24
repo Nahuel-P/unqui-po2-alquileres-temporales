@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 
 class ReservaTestCase {
 	private Reserva reserva;
-	private Aceptada estadoReservaAceptada;
 	private String fechaDeIngreso;
 	private String fechaDeSalida;
 	private LocalDate fechaDeIngresoDate;
 	private LocalDate fechaDeSalidaDate;
+	private Aceptada estadoReservaAceptada;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -21,8 +21,8 @@ class ReservaTestCase {
 		this.fechaDeSalida = "2022-03-15";
 		this.fechaDeIngresoDate = LocalDate.parse(fechaDeIngreso);
 		this.fechaDeSalidaDate = LocalDate.parse(fechaDeSalida);
-		this.reserva = new Reserva(fechaDeIngresoDate, fechaDeSalidaDate);
 		this.estadoReservaAceptada = mock(Aceptada.class);
+		this.reserva = new Reserva(fechaDeIngresoDate, fechaDeSalidaDate, estadoReservaAceptada);		
 	}
 	
 	@Test
@@ -43,6 +43,12 @@ class ReservaTestCase {
 	@Test
 	void testDiferenciaDeDiasEnReserva() {
 		assertEquals(44, this.reserva.getDiferenciaDeDias());
+	}
+	
+	@Test
+	void testEstadoDeReservaAceptada() {
+		this.reserva.setEstado(estadoReservaAceptada);
+		assertEquals(this.estadoReservaAceptada, this.reserva.getEstadoDeReserva());
 	}
 	
 	

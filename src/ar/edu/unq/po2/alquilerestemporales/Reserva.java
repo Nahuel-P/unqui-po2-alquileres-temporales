@@ -7,10 +7,12 @@ import java.time.Period;
 public class Reserva {
 	private LocalDate fechaIngreso;
 	private LocalDate fechaSalida;
+	private Aceptada estadoDeReserva;
 	
-	public Reserva(LocalDate fechaIngreso, LocalDate fechaSalida ) {
+	public Reserva(LocalDate fechaIngreso, LocalDate fechaSalida, Aceptada estadoDeReserva ) {
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
+		this.estadoDeReserva = estadoDeReserva;
 	}
 
 
@@ -33,8 +35,7 @@ public class Reserva {
 	}
 
 	public void setEstado(Aceptada aceptada) {
-		// TODO Auto-generated method stub
-		
+		this.estadoDeReserva = aceptada;		
 	}
 
 	public Object getInquilino() {
@@ -55,6 +56,11 @@ public class Reserva {
 	public int getDiferenciaDeDias() {	
 		Long periodo = Duration.between(this.getFechaDeIngreso().atStartOfDay(), this.getFechaDeSalida().atStartOfDay()).toDays();
 		return periodo.intValue();
+	}
+
+
+	public Aceptada getEstadoDeReserva() {
+		return this.estadoDeReserva;
 	}
 
 
