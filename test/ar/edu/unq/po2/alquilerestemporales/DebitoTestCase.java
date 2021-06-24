@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 
 class DebitoTestCase {
 
-	private FormaDePago debito;
+	private Debito debito;
 	private String tipo;
 	private int numeroTarjeta;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		numeroTarjeta = 1234;
+		
 		debito = new Debito(numeroTarjeta);
 		tipo = "Debito";
 	}
@@ -28,9 +28,13 @@ class DebitoTestCase {
 		assertEquals(this.tipo, this.debito.getTipo());
 	}
 	
-	/*@Test
+	@Test
 	void testNumeroDeTarjeta() {
-		this.debito.get
-	}*/
+		this.debito.setNumeroTarjeta(1234);
+		
+		int resultado = this.debito.getNumeroTarjeta();
+		assertEquals(resultado , 1234);
+		
+	}
 
 }

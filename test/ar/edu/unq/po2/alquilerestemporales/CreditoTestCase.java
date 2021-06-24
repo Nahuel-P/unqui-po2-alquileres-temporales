@@ -7,13 +7,18 @@ import org.junit.jupiter.api.Test;
 
 class CreditoTestCase {
 
-	private FormaDePago credito;
+	
+	private Credito credito;
 	private String tipo;
+	private int numeroTarjeta;
+	
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		credito = new Credito();
+		
+		credito = new Credito(numeroTarjeta);
 		tipo = "Credito";
+			
 	}
 	
 	@Test
@@ -24,6 +29,25 @@ class CreditoTestCase {
 	@Test
 	void testTipoDeTarjeta() {
 		assertEquals(this.tipo, this.credito.getTipo());
+	}
+	
+	@Test
+	void testNumeroDeTarjeta() {
+		this.credito.setNumeroTarjeta(1234);
+		
+		int resultado = this.credito.getNumeroTarjeta();
+		assertEquals(resultado , 1234);
+		
+	}
+	
+	
+	@Test
+	void testCantidadDeCuotas() {
+		this.credito.setCuotas(3);
+		
+		int resultado = this.credito.getCuotasElegidas();
+		
+		assertEquals(resultado, 3);
 	}
 
 }
