@@ -14,7 +14,7 @@ public class Reserva {
 	private LocalDate fechaRealizacionDeReserva;
 	private ArrayList<IBookingListener> listeners;
 	
-	public Reserva(LocalDate fechaRealizacionDeReserva, Usuario inquilino, LocalDate fechaIngreso, LocalDate fechaSalida, EstadoReserva estadoDeReserva, Publicacion publicacion,FormaDePago formaDePago ) {
+	public Reserva(LocalDate fechaRealizacionDeReserva, Usuario inquilino, LocalDate fechaIngreso, LocalDate fechaSalida, EstadoReserva estadoDeReserva, Publicacion publicacion,FormaDePago formaDePago) {
 		this.fechaRealizacionDeReserva = fechaRealizacionDeReserva;
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
@@ -23,6 +23,7 @@ public class Reserva {
 		this.publicacion = publicacion;
 		this.formaDePago = formaDePago;
 		this.listeners = new ArrayList<IBookingListener>();
+		this.estadoDeReserva = new Pendiente();
 	}
 
 	public float costoPorDia() {
