@@ -22,7 +22,6 @@ public class Reserva {
 		this.formaDePago = formaDePago;
 	}
 
-
 	public float costoPorDia() {
 		return this.costoTotal()/this.getDiferenciaDeDias();
 	}
@@ -35,13 +34,6 @@ public class Reserva {
 	private LocalDate getFechaRealizacionDeReserva() {
 		return this.fechaRealizacionDeReserva;
 	}
-	
-	
-	
-	
-	
-	
-
 
 	public float costoTotal() {
 		float costoTotal = 0.00f;

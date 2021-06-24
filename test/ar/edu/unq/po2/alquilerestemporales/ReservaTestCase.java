@@ -120,8 +120,15 @@ class ReservaTestCase {
 	}
 	
 	@Test
+	void testCostoPorDiaEnReserva() {
+		float costoPorDiaDeReserva = this.reserva.costoPorDia();
+		assertEquals(2000.00f, costoPorDiaDeReserva);
+	}
+	
+	@Test
 	void testEstadoDeReservaAceptada() {
 		this.reserva.setEstado(estadoReservaAceptada);
 		assertEquals(this.estadoReservaAceptada, this.reserva.getEstadoDeReserva());
-	}	
+	}
+	
 }
