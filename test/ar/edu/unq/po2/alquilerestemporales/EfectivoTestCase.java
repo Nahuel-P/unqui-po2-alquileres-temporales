@@ -29,7 +29,7 @@ class EfectivoTestCase {
 	}
 	
 	@Test
-	void testTipoDeTarjeta() {
+	void testTipo() {
 		
 		assertEquals(this.tipo, this.efectivo.getTipo());
 		
