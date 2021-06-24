@@ -35,6 +35,7 @@ class ReservaTestCase {
 		this.fechaDeIngresoDate = LocalDate.parse(fechaDeIngreso);
 		this.fechaDeSalidaDate = LocalDate.parse(fechaDeSalida);
 		this.estadoReservaAceptada = mock(Aceptada.class);
+		this.estadoReservaRechazada = mock(Rechazada.class);
 		this.inquilino = mock(Usuario.class);
 		this.publicacion = mock(Publicacion.class);
 		this.propietario = mock(Usuario.class);
