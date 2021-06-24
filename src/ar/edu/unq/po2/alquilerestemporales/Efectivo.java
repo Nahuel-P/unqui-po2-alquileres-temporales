@@ -2,16 +2,14 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 public class Efectivo implements FormaDePago{
 		
-
+	String tipo;
 	public Efectivo() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.tipo = "Efectivo";
 	}
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.tipo;
 	}
 
 }

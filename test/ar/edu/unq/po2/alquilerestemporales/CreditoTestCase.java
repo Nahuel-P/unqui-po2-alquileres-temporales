@@ -5,25 +5,25 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DebitoTestCase {
+class CreditoTestCase {
 
-	private FormaDePago debito;
+	private FormaDePago credito;
 	private String tipo;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		debito = new Debito();
-		tipo = "Debito";
+		credito = new Credito();
+		tipo = "Credito";
 	}
 	
 	@Test
 	void testConstructor() {
-		assertNotNull(this.debito);
+		assertNotNull(this.credito);
 	}
 	
 	@Test
 	void testTipoDeTarjeta() {
-		assertEquals(this.tipo, this.debito.getTipo());
+		assertEquals(this.tipo, this.credito.getTipo());
 	}
 
 }

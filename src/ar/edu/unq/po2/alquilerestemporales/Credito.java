@@ -1,16 +1,15 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
 public class Credito implements FormaDePago {
-
+	
+	String tipo;
 	public Credito() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.tipo = "Credito";
 	}
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.tipo;
 	}
 
 }
