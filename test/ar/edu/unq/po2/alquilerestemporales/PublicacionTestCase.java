@@ -195,6 +195,14 @@ class PublicacionTestCase {
 	}
 	
 	@Test
+	void testPublicacionConoceObservador() {
+		this.publicacion.setObervador(observador);
+		
+		Observer obs = this.publicacion.getObservador();
+		assertEquals(obs , observador);
+	}
+	
+	@Test
 	void testPublibacionBajaDePrecioYNotificaAObservador() {
 		this.publicacion.setObervador(observador);
 		this.observador.attach(iobservador);
