@@ -2,17 +2,20 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Period;
 
 public class Reserva {
 	private LocalDate fechaIngreso;
 	private LocalDate fechaSalida;
 	private Aceptada estadoDeReserva;
+	private Usuario inquilino;
+	private Publicacion publicacion;
 	
-	public Reserva(LocalDate fechaIngreso, LocalDate fechaSalida, Aceptada estadoDeReserva ) {
+	public Reserva(Usuario inquilino, LocalDate fechaIngreso, LocalDate fechaSalida, Aceptada estadoDeReserva, Publicacion publicacion ) {
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
 		this.estadoDeReserva = estadoDeReserva;
+		this.inquilino = inquilino;
+		this.publicacion = publicacion;
 	}
 
 
@@ -28,10 +31,8 @@ public class Reserva {
 		return 0f;
 	}
 
-	//esto retorna el dueño de la publicacion
 	public Usuario getPropietario() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.publicacion.getPropietario();
 	}
 
 	public void setEstado(Aceptada aceptada) {
@@ -39,8 +40,7 @@ public class Reserva {
 	}
 
 	public Object getInquilino() {
-		// TODO Auto-generated method stub
-		return null;
+		return inquilino;
 	}
 
 	public LocalDate getFechaDeIngreso() {
@@ -62,6 +62,4 @@ public class Reserva {
 	public Aceptada getEstadoDeReserva() {
 		return this.estadoDeReserva;
 	}
-
-
 }

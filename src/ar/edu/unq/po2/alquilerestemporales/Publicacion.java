@@ -134,7 +134,7 @@ public class Publicacion {
 		return inmueble;
 	}
 
-	public Object getPropietario() {
+	public Usuario getPropietario() {
 		return usuario;
 	}
 
