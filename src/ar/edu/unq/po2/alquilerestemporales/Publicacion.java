@@ -8,6 +8,8 @@ public class Publicacion {
 	
 	private LocalTime checkIn;
 	private LocalTime checkOut;
+	private LocalDate fechaInicio;
+	private LocalDate fechaFin;
 	private double precioBase;
 	private Inmueble inmueble;
 	private ArrayList <Foto> fotos;
@@ -18,12 +20,14 @@ public class Publicacion {
 	
 	
 	public Publicacion(Inmueble inmueble, Usuario usuario, double precioBase, LocalTime checkIn, LocalTime checkOut, 
-			ArrayList<Foto> fotos, ArrayList <FormaDePago> formasDePago) {
+			ArrayList<Foto> fotos, ArrayList <FormaDePago> formasDePago,LocalDate fecIni, LocalDate fecFin) {
 		
 		this.setInmueble(inmueble);
 		this.usuario = usuario;
 		this.setCheckIn(checkIn);
 		this.setCheckOut(checkOut);
+		this.fechaInicio=fecIni;
+		this.fechaFin=fecFin;
 		this.setPrecioBase(precioBase);
 		this.setFormasDePago(formasDePago);
 		this.setFotos(fotos);
@@ -108,6 +112,14 @@ public class Publicacion {
 	public LocalTime getCheckOut() {
 		return checkOut;
 	}
+	
+	public LocalDate getFechaInicio() {
+		return fechaInicio;
+	}
+	
+	public LocalDate getFechaFin() {
+		return fechaFin;
+	}
 
 	public void setCheckOut(LocalTime chOut) {
 		
@@ -153,6 +165,11 @@ public class Publicacion {
 
 	public Observer getObservador() {
 		return observador;
+	}
+
+	public String getCiudad() {
+		
+		return this.inmueble.getCiudad();
 	}
 
 }
