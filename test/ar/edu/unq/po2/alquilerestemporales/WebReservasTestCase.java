@@ -191,7 +191,6 @@ class WebReservasTestCase {
 	
 	@Test
 	void testNoSePuedeCancelarReservaAjena() {
-		
 		when(reserva1.getPropietario()).thenReturn(usu1);
 		when(reserva1.getInquilino()).thenReturn(usu2);
 		
@@ -202,6 +201,29 @@ class WebReservasTestCase {
 		this.web.cancelarReserva(usu1,reserva1);	
 		
 		verify(bibliotecaDeReserva,never()).cancelar(usu2,reserva1);
+	}
+	
+	@Test
+	void testSeDioDeAltaUnTipoDeInmueble() {
+		this.web.addTipoDeInmueble("PH");
+		this.web.addTipoDeInmueble("Casa");
+		int resultado = web.getTiposDeInmueble().size();
+		assertEquals(2,resultado);
+	}
+	
+	@Test
+	void testSeDioDeAltaUnServicio() {
+		this.web.addServicio("Agua Corriente");
+		this.web.addServicio("Wi-Fi");
+		int resultado = web.getServicios().size();
+		assertEquals(2,resultado);
+	}
+	
+	@Test
+	void testSeDioDeAltaUnaCategoriaCalificable() {
+		this.web.addCategoriaCalificable("Inquilino");
+		int resultado = web.getCategoriasCalificables().size();
+		assertEquals(1,resultado);
 	}
 	
 	

@@ -99,7 +99,7 @@ public class WebReservas {
 	
 	public void addCategoriaCalificable(String nombreCategoria) {
 		if(!hayCategoria(nombreCategoria)) {
-			this.tiposDeInmueble.add(nombreCategoria);
+			this.categoriasCalificables.add(nombreCategoria);
 		}
 		else {
 			System.out.println("Ya existe la categoria"+nombreCategoria);
@@ -108,7 +108,7 @@ public class WebReservas {
 
 	public void addServicio(String nombreServicio) {
 		if(!hayServicio(nombreServicio)) {
-			this.tiposDeInmueble.add(nombreServicio);
+			this.servicios.add(nombreServicio);
 		}
 		else {
 			System.out.println("Ya existe el servicio"+nombreServicio);
@@ -161,15 +161,15 @@ public class WebReservas {
 		return publicacion.getPropietario().equals(usu);
 	}
 	
-	public boolean hayTipoDeInmueble(String tipoDeInmueble) {
+	private boolean hayTipoDeInmueble(String tipoDeInmueble) {
 		return this.getTiposDeInmueble().contains(tipoDeInmueble);
 	}
 	
-	public boolean hayCategoria(String nombreCategoria) {
+	private boolean hayCategoria(String nombreCategoria) {
 		return this.getCategoriasCalificables().contains(nombreCategoria);
 	}
 	
-	public boolean hayServicio(String nombreServicio) {
+	private boolean hayServicio(String nombreServicio) {
 		return this.getServicios().contains(nombreServicio);
 	}
 	
