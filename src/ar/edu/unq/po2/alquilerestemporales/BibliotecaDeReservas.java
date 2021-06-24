@@ -20,7 +20,6 @@ public class BibliotecaDeReservas {
 		}else {
 			System.out.print("La reserva ya existe");
 		}
-		
 	}
 
 	public void concretarReserva(Usuario usu, Reserva reserva) {

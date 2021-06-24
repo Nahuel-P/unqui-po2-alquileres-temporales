@@ -11,10 +11,11 @@ public class Buscador {
 		
 		ArrayList<Publicacion> resultado = new ArrayList<Publicacion>();
 		ArrayList<Publicacion> busquedasExtra = new ArrayList<Publicacion>();
-		resultado.addAll(filtroBasico.filtrarPublicaciones(publicaciones));
-		for(Filtro filtro : filtrosExtra) {
+		resultado = filtroBasico.filtrarPublicaciones(publicaciones);
+		
+		 for(Filtro filtro : filtrosExtra) {
 			busquedasExtra = filtro.filtrarPublicaciones(publicaciones);
-			//
+			
 			for(Publicacion publicacion : busquedasExtra) {
 				if(!resultado.contains(publicacion)) {
 					resultado.add(publicacion);

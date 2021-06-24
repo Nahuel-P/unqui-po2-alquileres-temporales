@@ -59,8 +59,19 @@ class BuscadorTestCase {
 	
 	@Test
 	void testBuscadorConFiltroBasico() {
+		
 		when(this.filtroB.filtrarPublicaciones(publicaciones)).thenReturn(filtradas1);
+		
 		int resultado = buscador.buscar(publicaciones,filtroB,filtrosExtra).size();
 		assertEquals(resultado,3);
+	}
+	
+	@Test
+	void testBuscadorConFiltroBasicoYDePrecio() {
+		when(this.filtroP.filtrarPublicaciones(publicaciones)).thenReturn(filtradas2);
+		when(this.filtroB.filtrarPublicaciones(publicaciones)).thenReturn(filtradas1);
+		filtrosExtra.add(filtroP);
+		int resultado = buscador.buscar(publicaciones,filtroB,filtrosExtra).size();
+		assertEquals(4, resultado);
 	}
 }
