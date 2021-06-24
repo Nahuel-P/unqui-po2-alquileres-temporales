@@ -1,9 +1,9 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
-public class Rechazada implements IEstadoReserva {
+public class Rechazada extends EstadoReserva {
 	
-	public void informarEstadoDeReservaAInquilino(Reserva reserva) {
-		reserva.getPropietario().getCasillaEmail().enviarMail(reserva.getInquilino().getCasillaEmail(), "Su reserva ha sido rechazada");
+	@Override
+	public String mensaje(Reserva reserva) {
+		return "Su reserva ha sido rechazada ya que no cumple con los requisitos requeridos.";
 	}
-
 }

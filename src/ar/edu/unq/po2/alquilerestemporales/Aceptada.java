@@ -1,8 +1,9 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
-public class Aceptada implements IEstadoReserva{
+public class Aceptada extends EstadoReserva{
 	
-	public void informarEstadoDeReservaAInquilino(Reserva reserva) {
-		reserva.getPropietario().getCasillaEmail().enviarMail(reserva.getInquilino().getCasillaEmail(), "Su reserva ha sido aceptada");
+	@Override
+	public String mensaje(Reserva reserva) {
+		return String.format("Su reserva ha sido aceptada. Lo esperamos el día %s",reserva.getFechaDeIngreso());
 	}
 }

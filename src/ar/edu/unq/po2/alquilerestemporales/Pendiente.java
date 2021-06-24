@@ -1,7 +1,9 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
-public class Pendiente implements IEstadoReserva{
-	public void informarEstadoDeReservaAInquilino(Reserva reserva) {
-		reserva.getPropietario().getCasillaEmail().enviarMail(reserva.getInquilino().getCasillaEmail(), "Su reserva ha sido rechazada");
+public class Pendiente extends EstadoReserva{
+	
+	@Override
+	public String mensaje(Reserva reserva) {
+		return "Su reserva se encuentra en revisión. En cuanto se evalue recibirá un email";
 	}
 }

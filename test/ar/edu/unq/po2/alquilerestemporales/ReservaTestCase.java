@@ -17,7 +17,6 @@ class ReservaTestCase {
 	private String fechaDeSalida;
 	private LocalDate fechaDeIngresoDate;
 	private LocalDate fechaDeSalidaDate;
-	private Aceptada estadoReservaAceptada;
 	private Usuario inquilino;
 	private Publicacion publicacion;
 	private Usuario propietario;
@@ -25,7 +24,12 @@ class ReservaTestCase {
 	private LocalDate fecha1;
 	private PrecioTemporal precioTemporal;
 	private ArrayList <PrecioTemporal> temporadasEspeciales;
-	private Rechazada estadoReservaRechazada;
+	private EstadoReserva estadoReservaAceptada;
+	private EstadoReserva estadoReservaRechazada;
+	private EstadoReserva estadoReservaCondicional;
+	private EstadoReserva estadoReservaCancelada;
+	private EstadoReserva estadoReservaConcluida;
+	private EstadoReserva estadoReservaPendiente;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -36,13 +40,17 @@ class ReservaTestCase {
 		this.fechaDeSalidaDate = LocalDate.parse(fechaDeSalida);
 		this.estadoReservaAceptada = mock(Aceptada.class);
 		this.estadoReservaRechazada = mock(Rechazada.class);
+		this.estadoReservaCondicional = mock(Condicional.class);
+		this.estadoReservaCancelada = mock(Cancelada.class);
+		this.estadoReservaConcluida = mock(Concluida.class);
+		this.estadoReservaPendiente = mock(Pendiente.class);
 		this.inquilino = mock(Usuario.class);
 		this.publicacion = mock(Publicacion.class);
 		this.propietario = mock(Usuario.class);
 		this.credito = mock(Credito.class);
 		this.precioTemporal = mock(PrecioTemporal.class);
 		this.temporadasEspeciales = new ArrayList<PrecioTemporal>();
-		this.reserva = new Reserva(fecha1, inquilino, fechaDeIngresoDate, fechaDeSalidaDate, estadoReservaAceptada, publicacion, credito);		
+		this.reserva = new Reserva(fecha1, inquilino, fechaDeIngresoDate, fechaDeSalidaDate, estadoReservaPendiente, publicacion, credito);		
 	}
 	
 	@Test
@@ -127,18 +135,48 @@ class ReservaTestCase {
 		float costoPorDiaDeReserva = this.reserva.costoPorDia();
 		assertEquals(2000.00f, costoPorDiaDeReserva);
 	}
-	
+		
 	@Test
 	void testEstadoDeReservaAceptada() {
 		this.reserva.setEstado(estadoReservaAceptada);
-		assertEquals(this.estadoReservaAceptada, this.reserva.getEstadoDeReserva());
+		EstadoReserva estadoDeReserva = this.reserva.getEstadoDeReserva();
+		assertEquals(this.estadoReservaAceptada, estadoDeReserva);
 	}
 	
 	@Test
 	void testEstadoDeReservaRechazada() {
 		
 		this.reserva.setEstado(estadoReservaRechazada);
-		assertEquals(this.estadoReservaRechazada, this.reserva.getEstadoDeReserva());
+		EstadoReserva estadoDeReserva = this.reserva.getEstadoDeReserva();
+		assertEquals(this.estadoReservaRechazada, estadoDeReserva);
+	}
+	@Test
+	void testEstadoDeReservaCondicional() {
+		this.reserva.setEstado(estadoReservaCondicional);
+		EstadoReserva estadoDeReserva = this.reserva.getEstadoDeReserva();
+		assertEquals(this.estadoReservaCondicional, estadoDeReserva);
+	}
+	
+	@Test
+	void testEstadoDeReservaCancelada() {
+		this.reserva.setEstado(estadoReservaCancelada);
+		EstadoReserva estadoDeReserva = this.reserva.getEstadoDeReserva();
+		assertEquals(this.estadoReservaCancelada, estadoDeReserva);
+	}
+	
+	@Test
+	void testEstadoDeReservaConcluida() {
+		this.reserva.setEstado(estadoReservaConcluida);
+		EstadoReserva estadoDeReserva = this.reserva.getEstadoDeReserva();
+		assertEquals(this.estadoReservaConcluida, estadoDeReserva);
+	}
+	
+	
+	@Test
+	void testEstadoDeReservaPendiente() {
+		this.reserva.setEstado(estadoReservaPendiente);
+		EstadoReserva estadoDeReserva = this.reserva.getEstadoDeReserva();
+		assertEquals(this.estadoReservaPendiente, estadoDeReserva);
 	}
 	
 }

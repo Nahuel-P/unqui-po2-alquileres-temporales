@@ -6,13 +6,13 @@ import java.time.LocalDate;
 public class Reserva {
 	private LocalDate fechaIngreso;
 	private LocalDate fechaSalida;
-	private IEstadoReserva estadoDeReserva;
+	private EstadoReserva estadoDeReserva;
 	private Usuario inquilino;
 	private Publicacion publicacion;
 	private FormaDePago formaDePago;
 	private LocalDate fechaRealizacionDeReserva ;
 	
-	public Reserva(LocalDate fechaRealizacionDeReserva, Usuario inquilino, LocalDate fechaIngreso, LocalDate fechaSalida, IEstadoReserva estadoDeReserva, Publicacion publicacion,FormaDePago formaDePago ) {
+	public Reserva(LocalDate fechaRealizacionDeReserva, Usuario inquilino, LocalDate fechaIngreso, LocalDate fechaSalida, EstadoReserva estadoDeReserva, Publicacion publicacion,FormaDePago formaDePago ) {
 		this.fechaRealizacionDeReserva = fechaRealizacionDeReserva;
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
@@ -62,7 +62,7 @@ public class Reserva {
 		return this.publicacion.getPropietario();
 	}
 
-	public void setEstado(IEstadoReserva estado) {
+	public void setEstado(EstadoReserva estado) {
 		this.estadoDeReserva = estado;		
 	}
 
@@ -86,7 +86,7 @@ public class Reserva {
 	}
 
 
-	public IEstadoReserva getEstadoDeReserva() {
+	public EstadoReserva getEstadoDeReserva() {
 		return this.estadoDeReserva;
 	}
 	

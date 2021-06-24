@@ -1,7 +1,9 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
-public class Concluida implements IEstadoReserva{
-	public void informarEstadoDeReservaAInquilino(Reserva reserva) {
-		reserva.getPropietario().getCasillaEmail().enviarMail(reserva.getInquilino().getCasillaEmail(), "Su reserva ha sido rechazada");
+public class Concluida extends EstadoReserva{
+	
+	@Override
+	public String mensaje(Reserva reserva) {
+		return "Su reserva ha finalizado. Gracias por utilizar webReservas :)";
 	}
 }
