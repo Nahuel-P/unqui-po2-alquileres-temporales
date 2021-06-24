@@ -36,6 +36,8 @@ class PublicacionTestCase {
 	private Publicacion publicacion2;
 	private Observer observador;
 	private IPriceObserver iobservador;
+	LocalDate fechaInicioPublicacion;
+	LocalDate fechaFinPublicacion;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -45,6 +47,8 @@ class PublicacionTestCase {
 		checkIn = LocalTime.of(13, 0);
 		checkOut = LocalTime.of(10, 0);
 		checkOut2 = LocalTime.of(16, 0);
+		fechaInicioPublicacion = LocalDate.parse("2019-09-10");
+		fechaFinPublicacion = LocalDate.parse("2025-09-10");
 		foto1 = new Foto (12,6);
 		foto2 = new Foto (12,6);
 		foto3 = new Foto (12,6);
@@ -57,7 +61,7 @@ class PublicacionTestCase {
 		formasDePago = new ArrayList <FormaDePago>(); 
 		fotos = new ArrayList <Foto>() ;
 		precioBase = 500;
-		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, formasDePago);
+		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, formasDePago, fechaInicioPublicacion,fechaFinPublicacion);
 		publicacion2 = mock(Publicacion.class);
 		precioTemporal = mock(PrecioTemporal.class);
 		observador = new Observer();
