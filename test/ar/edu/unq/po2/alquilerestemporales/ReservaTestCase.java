@@ -203,6 +203,15 @@ class ReservaTestCase {
 	
 	@Test
 	void testBookingListenerRecibeMensajeReservaConcretada() {
-		
+		this.reserva.addListener(bookingListener);
+		this.reserva.notificar();
+		verify(bookingListener).reservaConcretada(this.reserva, fechaDeIngresoDate, fechaDeSalidaDate);
+	}
+
+	@Test
+	void testBookingListenerRecibeMensajeReservaCancelada() {
+		this.reserva.addListener(bookingListener);
+		this.reserva.notificar();
+		verify(bookingListener).reservaCancelada(this.reserva, fechaDeIngresoDate, fechaDeSalidaDate);
 	}
 }
