@@ -118,8 +118,8 @@ public class Publicacion {
 		}
 	}
 
-	public double getPrecioBase() {
-		return precioBase;
+	public float getPrecioBase() {
+		return (float) precioBase;
 	}
 
 	public void setPrecioBase(double precioBase) {
