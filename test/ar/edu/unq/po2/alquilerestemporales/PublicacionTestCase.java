@@ -225,4 +225,38 @@ class PublicacionTestCase {
 		this.publicacion.establecerPrecioTemporal(precioTemporal);
 		this.publicacion.mostrarDatos();
 	}
+	
+	@Test
+	void testFechasDeInicioDePublicacion() {
+		LocalDate fechaDeInicioDePublicacion = this.publicacion.getFechaInicio();
+		assertEquals(this.fechaInicioPublicacion, fechaDeInicioDePublicacion);
+	}
+	
+	@Test
+	void testFechasDeFinDePublicacion() {
+		LocalDate fechaDeFinDePublicacion = this.publicacion.getFechaFin();
+		assertEquals(this.fechaFinPublicacion, fechaDeFinDePublicacion);
+	}
+	
+	@Test
+	void testPropietarioDePublicacion() {
+		Usuario propietarioDeLaPublicacion = this.publicacion.getPropietario();
+		assertEquals(this.usuario, propietarioDeLaPublicacion);
+	}
+	
+	@Test
+	void testCiudadDePublicacion() {
+		when(this.inmueble.getCiudad()).thenReturn("Avellaneda");
+		String ciudadDeInmueble = this.inmueble.getCiudad();
+		String ciudadDePublicacion = this.publicacion.getCiudad();
+		assertEquals(ciudadDeInmueble, ciudadDePublicacion);
+	}
+	
+	@Test
+	void testCapacidadDePublicacion() {
+		when(this.inmueble.getCapacidad()).thenReturn(5);
+		int capacidadDeInmueble = this.inmueble.getCapacidad();
+		int cantidadDePublicacion = this.publicacion.getCantHabitantes();
+		assertEquals(capacidadDeInmueble, cantidadDePublicacion);
+	}
 }
