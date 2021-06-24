@@ -30,6 +30,9 @@ class ReservaTestCase {
 	private EstadoReserva estadoReservaCancelada;
 	private EstadoReserva estadoReservaConcluida;
 	private EstadoReserva estadoReservaPendiente;
+	private IBookingListener bookingListener;
+	private IBookingListener bookingListener2;
+	
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -44,6 +47,8 @@ class ReservaTestCase {
 		this.estadoReservaCancelada = mock(Cancelada.class);
 		this.estadoReservaConcluida = mock(Concluida.class);
 		this.estadoReservaPendiente = mock(Pendiente.class);
+		this.bookingListener = mock(IBookingListener.class);
+		this.bookingListener2 = mock(IBookingListener.class);
 		this.inquilino = mock(Usuario.class);
 		this.publicacion = mock(Publicacion.class);
 		this.propietario = mock(Usuario.class);
@@ -145,7 +150,6 @@ class ReservaTestCase {
 	
 	@Test
 	void testEstadoDeReservaRechazada() {
-		
 		this.reserva.setEstado(estadoReservaRechazada);
 		EstadoReserva estadoDeReserva = this.reserva.getEstadoDeReserva();
 		assertEquals(this.estadoReservaRechazada, estadoDeReserva);
@@ -179,4 +183,26 @@ class ReservaTestCase {
 		assertEquals(this.estadoReservaPendiente, estadoDeReserva);
 	}
 	
+	@Test
+	void testReservaTieneUnListener() {
+		this.reserva.addListener(bookingListener);
+		ArrayList<IBookingListener> listeners = this.reserva.getListeners();
+		int cantidadDeListeners = listeners.size();
+		assertEquals(1, cantidadDeListeners);
+	}
+	
+	@Test
+	void testReservaSeLeAgregan2ListenersYSeBorra1() {
+		this.reserva.addListener(bookingListener);
+		this.reserva.addListener(bookingListener2);
+		this.reserva.removeListener(bookingListener);
+		ArrayList<IBookingListener> listeners = this.reserva.getListeners();
+		int cantidadDeListeners = listeners.size();
+		assertEquals(1, cantidadDeListeners);
+	}
+	
+	@Test
+	void testBookingListenerRecibeMensajeReservaConcretada() {
+		
+	}
 }

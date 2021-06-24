@@ -97,8 +97,12 @@ public class Reserva {
 		return this.formaDePago;
 	}
 	
-	public void setListener(IBookingListener listener) {
+	public void addListener(IBookingListener listener) {
 		this.listeners.add(listener);
+	}
+	
+	public ArrayList<IBookingListener> getListeners() {
+		return this.listeners;
 	}
 	
 	public void removeListener(IBookingListener listener) {
