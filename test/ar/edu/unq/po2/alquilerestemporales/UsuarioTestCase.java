@@ -2,7 +2,6 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 class UsuarioTestCase {
 	private String nombreYApellidoDeUsuario;
@@ -47,13 +45,7 @@ class UsuarioTestCase {
 		comentarioCalificacionMedia = "Propietario normal, me dejo las llaves y se fue.";
 		comentarioCalificacionAlta = "Buen propietario, me hizo la cena y todo, re copado el tipo.";
 		casillaEmail = mock(CasillaEmail.class);
-		this.usuario = new Usuario(nombreYApellidoDeUsuario, direccion, telefono, fechaDeAlta, casillaEmail);
-		
-		comentarios = new ArrayList<String>();
-		comentarios.add(comentarioCalificacionBaja);
-		comentarios.add(comentarioCalificacionMedia);
-		comentarios.add(comentarioCalificacionAlta);
-		
+		this.usuario = new Usuario(nombreYApellidoDeUsuario, direccion, telefono, fechaDeAlta, casillaEmail);	
 	}
 	
 	@Test
@@ -75,14 +67,16 @@ class UsuarioTestCase {
 		this.usuario.setDireccion(this.direccion2);
 		this.usuario.setTelefono(this.telefono2);
 		assertEquals(this.nombreYApellidoDeUsuario2, this.usuario.getNombreYApellido());
+		assertEquals(this.direccion2, this.usuario.getDireccion());
+		assertEquals(this.telefono2, this.usuario.getTelefono());
 	}
 	
 	@Test
 	void testUsuarioRecibeCalificacion() {
 		this.usuario.addCalificacion(calificacion1);
 		this.usuario.addCalificacion(calificacion2);
-		int num = this.usuario.getCalificaciones().size();
-		assertEquals(2, num);
+		int cantidadDeCalificaciones = this.usuario.getCalificaciones().size();
+		assertEquals(2, cantidadDeCalificaciones);
 	}
 	
 	@Test
@@ -106,15 +100,23 @@ class UsuarioTestCase {
 		when(this.calificacion1.getComentario()).thenReturn(comentarioCalificacionBaja);
 		when(this.calificacion2.getComentario()).thenReturn(comentarioCalificacionMedia);
 		when(this.calificacion3.getComentario()).thenReturn(comentarioCalificacionAlta);
+		
+		comentarios = new ArrayList<String>();
+		comentarios.add(comentarioCalificacionBaja);
+		comentarios.add(comentarioCalificacionMedia);
+		comentarios.add(comentarioCalificacionAlta);
+		
 		this.usuario.addCalificacion(calificacion1);
 		this.usuario.addCalificacion(calificacion2);
 		this.usuario.addCalificacion(calificacion3);
+		
 		assertEquals(comentarios, usuario.getComentarios());
 		
 	}	
 	@Test
 	void testUsuarioTieneCasillaDeMail(){
+		CasillaEmail casillaDeUsuario = this.casillaEmail;
 		assertNotNull(this.usuario.getCasillaEmail());
-		assertEquals(this.usuario.getCasillaEmail(), this.casillaEmail);
+		assertEquals(this.usuario.getCasillaEmail(), casillaDeUsuario );
 	}
 }

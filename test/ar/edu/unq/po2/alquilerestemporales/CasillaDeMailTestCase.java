@@ -2,8 +2,6 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +25,8 @@ class CasillaDeMailTestCase {
 	
 	@Test
 	void testGetDatos() {
-		assertEquals(direccion, this.casillaDeMail.getDireccion());
+		String direccionDeCasilla = this.casillaDeMail.getDireccion();
+		assertEquals(direccion, direccionDeCasilla);
 		assertTrue(this.casillaDeMail.getInbox().isEmpty());
 	}
 	

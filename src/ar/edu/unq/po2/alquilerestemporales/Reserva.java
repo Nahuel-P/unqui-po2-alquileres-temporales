@@ -23,7 +23,7 @@ public class Reserva {
 	}
 
 	public float costoPorDia() {
-		return this.costoTotal()/this.getDiferenciaDeDias();
+		return (this.costoTotal()/this.getDiferenciaDeDias());
 	}
 
 	public int diasQueFaltan() {

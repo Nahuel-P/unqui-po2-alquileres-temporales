@@ -25,6 +25,7 @@ class ReservaTestCase {
 	private LocalDate fecha1;
 	private PrecioTemporal precioTemporal;
 	private ArrayList <PrecioTemporal> temporadasEspeciales;
+	private Rechazada estadoReservaRechazada;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -121,6 +122,7 @@ class ReservaTestCase {
 	
 	@Test
 	void testCostoPorDiaEnReserva() {
+		when(this.publicacion.getPrecioBase()).thenReturn(2000.00f);
 		float costoPorDiaDeReserva = this.reserva.costoPorDia();
 		assertEquals(2000.00f, costoPorDiaDeReserva);
 	}
@@ -129,6 +131,13 @@ class ReservaTestCase {
 	void testEstadoDeReservaAceptada() {
 		this.reserva.setEstado(estadoReservaAceptada);
 		assertEquals(this.estadoReservaAceptada, this.reserva.getEstadoDeReserva());
+	}
+	
+	@Test
+	void testEstadoDeReservaRechazada() {
+		
+		this.reserva.setEstado(estadoReservaRechazada);
+		assertEquals(this.estadoReservaRechazada, this.reserva.getEstadoDeReserva());
 	}
 	
 }
