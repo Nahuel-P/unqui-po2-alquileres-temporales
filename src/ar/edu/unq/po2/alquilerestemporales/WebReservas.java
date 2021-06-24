@@ -10,6 +10,7 @@ public class WebReservas {
 	private ArrayList<String> tiposDeInmueble;
 	private ArrayList<String> servicios;
 	private BibliotecaDeReservas bibliotecaDeReservas;
+	private Buscador buscador;
 
 	public WebReservas() {
 		this.usuarios = new ArrayList<Usuario>();
@@ -18,6 +19,7 @@ public class WebReservas {
 		this.categoriasCalificables = new ArrayList<String>();
 		this.tiposDeInmueble = new ArrayList<String>();
 		this.servicios = new ArrayList<String>();
+		this.buscador = new Buscador();
 	}
 	
 	public ArrayList<Usuario> getUsuarios() {

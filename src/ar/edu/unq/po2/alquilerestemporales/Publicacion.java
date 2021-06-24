@@ -172,4 +172,9 @@ public class Publicacion {
 		return this.inmueble.getCiudad();
 	}
 
+	public int getCantHabitantes() {
+		
+		return this.inmueble.getCapacidad();
+	}
+
 }

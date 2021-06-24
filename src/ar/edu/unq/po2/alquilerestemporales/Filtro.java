@@ -2,18 +2,10 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import java.util.ArrayList;
 
-public class FiltroPrecio extends Filtro {
-	
-	float precioMax;
-	float precioMin;
-	
-	public FiltroPrecio(float precioMax, float precioMin) {
-		this.precioMax = precioMax;
-		this.precioMin = precioMin;
-	}
+public abstract class Filtro {
 	
 	public ArrayList<Publicacion> filtrarPublicaciones(ArrayList<Publicacion> publicaciones) {
-		
+			
 		ArrayList<Publicacion> filtradas = new ArrayList<Publicacion>();
 		for(int i=0; i<publicaciones.size(); i++) {
 			if(cumpleCriterios(publicaciones.get(i))) {
@@ -24,10 +16,6 @@ public class FiltroPrecio extends Filtro {
 		}
 		return filtradas;
 	}
-	
-	public boolean cumpleCriterios(Publicacion publicacion) {
-		return (publicacion.getPrecioBase() >= precioMin) && (publicacion.getPrecioBase() <= precioMax);
-	}
-	
-	
+
+	public abstract boolean cumpleCriterios(Publicacion publicacion);
 }

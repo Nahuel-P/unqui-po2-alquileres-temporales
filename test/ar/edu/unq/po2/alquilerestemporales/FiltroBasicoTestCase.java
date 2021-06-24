@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class FiltroBasicoTestCase {
 	
-	private FiltroBasico filtro;
+	private Filtro filtro;
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	private LocalDate fechaInicioTest;
@@ -46,23 +46,7 @@ class FiltroBasicoTestCase {
 	void testCreation() {
 		assertNotNull(this.filtro);
 	}
-	
-	@Test
-	void testFiltroFecha() {
-		when(publi1.getFechaInicio()).thenReturn(this.fechaInicio);
-		when(publi1.getFechaFin()).thenReturn(this.fechaFin);
 		
-		assertTrue(filtro.estaEnFecha(publi1));
-	}
-	
-	@Test
-	void testFiltroFechaNoCoincide() {
-		when(publi1.getFechaInicio()).thenReturn(this.fechaInicioTest);
-		when(publi1.getFechaFin()).thenReturn(this.fechaFinTest);
-		
-		assertFalse(filtro.estaEnFecha(publi1));
-	}
-	
 	@Test
 	void testFiltroCiudadYFecha() {
 		when(publi1.getCiudad()).thenReturn("Avellaneda");
