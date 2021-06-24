@@ -2,14 +2,26 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 public class Debito implements FormaDePago{
 
-	String tipo;
-	public Debito() {
+		
+	private String tipo;
+	private int numeroTarjeta;
+	
+	public Debito(int numTarjeta) {
 		this.tipo = "Debito";
+		this.setNumeroTarjeta(numTarjeta);
 	}
 
-	@Override
+		
 	public String getTipo() {
 		return this.tipo;
+	}
+	
+	public int getNumeroTarjeta(){
+		return this.numeroTarjeta;
+	}
+	
+	public void setNumeroTarjeta(int numero) {
+		this.numeroTarjeta = numero;
 	}
 
 }

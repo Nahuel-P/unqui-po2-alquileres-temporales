@@ -9,10 +9,12 @@ class DebitoTestCase {
 
 	private FormaDePago debito;
 	private String tipo;
+	private int numeroTarjeta;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		debito = new Debito();
+		numeroTarjeta = 1234;
+		debito = new Debito(numeroTarjeta);
 		tipo = "Debito";
 	}
 	
@@ -25,5 +27,10 @@ class DebitoTestCase {
 	void testTipoDeTarjeta() {
 		assertEquals(this.tipo, this.debito.getTipo());
 	}
+	
+	/*@Test
+	void testNumeroDeTarjeta() {
+		this.debito.get
+	}*/
 
 }
