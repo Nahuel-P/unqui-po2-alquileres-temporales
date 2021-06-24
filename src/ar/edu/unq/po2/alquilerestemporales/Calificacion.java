@@ -4,11 +4,12 @@ public class Calificacion {
 	
 	private int calificacion;
 	private String comentario;
+	private String categoria;
 	
-	public Calificacion(int numeroCalificacion,String comentario) {
+	public Calificacion(int numeroCalificacion,String comentario, String categoria) {
 		this.setCalificacion(numeroCalificacion);
 		this.setComentario(comentario);
-		
+		this.categoria = categoria;
 	}
 	
 	public int getCalificacion() {
@@ -31,6 +32,10 @@ public class Calificacion {
 	
 	public void setComentario(String comentario) {
 		this.comentario=comentario;
+	}
+	
+	public String getCategoria() {
+		return this.categoria;
 	}
 
 	
