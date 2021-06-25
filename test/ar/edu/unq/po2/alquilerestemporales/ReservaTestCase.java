@@ -214,4 +214,10 @@ class ReservaTestCase {
 		this.reserva.notificar();
 		verify(bookingListener).reservaCancelada(this.reserva, fechaDeIngresoDate, fechaDeSalidaDate);
 	}
+	
+	void testInmuebleDeReserva() {
+		Inmueble inmuebleDePublicacion = this.publicacion.getInmueble();
+		Inmueble inmuebleDeReserva = this.reserva.getInmueble();
+		assertEquals(inmuebleDePublicacion, inmuebleDeReserva );
+	}
 }
