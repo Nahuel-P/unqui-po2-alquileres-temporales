@@ -2,5 +2,5 @@
 
 [UML](./UML/)
 
-[INFORME](./Informe/Informe-TPFinal)
+[INFORME](./Informe/Informe-TPFinal.pdf)
 ![](./UML/UML-FINAL.jpg)
