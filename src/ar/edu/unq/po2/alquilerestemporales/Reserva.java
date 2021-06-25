@@ -61,6 +61,9 @@ public class Reserva {
 		return costo;
 	}
 
+	public Inmueble getInmueble() {
+		return this.publicacion.getInmueble();
+	}
 
 	public Usuario getPropietario() {
 		return this.publicacion.getPropietario();
