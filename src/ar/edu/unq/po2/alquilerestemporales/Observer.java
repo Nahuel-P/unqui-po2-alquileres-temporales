@@ -10,7 +10,7 @@ public class Observer {
 		observadores = new ArrayList<IPriceObserver>();
 	}
 
-	public void update(Publicacion publicacion) {
+	public void notificar(Publicacion publicacion) {
 		for(IPriceObserver observador : this.getObservadores()) {
 			observador.update(publicacion);
 		}

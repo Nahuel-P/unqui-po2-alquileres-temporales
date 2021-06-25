@@ -83,7 +83,7 @@ public class Publicacion {
 	}
 	
 	public void notificar() {
-		this.observador.update(this);		
+		this.observador.notificar(this);		
 	}
 
 	public void setFormasDePago(ArrayList<FormaDePago> formDePago) {

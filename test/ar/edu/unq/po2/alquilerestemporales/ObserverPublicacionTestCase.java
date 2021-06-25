@@ -52,7 +52,7 @@ class ObserverPublicacionTestCase {
 	@Test
 	void testObservadorRecibePublicacionEInformaAIObservador() {
 		this.observador.attach(iobservador1);
-		this.observador.update(publicacion);
+		this.observador.notificar(publicacion);
 		
 		verify(iobservador1).update(publicacion);
 	}
