@@ -5,11 +5,13 @@ public class Calificacion {
 	private int calificacion;
 	private String comentario;
 	private String categoria;
+	private Usuario autor;
 	
-	public Calificacion(int numeroCalificacion,String comentario, String categoria) {
+	public Calificacion(int numeroCalificacion,String comentario, String categoria, Usuario autor) {
 		this.setCalificacion(numeroCalificacion);
 		this.setComentario(comentario);
 		this.categoria = categoria;
+		this.autor=autor;
 	}
 	
 	public int getCalificacion() {
@@ -36,6 +38,10 @@ public class Calificacion {
 	
 	public String getCategoria() {
 		return this.categoria;
+	}
+	
+	public Usuario getAutor() {
+		return this.autor;
 	}
 
 	
