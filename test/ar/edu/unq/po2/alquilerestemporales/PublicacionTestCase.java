@@ -38,6 +38,7 @@ class PublicacionTestCase {
 	private IPriceObserver iobservador;
 	LocalDate fechaInicioPublicacion;
 	LocalDate fechaFinPublicacion;
+	private PoliticaDeCancelacion politicaCancelacion;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -61,7 +62,9 @@ class PublicacionTestCase {
 		formasDePago = new ArrayList <FormaDePago>(); 
 		fotos = new ArrayList <Foto>() ;
 		precioBase = 500;
-		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, formasDePago, fechaInicioPublicacion,fechaFinPublicacion);
+		politicaCancelacion = mock(PoliticaDeCancelacion.class);
+		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, 
+				formasDePago, fechaInicioPublicacion,fechaFinPublicacion, politicaCancelacion);
 		publicacion2 = mock(Publicacion.class);
 		precioTemporal = mock(PrecioTemporal.class);
 		observador = new Observer();
@@ -267,4 +270,13 @@ class PublicacionTestCase {
 		int cantidadDePublicacion = this.publicacion.getCantHabitantes();
 		assertEquals(capacidadDeInmueble, cantidadDePublicacion);
 	}
+	
+	@Test
+	void testPublicacionTienePoliticaDeCancelacion() {
+		
+		assertEquals(this.publicacion.getPoliticaDeCancelacion(), politicaCancelacion);
+		
+	}
+	
+	
 }

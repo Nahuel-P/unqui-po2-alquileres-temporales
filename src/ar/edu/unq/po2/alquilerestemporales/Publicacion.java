@@ -17,10 +17,11 @@ public class Publicacion {
 	private ArrayList <FormaDePago> formasDePago;
 	private ArrayList <PrecioTemporal> temporadasEspeciales;
 	private Observer observador;
+	private PoliticaDeCancelacion politicaCancelacion;
 	
-	
-	public Publicacion(Inmueble inmueble, Usuario usuario, double precioBase, LocalTime checkIn, LocalTime checkOut, 
-			ArrayList<Foto> fotos, ArrayList <FormaDePago> formasDePago,LocalDate fecIni, LocalDate fecFin) {
+	public Publicacion(Inmueble inmueble, Usuario usuario, double precioBase, LocalTime checkIn, 
+			LocalTime checkOut, ArrayList<Foto> fotos, ArrayList <FormaDePago> formasDePago,
+			LocalDate fecIni, LocalDate fecFin, PoliticaDeCancelacion politCancelacion) {
 		
 		this.setInmueble(inmueble);
 		this.usuario = usuario;
@@ -33,6 +34,7 @@ public class Publicacion {
 		this.setFotos(fotos);
 		this.temporadasEspeciales = new ArrayList<PrecioTemporal>();
 		this.observador = new Observer();
+		this.politicaCancelacion = politCancelacion;
 	}
 		
 	public void establecerPrecioTemporal(PrecioTemporal precioTemporal) {
@@ -175,6 +177,10 @@ public class Publicacion {
 	public int getCantHabitantes() {
 		
 		return this.inmueble.getCapacidad();
+	}
+	
+	public PoliticaDeCancelacion getPoliticaDeCancelacion() {
+		return politicaCancelacion;
 	}
 
 }
