@@ -215,6 +215,7 @@ class ReservaTestCase {
 		verify(bookingListener).reservaCancelada(this.reserva, fechaDeIngresoDate, fechaDeSalidaDate);
 	}
 	
+	@Test
 	void testInmuebleDeReserva() {
 		Inmueble inmuebleDePublicacion = this.publicacion.getInmueble();
 		Inmueble inmuebleDeReserva = this.reserva.getInmueble();
