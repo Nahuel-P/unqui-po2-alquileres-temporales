@@ -96,4 +96,19 @@ class BibliotecaDeReservasTestCase {
 		verify(reserva1).concluir();
 		verify(reserva2,never()).concluir();
 	}
+	
+	@Test
+	void testRechazarReserva() {
+		when(this.reserva1.getPropietario()).thenReturn(usuario);
+		biblioteca.crearReserva(inquilino, reserva1);
+		this.biblioteca.rechazarReserva(usuario,reserva1);
+		verify(reserva1).rechazar();
+	}
+	
+	@Test
+	void testNoSePuedeRechazarReserva() {
+		when(this.reserva1.getPropietario()).thenReturn(usuario);
+		this.biblioteca.rechazarReserva(inquilino,reserva1);
+		verify(reserva1,never()).rechazar();
+	}
 }

@@ -131,4 +131,9 @@ public class Reserva {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void rechazar() {
+		// TODO Auto-generated method stub
+		
+	}
 }

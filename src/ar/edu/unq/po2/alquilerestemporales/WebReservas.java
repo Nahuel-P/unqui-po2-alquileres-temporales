@@ -42,12 +42,16 @@ public class WebReservas {
 		return this.servicios;
 	}
 	
-	public BibliotecaDeReservas biblioteca() {
-		return this.bibliotecaDeReservas;
-	}
+	//public BibliotecaDeReservas biblioteca() {
+	//	return this.bibliotecaDeReservas;
+	//}
 	
 	public void asignarNuevaBiblioteca(BibliotecaDeReservas repoReservas) {
 		this.bibliotecaDeReservas = repoReservas;
+	}
+	
+	public void asignarNuevaBibliotecaPublicaciones(BibliotecaDePublicaciones repoPulicaciones) {
+		this.bibliotecaDePublicaciones = repoPulicaciones;
 	}
 	
 	/*--------------------------------------------------------*/
@@ -136,7 +140,7 @@ public class WebReservas {
 
 	public void rechazarReserva(Usuario usu, Reserva reserva) {
 		if(esPropietario(usu,reserva)) {
-			this.bibliotecaDeReservas.declinarReserva(usu,reserva);
+			this.bibliotecaDeReservas.rechazarReserva(usu,reserva);
 		}
 		else {
 			System.out.println("No es el propietario");
@@ -187,6 +191,13 @@ public class WebReservas {
 	
 	public boolean esInquilino(Usuario usu, Reserva reserva) {
 		return reserva.getInquilino().equals(usu);
+	}
+	
+	public void hacerBusqueda(Usuario usu, FiltroBasico filtroBasico, ArrayList<Filtro> filtros) {
+		if(this.esUsuarioRegistado(usu)) {
+			ArrayList<Publicacion> busqueda = buscador.buscar(getPublicaciones(),filtroBasico, filtros);
+			usu.ultimaBusqueda(busqueda);
+		}
 	}
 
 

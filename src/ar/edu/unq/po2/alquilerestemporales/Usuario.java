@@ -12,6 +12,7 @@ public class Usuario implements ICalificable{
 	private LocalDate fechaDeAlta;
 	private BibliotecaDeCalificaciones bibliotecaDeCalificaciones;
 	private CasillaEmail casillaEmail;
+	private ArrayList<Publicacion> busquedaReciente;
 	
 	public Usuario(String nombreYApellido, String direccion, String telefono, LocalDate fechaDeAlta, CasillaEmail casillaEmail) {
 		this.setNombreYApellido(nombreYApellido);
@@ -20,6 +21,7 @@ public class Usuario implements ICalificable{
 		this.fechaDeAlta = fechaDeAlta;
 		this.casillaEmail = casillaEmail;
 		this.bibliotecaDeCalificaciones = new BibliotecaDeCalificaciones();
+		this.busquedaReciente= new ArrayList<Publicacion>();
 	}
 
 	public String getNombreYApellido() {
@@ -71,5 +73,10 @@ public class Usuario implements ICalificable{
 	
 	public ArrayList<Calificacion> getCalificaciones(){
 		return this.bibliotecaDeCalificaciones.getCalificaciones();
+	}
+
+	public void ultimaBusqueda(ArrayList<Publicacion> busqueda) {
+		this.busquedaReciente = busqueda;
+		
 	}		
 }

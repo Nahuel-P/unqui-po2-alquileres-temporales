@@ -52,4 +52,14 @@ public class BibliotecaDeReservas {
 			}
 		}
 	}
+
+	public void rechazarReserva(Usuario usu, Reserva reserva) {
+		if(reserva.getPropietario().equals(usu) && existeEnBiblioteca(reserva)) {
+			reserva.rechazar();
+		}
+		else {
+			System.out.println("La reserva no puede ser concretada");
+		}
+		
+	}
 }

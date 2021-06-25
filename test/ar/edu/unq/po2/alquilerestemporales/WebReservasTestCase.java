@@ -6,6 +6,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +20,10 @@ class WebReservasTestCase {
 	private Inmueble inmueble1;
 	private Reserva reserva1;
 	private BibliotecaDeReservas bibliotecaDeReserva;
+	private BibliotecaDePublicaciones bibliotecaDePublicaciones;
+	private FiltroBasico filtroBasico;
+	private ArrayList<Filtro> filtrosExtra;
+	private ArrayList<Publicacion> resultado;
 	
 	
 	@BeforeEach
@@ -29,8 +35,12 @@ class WebReservasTestCase {
 		inmueble1= mock(Inmueble.class);
 		reserva1=mock(Reserva.class);
 		bibliotecaDeReserva=mock(BibliotecaDeReservas.class);
+		bibliotecaDePublicaciones=mock(BibliotecaDePublicaciones.class);
 		web= new WebReservas();
 		web.asignarNuevaBiblioteca(this.bibliotecaDeReserva);
+		filtroBasico= mock(FiltroBasico.class);
+		resultado = new ArrayList<Publicacion>();
+		filtrosExtra = new ArrayList<Filtro>();
 	}
 	
 	@Test
@@ -135,6 +145,13 @@ class WebReservasTestCase {
 	}
 	
 	@Test
+	void testSeObtieneListadoDePublicaciones() {
+		this.web.asignarNuevaBibliotecaPublicaciones(bibliotecaDePublicaciones);
+		this.web.getPublicaciones();
+		verify(bibliotecaDePublicaciones).getPublicaciones();
+	}
+	
+	@Test
 	void testUsuarioCreaUnaReserva() {
 		this.web.registrarUsuario(usu1);
 		this.web.solicitarReserva(usu1,reserva1);	
@@ -165,13 +182,21 @@ class WebReservasTestCase {
 		
 		verify(this.bibliotecaDeReserva,never()).concretarReserva(usu1,reserva1);
 	}
+	
+	@Test
+	void testRechazarUnaReserva() {
+		when(reserva1.getPropietario()).thenReturn(usu1);
+		this.web.rechazarReserva(usu1,reserva1);	
+		
+		verify(bibliotecaDeReserva).rechazarReserva(usu1,reserva1);
+	}
 		
 	@Test
-	void testSoloPropietarioPuedeRechazarUnaReserva() {
+	void testNoSePuedeRechazarUnaReservaAjena() {
 		when(reserva1.getPropietario()).thenReturn(usu2);
 		this.web.rechazarReserva(usu1,reserva1);	
 		
-		verify(bibliotecaDeReserva,never()).declinarReserva(usu1,reserva1);
+		verify(bibliotecaDeReserva,never()).rechazarReserva(usu1,reserva1);
 	}
 	
 	@Test
@@ -223,6 +248,64 @@ class WebReservasTestCase {
 	void testSeDioDeAltaUnaCategoriaCalificable() {
 		this.web.addCategoriaCalificable("Inquilino");
 		int resultado = web.getCategoriasCalificables().size();
+		assertEquals(1,resultado);
+	}
+	
+	@Test
+	void testUsuarioHaceBusqueda() {
+		this.web.registrarUsuario(usu1);
+		web.hacerBusqueda(usu1, filtroBasico, filtrosExtra);
+		verify(usu1).ultimaBusqueda(resultado);
+	}
+	
+	@Test
+	void testUsuarioNoRegistradoNoHaceBusqueda() {
+		web.hacerBusqueda(usu1, filtroBasico, filtrosExtra);
+		verify(usu1,never()).ultimaBusqueda(resultado);
+	}
+	
+	@Test
+	void testSeAgregaUnaCategoriaNueva() {
+		web.addCategoriaCalificable("Propietario");
+		int resultado = web.getCategoriasCalificables().size();
+		assertEquals(1,resultado);
+	}
+	
+	@Test
+	void testNoSeAgregaUnaCategoriaRepetida() {
+		web.addCategoriaCalificable("Inquilino");
+		web.addCategoriaCalificable("Inquilino");
+		int resultado = web.getCategoriasCalificables().size();
+		assertEquals(1,resultado);
+	}
+	
+	@Test
+	void testSeAgregaUnServicioNuevo() {
+		web.addServicio("Wi-Fi");
+		int resultado = web.getServicios().size();
+		assertEquals(1,resultado);
+	}
+	
+	@Test
+	void testNoAgregaUnServicioRepetido() {
+		web.addServicio("Gas");
+		web.addServicio("Gas");
+		int resultado = web.getServicios().size();
+		assertEquals(1,resultado);
+	}
+	
+	@Test
+	void testSeAgregaUnNuevoTipoDeInmueble() {
+		web.addTipoDeInmueble("Casa");
+		int resultado = web.getTiposDeInmueble().size();
+		assertEquals(1,resultado);
+	}
+	
+	@Test
+	void testNoSeAgregaUnTipoDeInmuebleRepetido() {
+		web.addTipoDeInmueble("Departamento");
+		web.addTipoDeInmueble("Departamento");
+		int resultado = web.getTiposDeInmueble().size();
 		assertEquals(1,resultado);
 	}
 	
