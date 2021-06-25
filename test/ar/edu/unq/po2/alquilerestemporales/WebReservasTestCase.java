@@ -6,6 +6,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +20,7 @@ class WebReservasTestCase {
 	private Publicacion publi1;
 	private Inmueble inmueble1;
 	private Reserva reserva1;
+	private LocalDate hoy;
 	private BibliotecaDeReservas bibliotecaDeReserva;
 	private BibliotecaDePublicaciones bibliotecaDePublicaciones;
 	private FiltroBasico filtroBasico;
@@ -41,6 +43,7 @@ class WebReservasTestCase {
 		filtroBasico= mock(FiltroBasico.class);
 		resultado = new ArrayList<Publicacion>();
 		filtrosExtra = new ArrayList<Filtro>();
+		hoy= LocalDate.now();
 	}
 	
 	@Test
@@ -307,6 +310,32 @@ class WebReservasTestCase {
 		web.addTipoDeInmueble("Departamento");
 		int resultado = web.getTiposDeInmueble().size();
 		assertEquals(1,resultado);
+	}
+	
+	@Test
+	void testUsuarioRegistradoBuscaReservasFuturas() {
+		this.web.registrarUsuario(usu1);
+		web.reservasFuturas(usu1);
+		verify(this.bibliotecaDeReserva).reservasPosteriores(usu1,this.hoy);
+	}
+	
+	@Test
+	void testUsuarioNoRegistradoNoPuedeBuscarReservasFuturas() {
+		web.reservasFuturas(usu1);
+		verify(this.bibliotecaDeReserva,never()).reservasPosteriores(usu1,this.hoy);
+	}
+	
+	@Test
+	void testUsuarioRegistradoBuscaReservasPropias() {
+		this.web.registrarUsuario(usu1);
+		web.reservasDeUsuario(usu1);
+		verify(this.bibliotecaDeReserva).reservasDelUsuario(usu1);
+	}
+	
+	@Test
+	void testUsuarioNoRegistradoNoPuedeBuscarReservas() {
+		web.reservasDeUsuario(usu1);
+		verify(this.bibliotecaDeReserva,never()).reservasDelUsuario(usu1);
 	}
 	
 	

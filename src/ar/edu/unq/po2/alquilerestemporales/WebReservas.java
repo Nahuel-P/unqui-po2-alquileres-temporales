@@ -1,5 +1,6 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class WebReservas {
@@ -197,6 +198,25 @@ public class WebReservas {
 		if(this.esUsuarioRegistado(usu)) {
 			ArrayList<Publicacion> busqueda = buscador.buscar(getPublicaciones(),filtroBasico, filtros);
 			usu.ultimaBusqueda(busqueda);
+		}
+	}
+	
+	public void reservasFuturas(Usuario usu) {
+		if(this.esUsuarioRegistado(usu)) {
+			LocalDate hoy = LocalDate.now();
+			this.bibliotecaDeReservas.reservasPosteriores(usu,hoy);
+		}
+	}
+	
+	public void reservasDeUsuario(Usuario usu) {
+		if(this.esUsuarioRegistado(usu)) {
+			this.bibliotecaDeReservas.reservasDelUsuario(usu);
+		}
+	}
+	
+	public void calificar(Usuario usu, Reserva reserva) {
+		if(this.esUsuarioRegistado(usu)) {
+			this.bibliotecaDeReservas.reservasDelUsuario(usu);
 		}
 	}
 
