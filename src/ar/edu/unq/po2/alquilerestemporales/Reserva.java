@@ -116,4 +116,19 @@ public class Reserva {
 			listener.reservaConcretada(this, this.fechaIngreso, this.getFechaDeSalida());
 		}
 	}
+
+	public void aceptar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void cancelar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void concluir() {
+		// TODO Auto-generated method stub
+		
+	}
 }

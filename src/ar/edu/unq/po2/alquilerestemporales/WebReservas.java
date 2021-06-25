@@ -145,7 +145,7 @@ public class WebReservas {
 	
 	public void cancelarReserva(Usuario usu, Reserva reserva) {
 		if(this.esUsuarioRegistado(usu) && esInquilino(usu,reserva)) {
-			this.bibliotecaDeReservas.cancelar(usu,reserva);
+			this.bibliotecaDeReservas.declinarReserva(usu,reserva);
 		}
 		else {
 			System.out.println("No existe el usuario en el sistema");

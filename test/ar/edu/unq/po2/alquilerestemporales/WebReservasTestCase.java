@@ -186,7 +186,7 @@ class WebReservasTestCase {
 		this.web.aceptarReserva(usu2,reserva1);
 		this.web.cancelarReserva(usu1,reserva1);	
 		
-		verify(bibliotecaDeReserva).cancelar(usu1,reserva1);
+		verify(bibliotecaDeReserva).declinarReserva(usu1,reserva1);
 	}
 	
 	@Test
@@ -200,7 +200,7 @@ class WebReservasTestCase {
 		this.web.aceptarReserva(usu2,reserva1);
 		this.web.cancelarReserva(usu1,reserva1);	
 		
-		verify(bibliotecaDeReserva,never()).cancelar(usu2,reserva1);
+		verify(bibliotecaDeReserva,never()).declinarReserva(usu2,reserva1);
 	}
 	
 	@Test
