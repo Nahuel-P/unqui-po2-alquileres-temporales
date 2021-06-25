@@ -111,4 +111,14 @@ class BibliotecaDeReservasTestCase {
 		this.biblioteca.rechazarReserva(inquilino,reserva1);
 		verify(reserva1,never()).rechazar();
 	}
+	
+	@Test
+	void testReservasDeUsuario() {
+		when(this.reserva1.getInquilino()).thenReturn(usuario);
+		when(this.reserva2.getInquilino()).thenReturn(inquilino);
+		this.biblioteca.crearReserva(usuario, reserva1);
+		this.biblioteca.crearReserva(inquilino, reserva2);
+		int resultado = this.biblioteca.reservasDelUsuario(usuario).size();
+		assertEquals(1,resultado);
+	}
 }

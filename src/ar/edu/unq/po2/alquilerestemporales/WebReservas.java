@@ -201,22 +201,36 @@ public class WebReservas {
 		}
 	}
 	
-	public void reservasFuturas(Usuario usu) {
+	public ArrayList<Reserva> reservasFuturas(Usuario usu) {
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		if(this.esUsuarioRegistado(usu)) {
+			
 			LocalDate hoy = LocalDate.now();
-			this.bibliotecaDeReservas.reservasPosteriores(usu,hoy);
+			reservas= this.bibliotecaDeReservas.reservasPosteriores(usu,hoy);
+		}
+		return reservas;
+	}
+	
+	public ArrayList<Reserva> reservasDeUsuario(Usuario usu) {
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+		if(this.esUsuarioRegistado(usu)) {
+			reservas=this.bibliotecaDeReservas.reservasDelUsuario(usu);
+		}
+		return reservas;
+	}
+	
+	
+	public void calificarHospedaje(Usuario inquilino, Reserva reserva,Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
+		if(this.esUsuarioRegistado(inquilino) && reserva.getInquilino().equals(inquilino) && (reserva.getEstadoDeReserva().getClass() == Concluida.class)) {
+			reserva.getPropietario().addCalificacion(calificacionPropietario);
+			reserva.getInmueble().addCalificacion(calificacionInmueble);
 		}
 	}
 	
-	public void reservasDeUsuario(Usuario usu) {
-		if(this.esUsuarioRegistado(usu)) {
-			this.bibliotecaDeReservas.reservasDelUsuario(usu);
-		}
-	}
-	
-	public void calificar(Usuario usu, Reserva reserva) {
-		if(this.esUsuarioRegistado(usu)) {
-			this.bibliotecaDeReservas.reservasDelUsuario(usu);
+	public void calificarInquilino(Usuario propietario, Reserva reserva, Calificacion calificacionInquilino) {
+		if(this.esUsuarioRegistado(propietario) && reserva.getPropietario().equals(propietario) && (reserva.getEstadoDeReserva().getClass() == Concluida.class)) {
+			reserva.getPropietario().addCalificacion(null);
+			reserva.getInquilino().addCalificacion(calificacionInquilino);
 		}
 	}
 

@@ -63,13 +63,23 @@ public class BibliotecaDeReservas {
 		
 	}
 
-	public void reservasPosteriores(Usuario usu, LocalDate hoy) {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Reserva> reservasPosteriores(Usuario usu, LocalDate hoy) {
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+		for(Reserva reserva : this.getTodasReservas()) {
+			if(reserva.getInquilino().equals(usu) && hoy.compareTo(reserva.getFechaDeIngreso())<0) {
+				reservas.add(reserva);
+			}
+		}
+		return reservas;
 	}
 
-	public void reservasDelUsuario(Usuario usu) {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Reserva> reservasDelUsuario(Usuario usu) {
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+		for(Reserva reserva : this.getTodasReservas()) {
+			if(reserva.getInquilino().equals(usu)){
+				reservas.add(reserva);
+			}
+		}
+		return reservas;
 	}
 }

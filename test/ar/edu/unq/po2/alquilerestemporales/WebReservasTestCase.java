@@ -19,6 +19,7 @@ class WebReservasTestCase {
 	private Usuario usu2;
 	private Publicacion publi1;
 	private Inmueble inmueble1;
+	private Concluida concluida;
 	private Reserva reserva1;
 	private LocalDate hoy;
 	private BibliotecaDeReservas bibliotecaDeReserva;
@@ -337,10 +338,5 @@ class WebReservasTestCase {
 		web.reservasDeUsuario(usu1);
 		verify(this.bibliotecaDeReserva,never()).reservasDelUsuario(usu1);
 	}
-	
-	
-	
 
-	
-	
 }
