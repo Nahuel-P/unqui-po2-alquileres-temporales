@@ -62,4 +62,14 @@ public class BibliotecaDeReservas {
 		}
 		
 	}
+
+	public void reservasPosteriores(Usuario usu, LocalDate hoy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void reservasDelUsuario(Usuario usu) {
+		// TODO Auto-generated method stub
+		
+	}
 }
