@@ -7,11 +7,9 @@ public abstract class Filtro {
 	public ArrayList<Publicacion> filtrarPublicaciones(ArrayList<Publicacion> publicaciones) {
 			
 		ArrayList<Publicacion> filtradas = new ArrayList<Publicacion>();
-		for(int i=0; i<publicaciones.size(); i++) {
-			if(cumpleCriterios(publicaciones.get(i))) {
-				filtradas.add(publicaciones.get(i));
-			}else {
-				System.out.println("No cumple");
+		for(Publicacion publicacion : publicaciones) {
+			if(this.cumpleCriterios(publicacion)) {
+				filtradas.add(publicacion);
 			}
 		}
 		return filtradas;

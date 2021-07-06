@@ -15,19 +15,6 @@ public class FiltroBasico extends Filtro {
 		this.ciudad = ciudad;
 	}
 	
-	public ArrayList<Publicacion> filtrarPublicaciones(ArrayList<Publicacion> publicaciones) {
-		
-		ArrayList<Publicacion> filtradas = new ArrayList<Publicacion>();
-		for(int i=0; i<publicaciones.size(); i++) {
-			if(cumpleCriterios(publicaciones.get(i))) {
-				filtradas.add(publicaciones.get(i));
-			}else {
-				System.out.println("No cumple");
-			}
-		}
-		return filtradas;
-	}
-
 	public boolean cumpleCriterios(Publicacion publicacion) {
 		return (publicacion.getCiudad() == this.ciudad) && estaEnFecha(publicacion);
 	}
