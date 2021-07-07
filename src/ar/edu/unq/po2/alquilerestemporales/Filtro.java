@@ -1,18 +1,15 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public abstract class Filtro {
 	
 	public ArrayList<Publicacion> filtrarPublicaciones(ArrayList<Publicacion> publicaciones) {
 			
-		ArrayList<Publicacion> filtradas = new ArrayList<Publicacion>();
-		for(Publicacion publicacion : publicaciones) {
-			if(this.cumpleCriterios(publicacion)) {
-				filtradas.add(publicacion);
-			}
-		}
-		return filtradas;
+		return publicaciones.stream()
+	     .filter(publicacion -> this.cumpleCriterios(publicacion))
+	     .collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	public abstract boolean cumpleCriterios(Publicacion publicacion);
