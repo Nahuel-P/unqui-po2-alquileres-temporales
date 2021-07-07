@@ -18,17 +18,12 @@ public class BibliotecaDeReservas {
 	public void crearReserva(Usuario usu, Reserva reserva) {
 		if(!this.getTodasReservas().contains(reserva)) {
 			this.reservas.add(reserva);
-		}else {
-			System.out.println("La reserva ya existe");
 		}
 	}
 
 	public void concretarReserva(Usuario usu, Reserva reserva) {
 		if(reserva.getPropietario().equals(usu) && existeEnBiblioteca(reserva)) {
 			reserva.aceptar();
-		}
-		else {
-			System.out.println("La reserva no puede ser concretada");
 		}
 	}
 	
@@ -39,8 +34,6 @@ public class BibliotecaDeReservas {
 	public void declinarReserva(Usuario usu, Reserva reserva) {
 		if(reserva.getInquilino().equals(usu) && existeEnBiblioteca(reserva)) {
 			reserva.cancelar();
-		}else {
-			System.out.println("La reserva no puede ser cancelada");
 		}
 	}
 	
@@ -56,9 +49,6 @@ public class BibliotecaDeReservas {
 	public void rechazarReserva(Usuario usu, Reserva reserva) {
 		if(reserva.getPropietario().equals(usu) && existeEnBiblioteca(reserva)) {
 			reserva.rechazar();
-		}
-		else {
-			System.out.println("La reserva no puede ser concretada");
 		}
 		
 	}

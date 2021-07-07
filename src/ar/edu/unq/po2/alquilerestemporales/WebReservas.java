@@ -59,46 +59,26 @@ public class WebReservas {
 	public void registrarUsuario(Usuario nuevoUsuario) {
 		if(!esUsuarioRegistado(nuevoUsuario)) {
 			this.usuarios.add(nuevoUsuario);
-			System.out.println("Se dio de alta un usuario en el sistema");
-		}
-		else {
-			System.out.println("El usuario que se quiere dar de alta ya existe");
 		}
 	}
 
 	public void eliminarUsuario(Usuario usu) {
-		if(!esUsuarioRegistado(usu)) {
-			System.out.println("No existe el usuario en el sistema");
-		}
-		else {
-			this.usuarios.remove(usu);
-			System.out.println("El usuario fue eliminado");
-		}
+		this.usuarios.remove(usu);
 	}
 
 	public void publicar(Usuario usu, Publicacion publicacion) {
-		if(esUsuarioRegistado(usu) && esPropietarioDePublicacion(usu,publicacion)) {
+		if(esUsuarioRegistado(usu)) {
 			this.bibliotecaDePublicaciones.cargarPublicacion(publicacion);
-		}
-		else {
-			System.out.println("Usuario invalido para dar de alta publicacion");
 		}
 	}
 	
 	public void eliminarPublicacion(Usuario usu, Publicacion publicacion) {
-		if(esPropietarioDePublicacion(usu,publicacion)) {
-			this.bibliotecaDePublicaciones.borrar(publicacion);
-		}else {
-			System.out.println("Usuario invalido para dar de eliminar publicacion");
-		}
+		this.bibliotecaDePublicaciones.borrar(publicacion);
 	}
 	
 	public void addTipoDeInmueble(String nuevoTipo) {
 		if(!hayTipoDeInmueble(nuevoTipo)) {
 			this.darDeAltaTipoInmueble(nuevoTipo);
-		}
-		else {
-			System.out.println("Ya existe el tipo de inmueble"+nuevoTipo);
 		}
 	}
 	
@@ -106,17 +86,11 @@ public class WebReservas {
 		if(!hayCategoria(nombreCategoria)) {
 			this.categoriasCalificables.add(nombreCategoria);
 		}
-		else {
-			System.out.println("Ya existe la categoria"+nombreCategoria);
-		}
 	}
 
 	public void addServicio(String nombreServicio) {
 		if(!hayServicio(nombreServicio)) {
 			this.servicios.add(nombreServicio);
-		}
-		else {
-			System.out.println("Ya existe el servicio"+nombreServicio);
 		}
 	}
 	
@@ -124,46 +98,22 @@ public class WebReservas {
 		if(this.esUsuarioRegistado(usu)) {
 			this.bibliotecaDeReservas.crearReserva(usu,reserva);
 		}
-		else {
-			System.out.println("No existe el usuario en el sistema");
-		}
 	}
 	
 	public void aceptarReserva(Usuario usu, Reserva reserva) {
-		if(esPropietario(usu,reserva)) {
-			this.bibliotecaDeReservas.concretarReserva(usu,reserva);
-		}
-		else {
-			System.out.println("No es el propietario");
-		}
-		
+		this.bibliotecaDeReservas.concretarReserva(usu,reserva);
 	}
 
 	public void rechazarReserva(Usuario usu, Reserva reserva) {
-		if(esPropietario(usu,reserva)) {
-			this.bibliotecaDeReservas.rechazarReserva(usu,reserva);
-		}
-		else {
-			System.out.println("No es el propietario");
-		}
+		this.bibliotecaDeReservas.rechazarReserva(usu,reserva);
 	}
 	
 	public void cancelarReserva(Usuario usu, Reserva reserva) {
-		if(this.esUsuarioRegistado(usu) && esInquilino(usu,reserva)) {
-			this.bibliotecaDeReservas.declinarReserva(usu,reserva);
-		}
-		else {
-			System.out.println("No existe el usuario en el sistema");
-		}
+		this.bibliotecaDeReservas.declinarReserva(usu,reserva);
 	}
 
-	// metodos de encapsulamiento
 	private boolean esUsuarioRegistado(Usuario usu) {
 		return this.getUsuarios().contains(usu);
-	}
-	
-	private boolean esPropietarioDePublicacion(Usuario usu, Publicacion publicacion) {
-		return publicacion.getPropietario().equals(usu);
 	}
 	
 	private boolean hayTipoDeInmueble(String tipoDeInmueble) {
@@ -185,15 +135,7 @@ public class WebReservas {
 	public ArrayList<Reserva> getTodasLasReservas() {
 		return this.bibliotecaDeReservas.getTodasReservas();
 	}
-	
-	public boolean esPropietario(Usuario usu, Reserva reserva) {
-		return reserva.getPropietario().equals(usu);
-	}
-	
-	public boolean esInquilino(Usuario usu, Reserva reserva) {
-		return reserva.getInquilino().equals(usu);
-	}
-	
+		
 	public void hacerBusqueda(Usuario usu, FiltroBasico filtroBasico, ArrayList<Filtro> filtros) {
 		if(this.esUsuarioRegistado(usu)) {
 			ArrayList<Publicacion> busqueda = buscador.buscar(getPublicaciones(),filtroBasico, filtros);
@@ -204,7 +146,6 @@ public class WebReservas {
 	public ArrayList<Reserva> reservasFuturas(Usuario usu) {
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		if(this.esUsuarioRegistado(usu)) {
-			
 			LocalDate hoy = LocalDate.now();
 			reservas= this.bibliotecaDeReservas.reservasPosteriores(usu,hoy);
 		}
@@ -219,20 +160,7 @@ public class WebReservas {
 		return reservas;
 	}
 	
-	
-	public void calificarHospedaje(Usuario inquilino, Reserva reserva,Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
-		if(this.esUsuarioRegistado(inquilino) && reserva.getInquilino().equals(inquilino) && (reserva.getEstadoDeReserva().getClass() == Concluida.class)) {
-			reserva.getPropietario().addCalificacion(calificacionPropietario);
-			reserva.getInmueble().addCalificacion(calificacionInmueble);
-		}
-	}
-	
-	public void calificarInquilino(Usuario propietario, Reserva reserva, Calificacion calificacionInquilino) {
-		if(this.esUsuarioRegistado(propietario) && reserva.getPropietario().equals(propietario) && (reserva.getEstadoDeReserva().getClass() == Concluida.class)) {
-			reserva.getPropietario().addCalificacion(null);
-			reserva.getInquilino().addCalificacion(calificacionInquilino);
-		}
-	}
+
 
 
 

@@ -19,9 +19,6 @@ public class BibliotecaDePublicaciones {
 		if(!this.getPublicaciones().stream().anyMatch(publicacion-> (publicacion.getInmueble().equals(publi1.getInmueble())))){
 			this.publicaciones.add(publi1);
 		}
-		else {
-			System.out.println("Error en la publicacion");
-		}
 	}
 
 	public ArrayList<Publicacion> getPublicaciones() {
