@@ -8,11 +8,9 @@ public class CancelacionGratuita implements PoliticaDeCancelacion {
 		float importeAPagar = 0;
 		if(!estaEnPlazoDeCancelacionGratuita(reserva)) {
 			importeAPagar = reserva.costoPorDia() * 2;
-			System.out.println("PENALIDAD DE : "+importeAPagar);
+			
 		}
-		else {
-			System.out.println("NO PENALIZABLE");
-		}
+		
 		return importeAPagar;
 		
 	}

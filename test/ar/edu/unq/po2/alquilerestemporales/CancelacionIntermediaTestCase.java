@@ -25,7 +25,8 @@ class CancelacionIntermediaTestCase {
 	
 	@Test
 	void testCancelacionIntermediaEnPlazoEsGratis() {
-		when(this.reserva.diasQueFaltan()).thenReturn(20);
+		when(this.reserva.diasQueFaltan()).thenReturn(25);
+		when(this.reserva.costoTotal()).thenReturn(1000f);
 		
 		float resultado = this.cancelacion.aplicarCostosDeCancelacion(reserva);
 		assertEquals(0f, resultado);
@@ -33,7 +34,7 @@ class CancelacionIntermediaTestCase {
 	
 	@Test
 	void testCancelacionIntermediaEnPlazoIntermedioSeCobraLaMitad() {
-		when(this.reserva.diasQueFaltan()).thenReturn(19);
+		when(this.reserva.diasQueFaltan()).thenReturn(15);
 		when(this.reserva.costoTotal()).thenReturn(1000f);
 		
 		float resultado = this.cancelacion.aplicarCostosDeCancelacion(reserva);
@@ -42,7 +43,7 @@ class CancelacionIntermediaTestCase {
 	
 	@Test
 	void testCancelacionIntermediaFueraDePlazoSePagaCompleta() {
-		when(this.reserva.diasQueFaltan()).thenReturn(9);
+		when(this.reserva.diasQueFaltan()).thenReturn(5);
 		when(this.reserva.costoTotal()).thenReturn(1000f);
 		
 		float resultado = this.cancelacion.aplicarCostosDeCancelacion(reserva);
