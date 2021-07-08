@@ -61,8 +61,6 @@ public class Publicacion {
 		if((!this.getFotos().contains(foto)) &&
 				(!espacioParaFotosLleno())) {
 			this.getFotos().add(foto);
-		} else {
-			System.out.println("No es posible subir esta foto");
 		}
 	}
 
@@ -81,11 +79,9 @@ public class Publicacion {
 	}
 	
 	public void bajarDePrecio(double nuevoPrecio) {
-		if (nuevoPrecio < this.getPrecioBase()) { //Cumple extrictamente la funcion de bajar, caso contrario 
+		if (nuevoPrecio < this.getPrecioBase()) { //Cumple estrictamente la funcion de bajar, caso contrario 
 			this.setPrecioBase(nuevoPrecio);      //se deberia utilizar otro metodo.
 			this.notificar();	
-		} else {
-			System.out.println("El precio colocado es mayor al existente");
 		}
 	}
 	
@@ -132,9 +128,7 @@ public class Publicacion {
 		
 		if(chOut.isBefore(checkIn)) {
 			this.checkOut = chOut;
-		} else {
-			System.out.println("El horario de check-out, debe ser menor al horario de check-in");
-		}
+		} 
 	}
 
 	public float getPrecioBase() {
