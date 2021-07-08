@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Inmueble;
+
 class InmuebleTestCase {
 	
 	private Inmueble inmueble;

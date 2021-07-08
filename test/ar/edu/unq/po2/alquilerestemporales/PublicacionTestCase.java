@@ -12,6 +12,19 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.PoliticaDeCancelacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.Foto;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.IPriceObserver;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.Observer;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.PrecioTemporal;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Inmueble;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.Credito;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.Debito;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.Efectivo;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.FormaDePago;
+
 class PublicacionTestCase {
 	
 	private Publicacion publicacion;

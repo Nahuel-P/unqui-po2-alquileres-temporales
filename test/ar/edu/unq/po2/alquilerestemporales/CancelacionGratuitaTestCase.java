@@ -7,6 +7,10 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.CancelacionGratuita;
+import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.PoliticaDeCancelacion;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
+
 class CancelacionGratuitaTestCase {
 
 	private PoliticaDeCancelacion cancelacion; 

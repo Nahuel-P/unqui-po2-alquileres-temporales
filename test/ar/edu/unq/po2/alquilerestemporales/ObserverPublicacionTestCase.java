@@ -7,6 +7,10 @@ import static org.mockito.Mockito.verify;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.publicacion.IPriceObserver;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.Observer;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
+
 class ObserverPublicacionTestCase {
 	
 	private Observer observador;

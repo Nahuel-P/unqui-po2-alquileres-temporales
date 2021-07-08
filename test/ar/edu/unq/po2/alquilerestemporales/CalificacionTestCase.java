@@ -6,6 +6,9 @@ import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
+
 class CalificacionTestCase {
 	private Calificacion calificacion;
 	private Calificacion calificacion2;

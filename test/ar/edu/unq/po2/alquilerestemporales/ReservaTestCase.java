@@ -11,6 +11,22 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.publicacion.PrecioTemporal;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Inmueble;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.Credito;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.FormaDePago;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Aceptada;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Cancelada;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Concluida;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Condicional;
+import ar.edu.unq.po2.alquilerestemporales.reserva.EstadoReserva;
+import ar.edu.unq.po2.alquilerestemporales.reserva.IBookingListener;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Pendiente;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Rechazada;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
+
 class ReservaTestCase {
 	private Reserva reserva;
 	private String fechaDeIngreso;

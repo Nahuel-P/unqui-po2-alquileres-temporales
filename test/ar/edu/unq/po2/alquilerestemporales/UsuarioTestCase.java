@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.CasillaEmail;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
+
 class UsuarioTestCase {
 	private String nombreYApellidoDeUsuario;
 	private String nombreYApellidoDeUsuario2;

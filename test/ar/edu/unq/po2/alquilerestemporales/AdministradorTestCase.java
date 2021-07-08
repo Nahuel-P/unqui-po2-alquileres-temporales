@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.webReservas.Administrador;
+import ar.edu.unq.po2.alquilerestemporales.webReservas.WebReservas;
+
 class AdministradorTestCase {
 
 	private WebReservas web;
