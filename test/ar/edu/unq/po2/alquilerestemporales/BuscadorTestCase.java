@@ -26,9 +26,6 @@ class BuscadorTestCase {
 	private Filtro filtroH;
 	private ArrayList<Publicacion> publicaciones;
 	private ArrayList<Filtro> filtrosExtra;
-	private ArrayList<Publicacion> filtradas1;
-	private ArrayList<Publicacion> filtradas2;
-	private ArrayList<Publicacion> filtradas3;
 	private Publicacion publi1;
 	private Publicacion publi2;
 	private Publicacion publi3;
@@ -41,8 +38,6 @@ class BuscadorTestCase {
 		filtroH = mock(FiltroCantidadDeHabitantes.class);
 		publicaciones= new ArrayList<Publicacion>();
 		filtrosExtra= new ArrayList<Filtro>();
-		filtradas1= new ArrayList<Publicacion>();
-		filtradas2= new ArrayList<Publicacion>();
 		//
 		publi1 = mock(Publicacion.class);
 		publi2 = mock(Publicacion.class);
@@ -51,13 +46,6 @@ class BuscadorTestCase {
 		publicaciones.add(publi1);
 		publicaciones.add(publi2);
 		publicaciones.add(publi3);
-		//
-		filtradas1.add(publi1);
-		filtradas1.add(publi2);
-		//
-		filtradas2.add(publi1);
-
-
 	}
 	
 	@Test
@@ -67,42 +55,58 @@ class BuscadorTestCase {
 	
 	@Test
 	void testBuscadorConFiltroBasico() {
-		when(this.filtroB.filtrarPublicaciones(publicaciones)).thenReturn(filtradas1);
-		System.out.println(filtradas1.size());
+		when(this.filtroB.cumpleFiltrado(publi1)).thenReturn(true);
+		when(this.filtroB.cumpleFiltrado(publi2)).thenReturn(false);
+		when(this.filtroB.cumpleFiltrado(publi3)).thenReturn(true);
 		int resultado = buscador.buscar(publicaciones,filtroB,filtrosExtra).size();
 		assertEquals(resultado,2);
 	}
 	
 	@Test
 	void testBuscadorConFiltroBasicoYDePrecio() {
-		when(this.filtroB.filtrarPublicaciones(publicaciones)).thenReturn(filtradas1);
+		when(this.filtroB.cumpleFiltrado(publi1)).thenReturn(true);
+		when(this.filtroB.cumpleFiltrado(publi2)).thenReturn(true);
+		when(this.filtroB.cumpleFiltrado(publi3)).thenReturn(true);
+		/**/
+		when(this.filtroP.cumpleFiltrado(publi1)).thenReturn(true);
+		when(this.filtroP.cumpleFiltrado(publi2)).thenReturn(false);
+		when(this.filtroP.cumpleFiltrado(publi3)).thenReturn(true);
 		filtrosExtra.add(filtroP);
-		this.buscador.buscar(publicaciones,filtroB,filtrosExtra).size();
-		verify(filtroP).filtrarPublicaciones(publicaciones);
+		int resultado = buscador.buscar(publicaciones,filtroB,filtrosExtra).size();
+		assertEquals(resultado,2);
 	}
 	
 	@Test
 	void testBuscadorConFiltroBasicoDePrecioYDeHuspedes() {
-		when(this.filtroB.filtrarPublicaciones(publicaciones)).thenReturn(filtradas1);
-		filtrosExtra.add(filtroP);
+		when(this.filtroB.cumpleFiltrado(publi1)).thenReturn(true);
+		when(this.filtroB.cumpleFiltrado(publi2)).thenReturn(true);
+		when(this.filtroB.cumpleFiltrado(publi3)).thenReturn(true);
+		/**/
+		when(this.filtroH.cumpleFiltrado(publi1)).thenReturn(true);
+		when(this.filtroH.cumpleFiltrado(publi2)).thenReturn(false);
+		when(this.filtroH.cumpleFiltrado(publi3)).thenReturn(true);
 		filtrosExtra.add(filtroH);
-		this.buscador.buscar(publicaciones,filtroB,filtrosExtra).size();
-		verify(filtroP).filtrarPublicaciones(publicaciones);
-		verify(filtroH).filtrarPublicaciones(publicaciones);
+		int resultado = buscador.buscar(publicaciones,filtroB,filtrosExtra).size();
+		assertEquals(resultado,2);
 	}
 	
 	@Test
-	void testBuscadorConFiltroBasicoDeDeHuspedesYNoDePrecio() {
-		when(this.filtroB.filtrarPublicaciones(publicaciones)).thenReturn(filtradas1);
+	void testBuscadorConTodosLosFiltros() {
+		when(this.filtroB.cumpleFiltrado(publi1)).thenReturn(true);
+		when(this.filtroB.cumpleFiltrado(publi2)).thenReturn(true);
+		when(this.filtroB.cumpleFiltrado(publi3)).thenReturn(true);
+		/**/
+		when(this.filtroH.cumpleFiltrado(publi1)).thenReturn(true);
+		when(this.filtroH.cumpleFiltrado(publi2)).thenReturn(false);
+		when(this.filtroH.cumpleFiltrado(publi3)).thenReturn(true);
+		/**/
+		when(this.filtroP.cumpleFiltrado(publi1)).thenReturn(true);
+		when(this.filtroP.cumpleFiltrado(publi2)).thenReturn(true);
+		when(this.filtroP.cumpleFiltrado(publi3)).thenReturn(false);
+		/**/
 		filtrosExtra.add(filtroH);
-		this.buscador.buscar(publicaciones,filtroB,filtrosExtra).size();
-		verify(filtroP,never()).filtrarPublicaciones(publicaciones);
-		verify(filtroH).filtrarPublicaciones(publicaciones);
+		filtrosExtra.add(filtroP);
+		int resultado = buscador.buscar(publicaciones,filtroB,filtrosExtra).size();
+		assertEquals(resultado,1);
 	}
-
-	
-	
-	
-	
-
 }

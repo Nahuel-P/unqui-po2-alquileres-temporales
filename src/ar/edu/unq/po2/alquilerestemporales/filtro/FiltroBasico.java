@@ -3,7 +3,7 @@ package ar.edu.unq.po2.alquilerestemporales.filtro;
 import java.time.LocalDate;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
 
-public class FiltroBasico extends Filtro {
+public class FiltroBasico implements Filtro {
 	
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
@@ -15,13 +15,18 @@ public class FiltroBasico extends Filtro {
 		this.ciudad = ciudad;
 	}
 	
-	public boolean cumpleCriterios(Publicacion publicacion) {
-		return (publicacion.getCiudad() == this.ciudad) && estaEnFecha(publicacion);
+	@Override
+	public boolean cumpleFiltrado(Publicacion publicacion){
+        return estaEnCiudad(publicacion.getCiudad()) && estaEnFecha(publicacion);  
+    }
+
+    public boolean estaEnCiudad(String ciudadPublicada){
+        return this.ciudad.equals(ciudadPublicada);
+    }
+
+    public boolean estaEnFecha(Publicacion publicacion) {
+		return (publicacion.getFechaInicio().compareTo(fechaInicio)>=0) && (publicacion.getFechaFin().compareTo(fechaFin)<=0);
 	}
-	
-	private boolean estaEnFecha(Publicacion publicacion) {
-		LocalDate fecIniPubli = publicacion.getFechaInicio();
-		LocalDate fecFinPubli = publicacion.getFechaFin();
-		return (fecIniPubli.compareTo(fechaInicio)>=0) && (fecFinPubli.compareTo(fechaFin)<=0);
-	}	
+
+
 }

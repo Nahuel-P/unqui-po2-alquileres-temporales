@@ -34,19 +34,19 @@ class AdministradorTestCase {
 	@Test
 	void testCrearTipoDeInmueble() {
 		this.admin.crearTipoDeInmueble("Departamento");		
-		verify(web).addTipoDeInmueble("Departamento");
+		verify(web).agregarTipoDeInmueble("Departamento");
 	}
 	
 	@Test
 	void testCrearCategoriaCalificable() {
 		this.admin.crearCategoria("Inquilino");		
-		verify(web).addCategoriaCalificable("Inquilino");
+		verify(web).agregarCategoriaCalificable("Inquilino");
 	}
 	
 	@Test
 	void testCrearServicio() {
 		this.admin.crearServicio("Wi-Fi");		
-		verify(web).addServicio("Wi-Fi");
+		verify(web).agregarServicio("Wi-Fi");
 	}
 	
 	

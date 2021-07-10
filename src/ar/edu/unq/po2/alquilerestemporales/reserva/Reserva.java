@@ -145,4 +145,22 @@ public class Reserva {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public boolean esReservaDeUsuario(Usuario usuario) {
+		return this.getInquilino().equals(usuario);
+	}
+
+	public boolean esFutura() {
+		return LocalDate.now().compareTo(this.getFechaDeIngreso())<0;
+	}
+
+	public String getCiudad() {
+		return this.publicacion.getCiudad();
+	}
+
+	public boolean esEnCiudad(String ciudad) {
+		return getCiudad().equals(ciudad);
+	}
+
+
 }

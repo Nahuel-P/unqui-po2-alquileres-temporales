@@ -17,22 +17,14 @@ class FiltroCantidadDeHabitantesTestCase {
 
 	private Filtro filtro;
 	private int cantidad;
-	private ArrayList<Publicacion> publicaciones;
 	private Publicacion publi1;
-	private Publicacion publi2;
-	private Publicacion publi3;
+
 	
 	@BeforeEach
 	void setUp() throws Exception {	
 		cantidad=4;
 		filtro = new FiltroCantidadDeHabitantes(cantidad);
 		publi1= mock(Publicacion.class);
-		publi2= mock(Publicacion.class);
-		publi3= mock(Publicacion.class);
-		publicaciones= new ArrayList<Publicacion>();
-		publicaciones.add(publi1);
-		publicaciones.add(publi2);
-		publicaciones.add(publi3);
 	}
 	
 	@Test
@@ -41,12 +33,14 @@ class FiltroCantidadDeHabitantesTestCase {
 	}
 	
 	@Test
-	void testPrecios() {
+	void testCantidadDeHabitantesCumple() {
 		when(publi1.getCantHabitantes()).thenReturn(4);
-		when(publi2.getCantHabitantes()).thenReturn(2);
-		when(publi3.getCantHabitantes()).thenReturn(4);
-		
-		int resultado = filtro.filtrarPublicaciones(publicaciones).size();
-		assertEquals(resultado,2);
+		assertTrue(filtro.cumpleFiltrado(publi1));
+	}
+	
+	@Test
+	void testCantidadDeHabitantesNoCumple() {
+		when(publi1.getCantHabitantes()).thenReturn(6);
+		assertFalse(filtro.cumpleFiltrado(publi1));
 	}
 }

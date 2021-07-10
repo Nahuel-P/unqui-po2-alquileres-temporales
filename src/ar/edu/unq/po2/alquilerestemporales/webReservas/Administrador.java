@@ -9,15 +9,15 @@ public class Administrador {
 	}
 
 	public void crearCategoria(String nombreCategoria) {
-		this.webAministrada.addCategoriaCalificable(nombreCategoria);
+		this.webAministrada.agregarCategoriaCalificable(nombreCategoria);
 	}
 	
 	public void crearTipoDeInmueble(String tipoDeInmueble) {
-		this.webAministrada.addTipoDeInmueble(tipoDeInmueble);
+		this.webAministrada.agregarTipoDeInmueble(tipoDeInmueble);
 	}
 	
 	public void crearServicio(String nombreServicio) {
-		this.webAministrada.addServicio(nombreServicio);
+		this.webAministrada.agregarServicio(nombreServicio);
 		
 	}
 	

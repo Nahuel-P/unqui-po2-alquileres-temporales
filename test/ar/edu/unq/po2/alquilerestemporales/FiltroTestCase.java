@@ -2,6 +2,7 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,10 +27,8 @@ public class FiltroTestCase {
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	private String ciudad;
-	private ArrayList<Publicacion> publicaciones;
 	private Publicacion publi1;
-	private Publicacion publi2;
-	private Publicacion publi3;
+
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -40,13 +39,6 @@ public class FiltroTestCase {
 		fechaFin= LocalDate.of(2021,12,30);
 		ciudad= "Wilde";
 		publi1= mock(Publicacion.class);
-		publi2= mock(Publicacion.class);
-		publi3= mock(Publicacion.class);
-		publicaciones= new ArrayList<Publicacion>();
-		publicaciones.add(publi1);
-		publicaciones.add(publi2);
-		publicaciones.add(publi3);
-		
 	}
 	
 	@Test
@@ -70,10 +62,7 @@ public class FiltroTestCase {
 	@Test
 	void testFiltroPorPrecio() {
 		when(publi1.getPrecioBase()).thenReturn(1500.00f);
-		when(publi2.getPrecioBase()).thenReturn(2100.00f);
-		when(publi3.getPrecioBase()).thenReturn(3000.00f);
 		filtro = new FiltroPrecio(precioMax,precioMin);
-		int resultado = filtro.filtrarPublicaciones(publicaciones).size();
-		assertEquals(resultado,1);
+		assertTrue(filtro.cumpleFiltrado(publi1));
 	}
 }

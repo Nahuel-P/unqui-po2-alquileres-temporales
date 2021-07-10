@@ -2,77 +2,80 @@ package ar.edu.unq.po2.alquilerestemporales.webReservas;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 
 public class BibliotecaDeReservas {
 
-	private ArrayList<Reserva> reservas;
+	private List<Reserva> reservas;
 
 	public BibliotecaDeReservas() {
 		this.reservas = new ArrayList<Reserva>();
 	}
 
-	public ArrayList<Reserva> getTodasReservas() {
+	public List<Reserva> getTodasLasReservas() {
 		return this.reservas;
 	}
 	
-	public void crearReserva(Usuario usu, Reserva reserva) {
-		if(!this.getTodasReservas().contains(reserva)) {
-			this.reservas.add(reserva);
-		}
-	}
+	public List<Reserva> getReservasDeUsuario(Usuario usuario){
+        return this.getTodasLasReservas().stream()
+        			.filter(reserva-> reserva.esReservaDeUsuario(usuario))
+        			.collect(Collectors.toCollection(ArrayList::new));
+    }
 
-	public void concretarReserva(Usuario usu, Reserva reserva) {
-		if(reserva.getPropietario().equals(usu) && existeEnBiblioteca(reserva)) {
-			reserva.aceptar();
-		}
-	}
-	
-	public boolean existeEnBiblioteca (Reserva reserva) {
-		return this.getTodasReservas().contains(reserva);
-	}
-	
-	public void declinarReserva(Usuario usu, Reserva reserva) {
-		if(reserva.getInquilino().equals(usu) && existeEnBiblioteca(reserva)) {
-			reserva.cancelar();
-		}
-	}
-	
-	public void concluirReservas() {
-		LocalDate fecHoy = LocalDate.now();
-		for(Reserva reserva : this.getTodasReservas()) {
-			if(fecHoy.compareTo(reserva.getFechaDeSalida())>=0) {
+    public List<Reserva> getReservasFuturas(Usuario usuario){
+        return this.getTodasLasReservas().stream()
+        			.filter(reserva-> reserva.esFutura())
+        			.collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public List<String> getCiudadesReservadas(Usuario usuario){
+        List<String> ciudades = new ArrayList<String>();
+        for(Reserva reserva : this.getReservasDeUsuario(usuario)) {
+        	ciudades.add(reserva.getCiudad());
+        }
+        return ciudades;
+    }
+
+    public List<Reserva> getReservasEnCiudadDelUsuario(Usuario usuario, String ciudad){
+    	return this.getReservasDeUsuario(usuario).stream()
+    			.filter(reserva-> reserva.esEnCiudad(ciudad))
+    			.collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public void crearReserva(Reserva reserva){
+        this.reservas.add(reserva);
+    }
+    
+    public void concretarReserva(Reserva reserva){
+        //Primero busco, encuentro, acepto
+        reserva.aceptar();
+    }
+
+    public void rechazarReserva(Reserva reserva){
+         //Primero busco, encuentro, rechazo
+        reserva.rechazar();
+    }
+
+    public void declinarReserva(Reserva reserva){
+         //Primero busco, encuentro, declino
+        reserva.cancelar();
+    }
+
+    public void concluirReservas(){
+		for(Reserva reserva : this.getTodasLasReservas()) {
+			if(LocalDate.now().compareTo(reserva.getFechaDeSalida())>=0) {
 				reserva.concluir();
 			}
 		}
+    }
+
+	public ArrayList<Reserva> reservasPosteriores(Usuario usu) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public void rechazarReserva(Usuario usu, Reserva reserva) {
-		if(reserva.getPropietario().equals(usu) && existeEnBiblioteca(reserva)) {
-			reserva.rechazar();
-		}
-		
-	}
-
-	public ArrayList<Reserva> reservasPosteriores(Usuario usu, LocalDate hoy) {
-		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-		for(Reserva reserva : this.getTodasReservas()) {
-			if(reserva.getInquilino().equals(usu) && hoy.compareTo(reserva.getFechaDeIngreso())<0) {
-				reservas.add(reserva);
-			}
-		}
-		return reservas;
-	}
-
-	public ArrayList<Reserva> reservasDelUsuario(Usuario usu) {
-		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-		for(Reserva reserva : this.getTodasReservas()) {
-			if(reserva.getInquilino().equals(usu)){
-				reservas.add(reserva);
-			}
-		}
-		return reservas;
-	}
 }

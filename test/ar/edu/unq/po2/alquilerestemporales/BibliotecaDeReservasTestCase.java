@@ -45,47 +45,26 @@ class BibliotecaDeReservasTestCase {
 	
 	@Test
 	void testAgregarReservas() {
-		biblioteca.crearReserva(usuario, reserva1);
-		biblioteca.crearReserva(usuario, reserva2);
-		int resultado = biblioteca.getTodasReservas().size();
+		biblioteca.crearReserva(reserva1);
+		biblioteca.crearReserva(reserva2);
+		int resultado = biblioteca.getTodasLasReservas().size();
 		assertEquals(2,resultado);
 	}
-	
-	@Test
-	void testNoAgregarReservasRepetidas() {
-		biblioteca.crearReserva(usuario, reserva1);
-		biblioteca.crearReserva(usuario, reserva1);
-		int resultado = biblioteca.getTodasReservas().size();
-		assertEquals(1,resultado);
-	}
-	
+		
 	@Test
 	void testConcretarReserva() {
 		when(this.reserva1.getPropietario()).thenReturn(usuario);
-		biblioteca.crearReserva(inquilino, reserva1);
-		this.biblioteca.concretarReserva(usuario,reserva1);
+		biblioteca.crearReserva(reserva1);
+		this.biblioteca.concretarReserva(reserva1);
 		verify(reserva1).aceptar();
 	}
-	
-	@Test
-	void testReservaNoExiste() {
-		boolean resultado = biblioteca.existeEnBiblioteca(reserva1);
-		assertFalse(resultado);
-	}
-	
+		
 	@Test
 	void testCancelarReserva() {
 		when(this.reserva1.getInquilino()).thenReturn(inquilino);
-		biblioteca.crearReserva(inquilino, reserva1);
-		this.biblioteca.declinarReserva(inquilino,reserva1);
+		biblioteca.crearReserva(reserva1);
+		this.biblioteca.declinarReserva(reserva1);
 		verify(reserva1).cancelar();
-	}
-	
-	@Test
-	void testNoSePuedeCancelarReserva() {
-		when(this.reserva1.getInquilino()).thenReturn(usuario);
-		this.biblioteca.declinarReserva(inquilino,reserva1);
-		verify(reserva1,never()).cancelar();
 	}
 	
 	@Test
@@ -94,8 +73,8 @@ class BibliotecaDeReservasTestCase {
 		when(this.reserva2.getFechaDeSalida()).thenReturn(this.mañana);
 		when(this.reserva1.getPropietario()).thenReturn(usuario);
 		when(this.reserva2.getPropietario()).thenReturn(usuario);
-		biblioteca.crearReserva(inquilino, reserva1);
-		biblioteca.crearReserva(inquilino, reserva2);
+		biblioteca.crearReserva(reserva1);
+		biblioteca.crearReserva(reserva2);
 		biblioteca.concluirReservas();
 		verify(reserva1).concluir();
 		verify(reserva2,never()).concluir();
@@ -104,25 +83,18 @@ class BibliotecaDeReservasTestCase {
 	@Test
 	void testRechazarReserva() {
 		when(this.reserva1.getPropietario()).thenReturn(usuario);
-		biblioteca.crearReserva(inquilino, reserva1);
-		this.biblioteca.rechazarReserva(usuario,reserva1);
+		biblioteca.crearReserva(reserva1);
+		this.biblioteca.rechazarReserva(reserva1);
 		verify(reserva1).rechazar();
 	}
-	
-	@Test
-	void testNoSePuedeRechazarReserva() {
-		when(this.reserva1.getPropietario()).thenReturn(usuario);
-		this.biblioteca.rechazarReserva(inquilino,reserva1);
-		verify(reserva1,never()).rechazar();
-	}
-	
+
 	@Test
 	void testReservasDeUsuario() {
-		when(this.reserva1.getInquilino()).thenReturn(usuario);
-		when(this.reserva2.getInquilino()).thenReturn(inquilino);
-		this.biblioteca.crearReserva(usuario, reserva1);
-		this.biblioteca.crearReserva(inquilino, reserva2);
-		int resultado = this.biblioteca.reservasDelUsuario(usuario).size();
+		when(this.reserva1.esReservaDeUsuario(usuario)).thenReturn(true);
+		when(this.reserva2.esReservaDeUsuario(usuario)).thenReturn(false);
+		this.biblioteca.crearReserva(reserva1);
+		this.biblioteca.crearReserva(reserva2);
+		int resultado = this.biblioteca.getReservasDeUsuario(usuario).size();
 		assertEquals(1,resultado);
 	}
 }

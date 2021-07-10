@@ -2,7 +2,7 @@ package ar.edu.unq.po2.alquilerestemporales.filtro;
 
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
 
-public class FiltroCantidadDeHabitantes extends Filtro {
+public class FiltroCantidadDeHabitantes implements Filtro {
 
 	private int cantidadDeHuespedes;
 	
@@ -10,7 +10,8 @@ public class FiltroCantidadDeHabitantes extends Filtro {
 		this.cantidadDeHuespedes = cantidadDeHuespedes;
 	}
 	
-	public boolean cumpleCriterios(Publicacion publicacion) {
+	@Override
+	public boolean cumpleFiltrado(Publicacion publicacion) {
 		return publicacion.getCantHabitantes() == cantidadDeHuespedes;
 	}
 
