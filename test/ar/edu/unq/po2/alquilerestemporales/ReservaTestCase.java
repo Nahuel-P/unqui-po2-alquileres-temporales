@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ class ReservaTestCase {
 	private FormaDePago credito;
 	private LocalDate fecha1;
 	private PrecioTemporal precioTemporal;
-	private ArrayList <PrecioTemporal> temporadasEspeciales;
+	private List <PrecioTemporal> temporadasEspeciales;
 	private EstadoReserva estadoReservaAceptada;
 	private EstadoReserva estadoReservaRechazada;
 	private EstadoReserva estadoReservaCondicional;
@@ -129,7 +130,7 @@ class ReservaTestCase {
 	void testCostoPorDiaEnTemporada() {
 		when(this.precioTemporal.getInicio()).thenReturn(LocalDate.parse("2020-06-20"));
 		when(this.precioTemporal.getFinal()).thenReturn(LocalDate.parse("2023-06-20"));
-		when(this.precioTemporal.getPrecio()).thenReturn(2500.00);
+		when(this.precioTemporal.getPrecio()).thenReturn(2500.00f);
 		when(this.publicacion.getTemporadasEspeciales()).thenReturn(this.temporadasEspeciales);
 		this.temporadasEspeciales.add(precioTemporal);
 		float resultado = reserva.precioEnElDia(LocalDate.now());
@@ -202,7 +203,7 @@ class ReservaTestCase {
 	@Test
 	void testReservaTieneUnListener() {
 		this.reserva.addListener(bookingListener);
-		ArrayList<IBookingListener> listeners = this.reserva.getListeners();
+		List<IBookingListener> listeners = this.reserva.getListeners();
 		int cantidadDeListeners = listeners.size();
 		assertEquals(1, cantidadDeListeners);
 	}
@@ -212,7 +213,7 @@ class ReservaTestCase {
 		this.reserva.addListener(bookingListener);
 		this.reserva.addListener(bookingListener2);
 		this.reserva.removeListener(bookingListener);
-		ArrayList<IBookingListener> listeners = this.reserva.getListeners();
+		List<IBookingListener> listeners = this.reserva.getListeners();
 		int cantidadDeListeners = listeners.size();
 		assertEquals(1, cantidadDeListeners);
 	}

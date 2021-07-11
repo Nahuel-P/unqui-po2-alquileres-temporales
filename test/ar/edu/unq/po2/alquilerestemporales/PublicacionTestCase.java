@@ -47,7 +47,6 @@ class PublicacionTestCase {
 	private Credito credito;
 	private Efectivo efectivo;
 	private PrecioTemporal precioTemporal;
-	private Publicacion publicacion2;
 	private Observer observador;
 	private IPriceObserver iobservador;
 	LocalDate fechaInicioPublicacion;
@@ -79,7 +78,7 @@ class PublicacionTestCase {
 		politicaCancelacion = mock(PoliticaDeCancelacion.class);
 		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, 
 				formasDePago, fechaInicioPublicacion,fechaFinPublicacion, politicaCancelacion);
-		publicacion2 = mock(Publicacion.class);
+		mock(Publicacion.class);
 		precioTemporal = mock(PrecioTemporal.class);
 		observador = new Observer();
 		iobservador = mock(IPriceObserver.class);
@@ -168,7 +167,7 @@ class PublicacionTestCase {
 	
 	@Test
 	void testPublicacionConFechaCoincidenteConPrecioTemporal() {
-		double precioTest = 100;
+		float precioTest = 100;
 		when(this.precioTemporal.getPrecio()).thenReturn(precioTest);
 		when(this.precioTemporal.getInicio()).thenReturn(LocalDate.of(2021,01,01));
 		when(this.precioTemporal.getFinal()).thenReturn(LocalDate.of(2021,10,20));
@@ -183,7 +182,7 @@ class PublicacionTestCase {
 	
 	@Test
 	void testPublicacionConFechaNOCoincidenteConPrecioTemporal() {
-	double precioTest = 100;
+		float precioTest = 100;
 		when(this.precioTemporal.getPrecio()).thenReturn(precioTest);
 		when(this.precioTemporal.getInicio()).thenReturn(LocalDate.of(2021,10,20));
 		when(this.precioTemporal.getFinal()).thenReturn(LocalDate.of(2021,10,25));

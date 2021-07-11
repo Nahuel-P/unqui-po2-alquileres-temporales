@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,10 +22,10 @@ class InmuebleTestCase {
 	private String direccion;
 	private int capacidad;
 	private String tipoDeInmueble;
-	private ArrayList <String>servicios;
+	private List <String>servicios;
 	private Calificacion calificacion;
 	private Calificacion calificacion2;
-	private ArrayList<String> comentarios;
+	private List<String> comentarios;
 		
 	@BeforeEach
 	void setUp() throws Exception {
@@ -74,7 +75,7 @@ class InmuebleTestCase {
 		
 		this.inmueble.addCalificacion(calificacion);
 		
-		ArrayList<String> comentarios = this.inmueble.getComentarios();
+		List<String> comentarios = this.inmueble.getComentarios();
 		assertEquals(this.inmueble.getComentarios(), comentarios);
 	}
 	
