@@ -5,11 +5,11 @@ import java.time.LocalDate;
 
 public class PrecioTemporal {
 	
-	private double precioEspecial;
+	private float precioEspecial;
 	private LocalDate desde;
 	private LocalDate hasta;
 
-	public PrecioTemporal(double precioEsp, LocalDate dsd, LocalDate hst) {
+	public PrecioTemporal(float precioEsp, LocalDate dsd, LocalDate hst) {
 		
 		this.precioEspecial = precioEsp;
 		this.desde = dsd;
@@ -27,7 +27,7 @@ public class PrecioTemporal {
 		return hasta;
 	}
 
-	public double getPrecio() {
+	public float getPrecio() {
 		
 		return precioEspecial;
 	}

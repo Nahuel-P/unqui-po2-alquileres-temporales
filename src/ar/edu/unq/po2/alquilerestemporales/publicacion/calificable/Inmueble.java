@@ -1,6 +1,7 @@
 package ar.edu.unq.po2.alquilerestemporales.publicacion.calificable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Inmueble implements ICalificable{
 	
@@ -10,11 +11,11 @@ public class Inmueble implements ICalificable{
 	private String direccion;
 	private int capacidad;
 	private String tipoDeInmueble;
-	private ArrayList <String>servicios;
+	private List <String>servicios;
 	private BibliotecaDeCalificaciones bibliotecaDeCalificaciones;
 
 	public Inmueble(double superficie, String pais, String ciudad, String direccion, int capacidad,
-			String tipoDeInmueble, ArrayList<String> servicios) {
+			String tipoDeInmueble, List<String> servicios) {
 		this.setSuperficie(superficie);
 		this.setPais(pais);
 		this.setCiudad(ciudad);
@@ -31,7 +32,7 @@ public class Inmueble implements ICalificable{
 	}
 
 	@Override
-	public ArrayList<String> getComentarios() {
+	public List<String> getComentarios() {
 		return this.bibliotecaDeCalificaciones.getComentarios();
 	}
 
@@ -40,7 +41,7 @@ public class Inmueble implements ICalificable{
 		this.bibliotecaDeCalificaciones.addCalificacion(calificacion);
 	}
 	
-	public ArrayList<Calificacion> getCalificaciones(){
+	public List<Calificacion> getCalificaciones(){
 		return this.bibliotecaDeCalificaciones.getCalificaciones();
 	}
 
@@ -92,11 +93,11 @@ public class Inmueble implements ICalificable{
 		this.tipoDeInmueble = tipoDeInmueble;
 	}
 
-	public void setServicios(ArrayList<String> servicios) {
+	public void setServicios(List<String> servicios) {
 		this.servicios = servicios;
 	}
 	
-	public ArrayList<String> getServicios() {
+	public List<String> getServicios() {
 		return servicios;
 	}
 	

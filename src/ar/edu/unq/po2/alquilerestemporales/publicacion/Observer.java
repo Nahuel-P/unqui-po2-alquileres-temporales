@@ -1,10 +1,11 @@
 package ar.edu.unq.po2.alquilerestemporales.publicacion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Observer {
 	
-	private ArrayList <IPriceObserver> observadores;
+	private List <IPriceObserver> observadores;
 	
 	public Observer() {
 		observadores = new ArrayList<IPriceObserver>();
@@ -24,7 +25,7 @@ public class Observer {
 		this.getObservadores().remove(obs);
 	}
 
-	public ArrayList <IPriceObserver> getObservadores() {
+	public List <IPriceObserver> getObservadores() {
 		return observadores;
 	}
 	

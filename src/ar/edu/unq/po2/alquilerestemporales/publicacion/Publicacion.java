@@ -3,6 +3,7 @@ package ar.edu.unq.po2.alquilerestemporales.publicacion;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.PoliticaDeCancelacion;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Inmueble;
@@ -17,15 +18,15 @@ public class Publicacion {
 	private LocalDate fechaFin;
 	private double precioBase;
 	private Inmueble inmueble;
-	private ArrayList <Foto> fotos;
+	private List <Foto> fotos;
 	private Usuario usuario;
-	private ArrayList <FormaDePago> formasDePago;
-	private ArrayList <PrecioTemporal> temporadasEspeciales;
+	private List <FormaDePago> formasDePago;
+	private List <PrecioTemporal> temporadasEspeciales;
 	private Observer observador;
 	private PoliticaDeCancelacion politicaCancelacion;
 	
 	public Publicacion(Inmueble inmueble, Usuario usuario, double precioBase, LocalTime checkIn, 
-			LocalTime checkOut, ArrayList<Foto> fotos, ArrayList <FormaDePago> formasDePago,
+			LocalTime checkOut, List<Foto> fotos, List <FormaDePago> formasDePago,
 			LocalDate fecIni, LocalDate fecFin, PoliticaDeCancelacion politCancelacion) {
 		
 		this.setInmueble(inmueble);
@@ -89,11 +90,11 @@ public class Publicacion {
 		this.observador.notificar(this);		
 	}
 
-	public void setFormasDePago(ArrayList<FormaDePago> formDePago) {
+	public void setFormasDePago(List<FormaDePago> formDePago) {
 		this.formasDePago = formDePago;
 	}
 	
-	public void setFotos(ArrayList<Foto> fotos2) {
+	public void setFotos(List<Foto> fotos2) {
 		this.fotos = fotos2;
 	}
 
@@ -139,7 +140,7 @@ public class Publicacion {
 		this.precioBase = precioBase;
 	}
 	
-	public ArrayList<Foto> getFotos() {
+	public List<Foto> getFotos() {
 		return fotos;
 	}
 
@@ -151,12 +152,12 @@ public class Publicacion {
 		return usuario;
 	}
 
-	public ArrayList<FormaDePago> getFormasDePago() {
+	public List<FormaDePago> getFormasDePago() {
 		
 		return formasDePago;
 	}
 	
-	public ArrayList<PrecioTemporal> getTemporadasEspeciales() {
+	public List<PrecioTemporal> getTemporadasEspeciales() {
 		return temporadasEspeciales;
 	}
 

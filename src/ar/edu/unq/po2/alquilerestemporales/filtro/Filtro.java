@@ -4,6 +4,6 @@ import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
 
 public interface Filtro {
 	
-	public abstract boolean cumpleFiltrado(Publicacion publicacion);
+	public boolean cumpleFiltrado(Publicacion publicacion);
 
 }

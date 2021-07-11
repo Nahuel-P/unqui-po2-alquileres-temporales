@@ -2,6 +2,7 @@ package ar.edu.unq.po2.alquilerestemporales.publicacion.calificable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
 
@@ -14,7 +15,7 @@ public class Usuario implements ICalificable{
 	private LocalDate fechaDeAlta;
 	private BibliotecaDeCalificaciones bibliotecaDeCalificaciones;
 	private CasillaEmail casillaEmail;
-	private ArrayList<Publicacion> busquedaReciente;
+	private List<Publicacion> busquedaReciente;
 	
 	public Usuario(String nombreYApellido, String direccion, String telefono, LocalDate fechaDeAlta, CasillaEmail casillaEmail) {
 		this.setNombreYApellido(nombreYApellido);
@@ -60,7 +61,7 @@ public class Usuario implements ICalificable{
 	}
 
 	@Override
-	public ArrayList<String> getComentarios() {
+	public List<String> getComentarios() {
 		return this.bibliotecaDeCalificaciones.getComentarios();
 	}
 
@@ -73,7 +74,7 @@ public class Usuario implements ICalificable{
 		return this.casillaEmail;
 	}
 	
-	public ArrayList<Calificacion> getCalificaciones(){
+	public List<Calificacion> getCalificaciones(){
 		return this.bibliotecaDeCalificaciones.getCalificaciones();
 	}
 

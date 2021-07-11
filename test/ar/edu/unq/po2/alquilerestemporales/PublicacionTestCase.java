@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class PublicacionTestCase {
 	private static LocalTime checkOut2;
 	private double precioBase;
 	private Inmueble inmueble;
-	private ArrayList <Foto> fotos;
+	private List <Foto> fotos;
 	private Foto foto1;
 	private Foto foto2;
 	private Foto foto3;
@@ -41,7 +42,7 @@ class PublicacionTestCase {
 	private Foto foto5;
 	private Foto foto6;
 	private Usuario usuario;
-	private ArrayList <FormaDePago> formasDePago;
+	private List <FormaDePago> formasDePago;
 	private Debito debito;
 	private Credito credito;
 	private Efectivo efectivo;
@@ -161,7 +162,7 @@ class PublicacionTestCase {
 		this.formasDePago.add(efectivo);
 		this.publicacion.setFormasDePago(formasDePago);
 		
-		ArrayList<FormaDePago> resultado4 = this.publicacion.getFormasDePago();
+		List<FormaDePago> resultado4 = this.publicacion.getFormasDePago();
 		assertTrue(resultado4.containsAll(formasDePago));
 	}
 	

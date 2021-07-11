@@ -3,6 +3,7 @@ package ar.edu.unq.po2.alquilerestemporales.reserva;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import ar.edu.unq.po2.alquilerestemporales.publicacion.PrecioTemporal;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
@@ -18,7 +19,7 @@ public class Reserva {
 	private Publicacion publicacion;
 	private FormaDePago formaDePago;
 	private LocalDate fechaRealizacionDeReserva;
-	private ArrayList<IBookingListener> listeners;
+	private List<IBookingListener> listeners;
 	
 	public Reserva(LocalDate fechaRealizacionDeReserva, Usuario inquilino, LocalDate fechaIngreso, LocalDate fechaSalida, EstadoReserva estadoDeReserva, Publicacion publicacion,FormaDePago formaDePago) {
 		this.fechaRealizacionDeReserva = fechaRealizacionDeReserva;
@@ -60,7 +61,7 @@ public class Reserva {
 		for (PrecioTemporal temporada : this.publicacion.getTemporadasEspeciales()) {
 			if(dia.isAfter(temporada.getInicio())
 					&& dia.isBefore(temporada.getFinal())) {
-				costo = (float) temporada.getPrecio();
+				costo = temporada.getPrecio();
 			break;
 			}
 		}
@@ -111,7 +112,7 @@ public class Reserva {
 		this.listeners.add(listener);
 	}
 	
-	public ArrayList<IBookingListener> getListeners() {
+	public List<IBookingListener> getListeners() {
 		return this.listeners;
 	}
 	

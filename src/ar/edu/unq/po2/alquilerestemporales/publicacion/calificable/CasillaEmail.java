@@ -1,11 +1,12 @@
 package ar.edu.unq.po2.alquilerestemporales.publicacion.calificable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CasillaEmail {
 
 	String direccion;
-	ArrayList<String> inbox;
+	List<String> inbox;
 	
 	public CasillaEmail(String direccion) {
 		this.direccion = direccion;
@@ -16,7 +17,7 @@ public class CasillaEmail {
 		return this.direccion;
 	}
 
-	public ArrayList<String> getInbox() {
+	public List<String> getInbox() {
 		return this.inbox;
 	}
 

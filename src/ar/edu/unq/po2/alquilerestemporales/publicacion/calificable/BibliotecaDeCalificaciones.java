@@ -1,10 +1,11 @@
 package ar.edu.unq.po2.alquilerestemporales.publicacion.calificable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BibliotecaDeCalificaciones {
 	
-	private ArrayList<Calificacion> calificaciones;
+	private List<Calificacion> calificaciones;
 	
 	public BibliotecaDeCalificaciones() {
 		this.calificaciones = new ArrayList<Calificacion>();
@@ -14,7 +15,7 @@ public class BibliotecaDeCalificaciones {
 		this.calificaciones.add(calificacion);
 	}
 
-	public ArrayList<String> getComentarios() {
+	public List<String> getComentarios() {
 		ArrayList<String> comentarios = new ArrayList<String>();
 		calificaciones.stream().forEach(calificacion -> comentarios.add(calificacion.getComentario()));
 		return comentarios;
@@ -24,7 +25,7 @@ public class BibliotecaDeCalificaciones {
 		return (float) calificaciones.stream().mapToDouble(calificacion-> calificacion.getCalificacion()).average().orElse(0.0);
 	}
 
-	public ArrayList<Calificacion> getCalificaciones() {
+	public List<Calificacion> getCalificaciones() {
 		return calificaciones;
 	}
 
