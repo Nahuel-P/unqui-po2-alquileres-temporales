@@ -21,42 +21,41 @@ import ar.edu.unq.po2.alquilerestemporales.reserva.Concluida;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 import ar.edu.unq.po2.alquilerestemporales.webReservas.BibliotecaDePublicaciones;
 import ar.edu.unq.po2.alquilerestemporales.webReservas.BibliotecaDeReservas;
+import ar.edu.unq.po2.alquilerestemporales.webReservas.Buscador;
 import ar.edu.unq.po2.alquilerestemporales.webReservas.WebReservas;
 
 class WebReservasTestCase {
 	
 	private WebReservas web;
 	private Usuario usu1;
-	private Usuario usu2;
 	private Publicacion publi1;
-	private Inmueble inmueble1;
-	private Concluida concluida;
 	private Reserva reserva1;
-	private LocalDate hoy;
 	private BibliotecaDeReservas bibliotecaDeReserva;
 	private BibliotecaDePublicaciones bibliotecaDePublicaciones;
+	private Buscador buscador;
 	private FiltroBasico filtroBasico;
 	private ArrayList<Filtro> filtrosExtra;
 	private ArrayList<Publicacion> resultado;
+	private String ciudad1;
 	
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		
 		usu1= mock(Usuario.class);
-		usu2= mock(Usuario.class);
 		publi1= mock(Publicacion.class);
-		inmueble1= mock(Inmueble.class);
 		reserva1=mock(Reserva.class);
 		bibliotecaDeReserva=mock(BibliotecaDeReservas.class);
 		bibliotecaDePublicaciones=mock(BibliotecaDePublicaciones.class);
+		buscador = mock(Buscador.class);
 		web= new WebReservas();
 		web.setBibliotecaDePublicaciones(bibliotecaDePublicaciones);
 		web.setBibliotecaDeReservas(bibliotecaDeReserva);
+		web.setBuscador(buscador);
 		filtroBasico= mock(FiltroBasico.class);
 		resultado = new ArrayList<Publicacion>();
 		filtrosExtra = new ArrayList<Filtro>();
-		hoy= LocalDate.now();
+		ciudad1="Fondo de Bikini";
 	}
 	
 	@Test
@@ -136,14 +135,9 @@ class WebReservasTestCase {
 	void testUsuarioHaceBusqueda() {
 		this.web.registrarUsuario(usu1);
 		web.hacerBusqueda(filtroBasico, filtrosExtra);
-		verify(usu1).ultimaBusqueda(resultado);
+		verify(buscador).buscar(web.getPublicaciones(),filtroBasico,filtrosExtra);
 	}
 	
-	@Test
-	void testUsuarioNoRegistradoNoHaceBusqueda() {
-		web.hacerBusqueda(usu1, filtroBasico, filtrosExtra);
-		verify(usu1,never()).ultimaBusqueda(resultado);
-	}
 	
 	@Test
 	void testSeAgregaUnaCategoriaNueva() {
@@ -191,29 +185,34 @@ class WebReservasTestCase {
 	}
 	
 	@Test
+	void testTodasLasRservasDelSistema() {
+		web.getTodasLasReservas();
+		verify(this.bibliotecaDeReserva).getTodasLasReservas();
+	}
+	
+	@Test
 	void testUsuarioRegistradoBuscaReservasFuturas() {
 		this.web.registrarUsuario(usu1);
 		web.reservasFuturas(usu1);
-		verify(this.bibliotecaDeReserva).reservasPosteriores(usu1,this.hoy);
+		verify(this.bibliotecaDeReserva).getReservasFuturas(usu1);
 	}
-	
-	@Test
-	void testUsuarioNoRegistradoNoPuedeBuscarReservasFuturas() {
-		web.reservasFuturas(usu1);
-		verify(this.bibliotecaDeReserva,never()).reservasPosteriores(usu1,this.hoy);
-	}
-	
+
 	@Test
 	void testUsuarioRegistradoBuscaReservasPropias() {
-		this.web.registrarUsuario(usu1);
-		web.reservasDeUsuario(usu1);
-		verify(this.bibliotecaDeReserva).reservasDelUsuario(usu1);
+		web.todasLasReservas(usu1);
+		verify(this.bibliotecaDeReserva).getReservasDeUsuario(usu1);
 	}
 	
 	@Test
-	void testUsuarioNoRegistradoNoPuedeBuscarReservas() {
-		web.reservasDeUsuario(usu1);
-		verify(this.bibliotecaDeReserva,never()).reservasDelUsuario(usu1);
+	void testCiudadesConReservaDelUsuario() {
+		web.ciudadesConReserva(usu1);
+		verify(this.bibliotecaDeReserva).getCiudadesReservadas(usu1);
+	}
+	
+	@Test
+	void testReservasEnLaCiudadPorElUsuario() {
+		web.reservasDeUsuarioEnCiudad(usu1,ciudad1);
+		verify(this.bibliotecaDeReserva).getReservasEnCiudadDelUsuario(usu1,ciudad1);
 	}
 
 }

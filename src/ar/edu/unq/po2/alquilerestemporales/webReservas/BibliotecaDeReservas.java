@@ -27,7 +27,7 @@ public class BibliotecaDeReservas {
     }
 
     public List<Reserva> getReservasFuturas(Usuario usuario){
-        return this.getTodasLasReservas().stream()
+        return this.getReservasDeUsuario(usuario).stream()
         			.filter(reserva-> reserva.esFutura())
         			.collect(Collectors.toCollection(ArrayList::new));
     }
@@ -72,10 +72,5 @@ public class BibliotecaDeReservas {
 			}
 		}
     }
-
-	public ArrayList<Reserva> reservasPosteriores(Usuario usu) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

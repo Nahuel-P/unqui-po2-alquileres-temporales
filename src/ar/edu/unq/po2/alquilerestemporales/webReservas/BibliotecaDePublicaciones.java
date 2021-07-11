@@ -9,28 +9,24 @@ public class BibliotecaDePublicaciones {
 
 	private List<Publicacion> publicaciones;
 
-	
-	
 	public BibliotecaDePublicaciones() {
-
 		this.publicaciones = new ArrayList<Publicacion>();
 	}
-
-
-	//Modificar para no anidar tanta logica
-	public void cargarPublicacion(Publicacion publi1) {
-		if(!this.getPublicaciones().stream().anyMatch(publicacion-> (publicacion.getInmueble().equals(publi1.getInmueble())))){
-			this.publicaciones.add(publi1);
+	
+	public void cargarPublicacion(Publicacion publicacion) {
+		if(!estaPublicada(publicacion)) {
+			this.publicaciones.add(publicacion);
 		}
+		
+	}
+	
+	public boolean estaPublicada(Publicacion publicacion) {
+		return this.getPublicaciones().stream().
+						anyMatch(publi-> (publicacion.getInmueble().equals(publi.getInmueble())));
 	}
 
 	public List<Publicacion> getPublicaciones() {
 		return this.publicaciones;
-		
-	}
-
-	public void borrar(Publicacion publi1) {
-		this.publicaciones.remove(publi1);	
 	}
 
 }

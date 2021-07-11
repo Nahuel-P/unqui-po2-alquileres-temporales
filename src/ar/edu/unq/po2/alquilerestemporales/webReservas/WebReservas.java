@@ -114,7 +114,7 @@ public class WebReservas {
         return this.bibliotecaDeReservas.getReservasDeUsuario(usuario);
     }
 
-    public List<Reserva> reservasFuturuas(Usuario usuario){
+    public List<Reserva> reservasFuturas(Usuario usuario){
         return this.bibliotecaDeReservas.getReservasFuturas(usuario);
     }
 
@@ -140,6 +140,10 @@ public class WebReservas {
 
 	public void setBibliotecaDeReservas(BibliotecaDeReservas bibliotecaDeReserva) {
 		this.bibliotecaDeReservas=bibliotecaDeReserva;
+	}
+
+	public void setBuscador(Buscador buscador) {
+		this.buscador=buscador;
 	}
 	
 }
