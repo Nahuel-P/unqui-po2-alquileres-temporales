@@ -51,7 +51,8 @@ class WebReservasTestCase {
 		bibliotecaDeReserva=mock(BibliotecaDeReservas.class);
 		bibliotecaDePublicaciones=mock(BibliotecaDePublicaciones.class);
 		web= new WebReservas();
-		web.asignarNuevaBiblioteca(this.bibliotecaDeReserva);
+		web.setBibliotecaDePublicaciones(bibliotecaDePublicaciones);
+		web.setBibliotecaDeReservas(bibliotecaDeReserva);
 		filtroBasico= mock(FiltroBasico.class);
 		resultado = new ArrayList<Publicacion>();
 		filtrosExtra = new ArrayList<Filtro>();
@@ -69,199 +70,64 @@ class WebReservasTestCase {
 		int resultado = this.web.getUsuarios().size();
 		assertEquals(1, resultado);
 	}
-	
-	@Test
-	void testNoAgregarUsuarioRepetido() {
-		this.web.registrarUsuario(usu1);
-		this.web.registrarUsuario(usu1);
-		int resultado = this.web.getUsuarios().size();
-		assertEquals(1, resultado);
-	}
-	
-	@Test
-	void testEliminarUsuarioRegistrado() {
-		this.web.registrarUsuario(usu1);
-		this.web.eliminarUsuario(usu1);
-		int resultado = this.web.getUsuarios().size();
-		assertEquals(0, resultado);
-	}
-	
-	@Test
-	void testUnUsuarioNoRegistradoNoPuedeSerEliminado() {
-		this.web.registrarUsuario(usu1);
-		this.web.eliminarUsuario(usu2);
-		int resultado = this.web.getUsuarios().size();
-		assertEquals(1, resultado);
-	}
-	
+				
 	@Test
 	void testPublicar() {
-		when(publi1.getPropietario()).thenReturn(usu1);
-		
-		this.web.registrarUsuario(usu1);
-		this.web.publicar(usu1,publi1);
-		int resultado = this.web.getPublicaciones().size();
-		assertEquals(1, resultado);
+		this.web.publicar(publi1);
+		verify(bibliotecaDePublicaciones).cargarPublicacion(publi1);
 	}
 	
-	@Test
-	void testSoloSePuedePublicarSiEsUsuarioRegistrado() {
-		
-		this.web.publicar(usu1,publi1);
-
-		int resultado = this.web.getPublicaciones().size();
-		assertEquals(0, resultado);
-	}
-	
-	@Test
-	void testUnUsuarioSoloPuedeDarDeAltaUnaPublicacionPropia() {
-		when(publi1.getPropietario()).thenReturn(usu2);
-		
-		this.web.registrarUsuario(usu1);
-		this.web.publicar(usu1,publi1);
-
-		int resultado = this.web.getPublicaciones().size();
-		assertEquals(0, resultado);
-	}
-	
-	@Test
-	void testNoSePuedePublicarDosVecesLoMismo() {
-		when(publi1.getInmueble()).thenReturn(inmueble1);
-		when(publi1.getPropietario()).thenReturn(usu1);
-		
-		this.web.registrarUsuario(usu1);
-		this.web.publicar(usu1,publi1);
-		this.web.publicar(usu1,publi1);
-		
-		int resultado = this.web.getPublicaciones().size();
-		assertEquals(1, resultado);
-	}
-	
-	@Test
-	void testEliminarPublicacion() {
-		when(publi1.getPropietario()).thenReturn(usu1);
-		this.web.registrarUsuario(usu1);
-		this.web.publicar(usu1, publi1);
-		this.web.eliminarPublicacion(usu1,publi1);
-		
-		int resultado = this.web.getPublicaciones().size();
-		assertEquals(0, resultado);
-	}
-	
-	@Test
-	void testSoloElPropietarioPuedeEliminarPublicacion() {
-		when(publi1.getPropietario()).thenReturn(usu1);
-		this.web.registrarUsuario(usu1);
-		this.web.publicar(usu1, publi1);
-		this.web.eliminarPublicacion(usu2,publi1);
-		
-		int resultado = this.web.getPublicaciones().size();
-		assertEquals(1, resultado);
-	}
 	
 	@Test
 	void testSeObtieneListadoDePublicaciones() {
-		this.web.asignarNuevaBibliotecaPublicaciones(bibliotecaDePublicaciones);
 		this.web.getPublicaciones();
 		verify(bibliotecaDePublicaciones).getPublicaciones();
 	}
 	
 	@Test
 	void testUsuarioCreaUnaReserva() {
-		this.web.registrarUsuario(usu1);
-		this.web.solicitarReserva(usu1,reserva1);	
-		verify(bibliotecaDeReserva).crearReserva(usu1,reserva1);
+		this.web.solicitarReserva(reserva1);	
+		verify(bibliotecaDeReserva).crearReserva(reserva1);
 	}
-	
-	@Test
-	void testUsuarioNoRegistradoNoPuedeReservar() {
-		this.web.solicitarReserva(usu1,reserva1);	
-		verify(bibliotecaDeReserva,never()).crearReserva(usu1,reserva1);
-	}
-	
+		
 	@Test
 	void testAceptarUnaReserva() {
-		when(reserva1.getPropietario()).thenReturn(usu2);
-		
-		
-		this.web.aceptarReserva(usu2,reserva1);	
-		
-		verify(bibliotecaDeReserva).concretarReserva(usu2,reserva1);
+		this.web.aceptarReserva(reserva1);	
+		verify(bibliotecaDeReserva).concretarReserva(reserva1);
 	}
 	
-	@Test
-	void testSoloPropietarioPuedeAceptarUnaReserva() {
-		when(reserva1.getPropietario()).thenReturn(usu2);
-		
-		this.web.aceptarReserva(usu1,reserva1);	
-		
-		verify(this.bibliotecaDeReserva,never()).concretarReserva(usu1,reserva1);
-	}
 	
 	@Test
 	void testRechazarUnaReserva() {
-		when(reserva1.getPropietario()).thenReturn(usu1);
-		this.web.rechazarReserva(usu1,reserva1);	
-		
-		verify(bibliotecaDeReserva).rechazarReserva(usu1,reserva1);
+		this.web.rechazarReserva(reserva1);	
+		verify(bibliotecaDeReserva).rechazarReserva(reserva1);
 	}
 		
-	@Test
-	void testNoSePuedeRechazarUnaReservaAjena() {
-		when(reserva1.getPropietario()).thenReturn(usu2);
-		this.web.rechazarReserva(usu1,reserva1);	
-		
-		verify(bibliotecaDeReserva,never()).rechazarReserva(usu1,reserva1);
-	}
-	
 	@Test
 	void testUnInquilinoCancelaUnaReservaPropia() {
-		
-		when(reserva1.getPropietario()).thenReturn(usu2);
-		when(reserva1.getInquilino()).thenReturn(usu1);
-		
-		this.web.registrarUsuario(usu1);
-		this.web.registrarUsuario(usu2);
-		this.web.solicitarReserva(usu1,reserva1);
-		this.web.aceptarReserva(usu2,reserva1);
-		this.web.cancelarReserva(usu1,reserva1);	
-		
-		verify(bibliotecaDeReserva).declinarReserva(usu1,reserva1);
-	}
-	
-	@Test
-	void testNoSePuedeCancelarReservaAjena() {
-		when(reserva1.getPropietario()).thenReturn(usu1);
-		when(reserva1.getInquilino()).thenReturn(usu2);
-		
-		this.web.registrarUsuario(usu1);
-		this.web.registrarUsuario(usu2);
-		this.web.solicitarReserva(usu1,reserva1);
-		this.web.aceptarReserva(usu2,reserva1);
-		this.web.cancelarReserva(usu1,reserva1);	
-		
-		verify(bibliotecaDeReserva,never()).declinarReserva(usu2,reserva1);
+		this.web.cancelarReserva(reserva1);	
+		verify(bibliotecaDeReserva).declinarReserva(reserva1);
 	}
 	
 	@Test
 	void testSeDioDeAltaUnTipoDeInmueble() {
-		this.web.addTipoDeInmueble("PH");
-		this.web.addTipoDeInmueble("Casa");
+		this.web.agregarTipoDeInmueble("PH");
+		this.web.agregarTipoDeInmueble("Casa");
 		int resultado = web.getTiposDeInmueble().size();
 		assertEquals(2,resultado);
 	}
 	
 	@Test
 	void testSeDioDeAltaUnServicio() {
-		this.web.addServicio("Agua Corriente");
-		this.web.addServicio("Wi-Fi");
+		this.web.agregarServicio("Agua Corriente");
+		this.web.agregarServicio("Wi-Fi");
 		int resultado = web.getServicios().size();
 		assertEquals(2,resultado);
 	}
 	
 	@Test
 	void testSeDioDeAltaUnaCategoriaCalificable() {
-		this.web.addCategoriaCalificable("Inquilino");
+		this.web.agregarCategoriaCalificable("Inquilino");
 		int resultado = web.getCategoriasCalificables().size();
 		assertEquals(1,resultado);
 	}
@@ -269,7 +135,7 @@ class WebReservasTestCase {
 	@Test
 	void testUsuarioHaceBusqueda() {
 		this.web.registrarUsuario(usu1);
-		web.hacerBusqueda(usu1, filtroBasico, filtrosExtra);
+		web.hacerBusqueda(filtroBasico, filtrosExtra);
 		verify(usu1).ultimaBusqueda(resultado);
 	}
 	
@@ -281,45 +147,45 @@ class WebReservasTestCase {
 	
 	@Test
 	void testSeAgregaUnaCategoriaNueva() {
-		web.addCategoriaCalificable("Propietario");
+		web.agregarCategoriaCalificable("Propietario");
 		int resultado = web.getCategoriasCalificables().size();
 		assertEquals(1,resultado);
 	}
 	
 	@Test
 	void testNoSeAgregaUnaCategoriaRepetida() {
-		web.addCategoriaCalificable("Inquilino");
-		web.addCategoriaCalificable("Inquilino");
+		web.agregarCategoriaCalificable("Inquilino");
+		web.agregarCategoriaCalificable("Inquilino");
 		int resultado = web.getCategoriasCalificables().size();
 		assertEquals(1,resultado);
 	}
 	
 	@Test
 	void testSeAgregaUnServicioNuevo() {
-		web.addServicio("Wi-Fi");
+		web.agregarServicio("Wi-Fi");
 		int resultado = web.getServicios().size();
 		assertEquals(1,resultado);
 	}
 	
 	@Test
 	void testNoAgregaUnServicioRepetido() {
-		web.addServicio("Gas");
-		web.addServicio("Gas");
+		web.agregarServicio("Gas");
+		web.agregarServicio("Gas");
 		int resultado = web.getServicios().size();
 		assertEquals(1,resultado);
 	}
 	
 	@Test
 	void testSeAgregaUnNuevoTipoDeInmueble() {
-		web.addTipoDeInmueble("Casa");
+		web.agregarTipoDeInmueble("Casa");
 		int resultado = web.getTiposDeInmueble().size();
 		assertEquals(1,resultado);
 	}
 	
 	@Test
 	void testNoSeAgregaUnTipoDeInmuebleRepetido() {
-		web.addTipoDeInmueble("Departamento");
-		web.addTipoDeInmueble("Departamento");
+		web.agregarTipoDeInmueble("Departamento");
+		web.agregarTipoDeInmueble("Departamento");
 		int resultado = web.getTiposDeInmueble().size();
 		assertEquals(1,resultado);
 	}

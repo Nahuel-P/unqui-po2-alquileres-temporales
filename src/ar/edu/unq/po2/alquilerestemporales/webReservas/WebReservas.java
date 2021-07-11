@@ -133,5 +133,13 @@ public class WebReservas {
     public List<Publicacion> getPublicaciones(){
     	return this.bibliotecaDePublicaciones.getPublicaciones();
     }
+
+	public void setBibliotecaDePublicaciones(BibliotecaDePublicaciones bibliotecaDePublicaciones) {
+		this.bibliotecaDePublicaciones=bibliotecaDePublicaciones;
+	}
+
+	public void setBibliotecaDeReservas(BibliotecaDeReservas bibliotecaDeReserva) {
+		this.bibliotecaDeReservas=bibliotecaDeReserva;
+	}
 	
 }
