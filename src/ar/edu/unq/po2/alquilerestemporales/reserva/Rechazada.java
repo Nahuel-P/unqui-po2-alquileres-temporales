@@ -1,9 +1,26 @@
 package ar.edu.unq.po2.alquilerestemporales.reserva;
 
-public class Rechazada extends EstadoReserva {
-	
+public class Rechazada implements EstadoReserva {
+
 	@Override
-	public String mensaje(Reserva reserva) {
-		return "Su reserva ha sido rechazada ya que no cumple con los requisitos requeridos.";
+	public void aceptar(Reserva reserva) {
+		throw new RuntimeException("No se puede aceptar una reserva que ya fue rechazada");		
 	}
+
+	@Override
+	public void rechazar(Reserva reserva) {
+		throw new RuntimeException("La reserva ya fue rechazada");
+	}
+
+	@Override
+	public void cancelar(Reserva reserva) {
+		throw new RuntimeException("No se puede cancelar una reserva que fue rechazada");	
+	}
+
+	@Override
+	public void concluir(Reserva reserva) {
+		throw new RuntimeException("No se puede concluir una reserva que fue rechazada");	
+	}
+	
+
 }

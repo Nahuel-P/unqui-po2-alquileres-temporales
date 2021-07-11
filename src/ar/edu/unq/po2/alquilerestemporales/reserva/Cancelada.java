@@ -1,9 +1,24 @@
 package ar.edu.unq.po2.alquilerestemporales.reserva;
 
-public class Cancelada extends EstadoReserva{
+public class Cancelada implements EstadoReserva{
 
 	@Override
-	public String mensaje(Reserva reserva) {
-		return String.format("Su reserva ha sido cancelada. El monto total de %s será reintegrado en su cuenta en las proximas 24/48 horas habiles", reserva.costoTotal());
+	public void aceptar(Reserva reserva) {
+		throw new RuntimeException("No se puede aceptar una reserva cancelada");		
+	}
+
+	@Override
+	public void rechazar(Reserva reserva) {
+		throw new RuntimeException("No se puede rechazar una reserva que fue cancelada");		
+	}
+
+	@Override
+	public void cancelar(Reserva reserva) {
+		throw new RuntimeException("La reserva ya ha sido cancelada");	
+	}
+
+	@Override
+	public void concluir(Reserva reserva) {
+		throw new RuntimeException("No se puede concluir una reserva que fue cancelada");	
 	}
 }

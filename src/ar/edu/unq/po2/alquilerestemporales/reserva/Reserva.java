@@ -119,32 +119,23 @@ public class Reserva {
 	public void removeListener(IBookingListener listener) {
 		this.listeners.remove(listener);
 	}
-	
-	public void notificar() {
-		for(IBookingListener listener : this.listeners) {
-			listener.reservaCancelada(this, this.getFechaDeIngreso(),this.getFechaDeSalida());
-			listener.reservaConcretada(this, this.fechaIngreso, this.getFechaDeSalida());
-		}
-	}
 
 	public void aceptar() {
-		// TODO Auto-generated method stub
-		
+		this.estadoDeReserva.aceptar(this);
 	}
 
 	public void cancelar() {
-		// TODO Auto-generated method stub
+		this.estadoDeReserva.cancelar(this);
 		
 	}
 
 	public void concluir() {
-		// TODO Auto-generated method stub
+		this.estadoDeReserva.concluir(null);
 		
 	}
 
 	public void rechazar() {
-		// TODO Auto-generated method stub
-		
+		this.estadoDeReserva.rechazar(this);
 	}
 
 	public boolean esReservaDeUsuario(Usuario usuario) {
@@ -163,5 +154,21 @@ public class Reserva {
 		return getCiudad().equals(ciudad);
 	}
 
+	public void informarUsuario(String mensaje, Usuario usuario) {
+		usuario.recibirMail(mensaje);
+	}
+
+	public void notificarConcretada() {
+		for(IBookingListener listener : this.listeners) {
+			listener.reservaConcretada(this, this.getFechaDeIngreso(),this.getFechaDeSalida());
+		}
+	}
+
+	public void notificarCancelada() {
+		for(IBookingListener listener : this.listeners) {
+			listener.reservaCancelada(this, this.getFechaDeIngreso(),this.getFechaDeSalida());
+		}
+		
+	}
 
 }

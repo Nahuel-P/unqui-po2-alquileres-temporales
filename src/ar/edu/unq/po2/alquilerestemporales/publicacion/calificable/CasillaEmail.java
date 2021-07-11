@@ -23,10 +23,5 @@ public class CasillaEmail {
 
 	public void recibirMail(String nuevoMail) {
 		this.inbox.add(nuevoMail);		
-	}
-
-	public void enviarMail(CasillaEmail casillaDeMail, String nuevoMail) {
-		casillaDeMail.recibirMail(nuevoMail);
-	}
-	
+	}	
 }

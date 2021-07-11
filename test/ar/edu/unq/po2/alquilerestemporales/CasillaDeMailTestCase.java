@@ -37,11 +37,4 @@ class CasillaDeMailTestCase {
 		this.casillaDeMail.recibirMail(nuevoMail);
 		assertTrue(this.casillaDeMail.getInbox().contains(nuevoMail));
 	}
-	
-	@Test 
-	void testEnviarMail() {
-		this.casillaDeMail.enviarMail(this.casillaDeMail, nuevoMail);
-		assertTrue(this.casillaDeMail.getInbox().contains(nuevoMail));
-	}
-
 }

@@ -22,13 +22,12 @@ public class Calificacion {
 		return comentario;
 	}
 	
-	public void setCalificacion(int numeroCalificacion) {
+	public void setCalificacion(int numeroCalificacion){
 		if (numeroCalificacion>=1 && numeroCalificacion<=5) {
 			this.calificacion = numeroCalificacion;
 		}
 		else {
-			System.out.println("No se ha indicado el valor correcto. Ingrese un número entre 1 y 5");
-			this.calificacion = 0;
+			throw new RuntimeException("No se ha indicado el valor correcto. Ingrese un número entre 1 y 5");
 		}
 	}
 	
