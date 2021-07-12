@@ -42,6 +42,8 @@ public class Publicacion {
 		this.observador = new Observer();
 		this.politicaCancelacion = politCancelacion;
 	}
+	
+	
 		
 	public void establecerPrecioTemporal(PrecioTemporal precioTemporal) {
 		this.getTemporadasEspeciales().add(precioTemporal);
@@ -99,9 +101,7 @@ public class Publicacion {
 	}
 
 	public void setInmueble(Inmueble inm) {
-		//no se verifica si ya hay un inmueble elegido, porque se asume que el usuario puede
-		//cambiar y pisar el inmueble elegido anteriormente
-		this.inmueble = inm;
+			this.inmueble = inm;
 	}
 
 	public LocalTime getCheckIn() {
@@ -181,6 +181,10 @@ public class Publicacion {
 	
 	public PoliticaDeCancelacion getPoliticaDeCancelacion() {
 		return politicaCancelacion;
+	}
+	
+	public void setPoliticaDeCancelacion(PoliticaDeCancelacion politCancelacion) {
+		this.politicaCancelacion = politCancelacion;
 	}
 
 }

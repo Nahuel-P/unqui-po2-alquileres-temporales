@@ -13,6 +13,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.CancelacionGratuita;
+import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.CancelacionRestringida;
 import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.PoliticaDeCancelacion;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Foto;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.IPriceObserver;
@@ -52,6 +54,8 @@ class PublicacionTestCase {
 	LocalDate fechaInicioPublicacion;
 	LocalDate fechaFinPublicacion;
 	private PoliticaDeCancelacion politicaCancelacion;
+	private CancelacionGratuita cancelacionGratuita;
+	private CancelacionRestringida cancelacionRestringida;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -82,6 +86,8 @@ class PublicacionTestCase {
 		precioTemporal = mock(PrecioTemporal.class);
 		observador = new Observer();
 		iobservador = mock(IPriceObserver.class);
+		cancelacionGratuita = mock(CancelacionGratuita.class);
+		cancelacionRestringida = mock (CancelacionRestringida.class);
 	}
 	
 	@Test
@@ -288,8 +294,6 @@ class PublicacionTestCase {
 	void testPublicacionTienePoliticaDeCancelacion() {
 		
 		assertEquals(this.publicacion.getPoliticaDeCancelacion(), politicaCancelacion);
-		
 	}
-	
-	
+		
 }
