@@ -20,6 +20,7 @@ public class Reserva {
 	private FormaDePago formaDePago;
 	private LocalDate fechaRealizacionDeReserva;
 	private List<IBookingListener> listeners;
+	private float precioFinal;
 	
 	public Reserva(LocalDate fechaRealizacionDeReserva, Usuario inquilino, LocalDate fechaIngreso, LocalDate fechaSalida, EstadoReserva estadoDeReserva, Publicacion publicacion,FormaDePago formaDePago) {
 		this.fechaRealizacionDeReserva = fechaRealizacionDeReserva;
@@ -31,6 +32,7 @@ public class Reserva {
 		this.formaDePago = formaDePago;
 		this.listeners = new ArrayList<IBookingListener>();
 		this.estadoDeReserva = new Pendiente();
+		this.precioFinal = this.costoTotal();
 	}
 
 	public float costoPorDia() {
@@ -169,6 +171,14 @@ public class Reserva {
 			listener.reservaCancelada(this, this.getFechaDeIngreso(),this.getFechaDeSalida());
 		}
 		
+	}
+
+	public void aplicarPoliticaDeCancelacion() {
+		precioFinal = this.publicacion.aplicarPoliticaDeCancelacion(this);
+	}
+	
+	public float getPrecioFinal() {
+		return this.precioFinal;
 	}
 
 }

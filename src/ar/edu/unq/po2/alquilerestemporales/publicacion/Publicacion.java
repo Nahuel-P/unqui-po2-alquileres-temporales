@@ -9,6 +9,7 @@ import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.PoliticaDeCanc
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Inmueble;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.FormaDePago;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 
 public class Publicacion {
 	
@@ -186,5 +187,11 @@ public class Publicacion {
 	public void setPoliticaDeCancelacion(PoliticaDeCancelacion politCancelacion) {
 		this.politicaCancelacion = politCancelacion;
 	}
+
+	public float aplicarPoliticaDeCancelacion(Reserva reserva) {
+		return this.politicaCancelacion.aplicarCostosDeCancelacion(reserva);
+	}
+
+
 
 }

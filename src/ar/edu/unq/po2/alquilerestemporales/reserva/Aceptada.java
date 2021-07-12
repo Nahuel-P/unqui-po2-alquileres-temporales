@@ -17,6 +17,7 @@ public class Aceptada implements EstadoReserva{
 		reserva.setEstado(new Cancelada());
 		reserva.informarUsuario("Se ha cancelada una de sus reservas", reserva.getPropietario());
 		reserva.notificarCancelada();
+		reserva.aplicarPoliticaDeCancelacion();
 	}
 
 	@Override
