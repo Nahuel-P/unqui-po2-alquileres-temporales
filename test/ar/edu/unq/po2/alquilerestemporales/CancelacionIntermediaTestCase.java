@@ -8,19 +8,27 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.CancelacionIntermedia;
+import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.EstadoIntermediaInicial;
+import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.IEstadoCancelacionIntermedia;
 import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.PoliticaDeCancelacion;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 
 class CancelacionIntermediaTestCase {
 
-	private PoliticaDeCancelacion cancelacion;
+	private CancelacionIntermedia cancelacion;
 	private Reserva reserva;
-	
+		
 	@BeforeEach
 	void setUp() throws Exception {
 		cancelacion= new CancelacionIntermedia();
 		reserva= mock(Reserva.class);
-
+		
+	}
+	
+	@Test 
+	void testCancelacionIntermediaTieneUnEstado() {
+		
+		assertNotNull(this.cancelacion.getEstado());
 	}
 	
 	@Test
