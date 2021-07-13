@@ -270,4 +270,53 @@ class ReservaTestCase {
 		assertTrue(this.reserva.esFutura());
 	}
 	
+	@Test
+	void testCiudadDeUnaPublicacion() {
+		String ciudad = "Avellaneda";
+		when(this.publicacion.getCiudad()).thenReturn(ciudad);
+		assertEquals(ciudad, this.reserva.getCiudad());
+	}
+	
+	@Test
+	void testCiudadDeUnaPublicacionCoincideConLaRecibida() {
+		String ciudad = "Avellaneda";
+		when(this.publicacion.getCiudad()).thenReturn(ciudad);
+		assertTrue(this.reserva.esEnCiudad(ciudad));
+	}
+	
+	@Test
+	void testReservaInformaAUsuario() {
+		String mensaje = "Mensaje de test";
+		this.reserva.informarUsuario(mensaje, inquilino);
+		verify(this.inquilino).recibirMail(mensaje);
+	}
+	
+	@Test
+	void testReservaSeSuperponeConSiMisma() {
+		this.reserva.setEstado(estadoReservaAceptada);
+		this.reserva.seSuporponeCon(reserva);
+		verify(this.estadoReservaAceptada).estaOcupadaCon(reserva.getFechaDeIngreso(), reserva.getFechaDeSalida(), reserva);
+	}
+	
+	@Test
+	void testReservaSeLeAplicaPoliticaDeCancelacion() {
+		when(this.publicacion.aplicarPoliticaDeCancelacion(reserva)).thenReturn(100f);
+		this.reserva.aplicarPoliticaDeCancelacion();
+		float costoDeCancelacionDeReserva = this.reserva.getPrecioFinal();
+		assertEquals(100f, costoDeCancelacionDeReserva);
+	}
+	
+	@Test
+	void testReservaEnEstadoAceptadaEsConcluida(){
+		this.reserva.setEstado(estadoReservaAceptada);
+		this.reserva.concluir();
+		verify(this.estadoReservaAceptada).concluir(reserva);
+	}
+	
+	
+	@Test
+	void testReservaSeEncuentraEnMismoPeriodoQueOtraReserva(){
+		assertTrue(this.reserva.enMismoPeriodoQueReserva(reserva));
+	}
+
 }

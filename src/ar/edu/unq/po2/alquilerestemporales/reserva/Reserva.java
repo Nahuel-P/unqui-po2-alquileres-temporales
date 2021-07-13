@@ -131,7 +131,7 @@ public class Reserva {
 	}
 
 	public void concluir() {
-		this.estadoDeReserva.concluir(null);
+		this.estadoDeReserva.concluir(this);
 	}
 
 	public void rechazar() {
@@ -183,6 +183,7 @@ public class Reserva {
 	}
 
 	public boolean enMismoPeriodoQueReserva(Reserva reserva) {
-		return fechaIngreso.isAfter(reserva.getFechaDeIngreso()) && fechaSalida.isBefore(reserva.getFechaDeSalida());
+		return (fechaIngreso.compareTo(reserva.getFechaDeIngreso())>=0) && (fechaSalida.compareTo(reserva.getFechaDeSalida())<=0);
+		//return fechaIngreso.isAfter(reserva.getFechaDeIngreso()) && fechaSalida.isBefore(reserva.getFechaDeSalida());
 	}
 }

@@ -29,7 +29,7 @@ public class Aceptada implements EstadoReserva{
 
 	@Override
 	public boolean estaOcupadaCon(LocalDate fechaIngreso, LocalDate fechaSalida, Reserva reserva) {
-		return fechaIngreso.isAfter(reserva.getFechaDeIngreso()) && fechaSalida.isBefore(reserva.getFechaDeSalida());
+		return (fechaIngreso.compareTo(reserva.getFechaDeIngreso())>=0) && (fechaSalida.compareTo(reserva.getFechaDeSalida())<=0);
 	}
 
 
