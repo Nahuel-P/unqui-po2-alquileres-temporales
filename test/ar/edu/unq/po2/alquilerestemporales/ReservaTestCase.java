@@ -30,10 +30,15 @@ import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 
 class ReservaTestCase {
 	private Reserva reserva;
+	private Reserva reserva2;
 	private String fechaDeIngreso;
 	private String fechaDeSalida;
+	private String fechaDeIngreso2;
+	private String fechaDeSalida2;
 	private LocalDate fechaDeIngresoDate;
 	private LocalDate fechaDeSalidaDate;
+	private LocalDate fechaDeIngresoDate2;
+	private LocalDate fechaDeSalidaDate2;
 	private Usuario inquilino;
 	private Publicacion publicacion;
 	private Usuario propietario;
@@ -56,8 +61,12 @@ class ReservaTestCase {
 		this.fecha1 = LocalDate.parse("2022-01-15");
 		this.fechaDeIngreso = "2022-01-28";
 		this.fechaDeSalida = "2022-01-30";
+		this.fechaDeIngreso2 = "2018-01-28";
+		this.fechaDeSalida2 = "2018-01-30";
 		this.fechaDeIngresoDate = LocalDate.parse(fechaDeIngreso);
 		this.fechaDeSalidaDate = LocalDate.parse(fechaDeSalida);
+		this.fechaDeIngresoDate2 = LocalDate.parse(fechaDeIngreso2);
+		this.fechaDeSalidaDate2 = LocalDate.parse(fechaDeSalida2);
 		this.estadoReservaAceptada = mock(Aceptada.class);
 		this.estadoReservaRechazada = mock(Rechazada.class);
 		this.estadoReservaCancelada = mock(Cancelada.class);
@@ -71,7 +80,8 @@ class ReservaTestCase {
 		this.credito = mock(Credito.class);
 		this.precioTemporal = mock(PrecioTemporal.class);
 		this.temporadasEspeciales = new ArrayList<PrecioTemporal>();
-		this.reserva = new Reserva(fecha1, inquilino, fechaDeIngresoDate, fechaDeSalidaDate, estadoReservaPendiente, publicacion, credito);		
+		this.reserva = new Reserva(fecha1, inquilino, fechaDeIngresoDate, fechaDeSalidaDate, estadoReservaPendiente, publicacion, credito);
+		this.reserva2 = new Reserva(fecha1, inquilino, fechaDeIngresoDate2, fechaDeSalidaDate2, estadoReservaPendiente, publicacion, credito);		
 	}
 	
 	@Test
@@ -299,6 +309,11 @@ class ReservaTestCase {
 	}
 	
 	@Test
+	void testReservaNoEsFutura() {
+		assertFalse(this.reserva2.esFutura());
+	}
+	
+	@Test
 	void testReservaSeLeAplicaPoliticaDeCancelacion() {
 		when(this.publicacion.aplicarPoliticaDeCancelacion(reserva)).thenReturn(100f);
 		this.reserva.aplicarPoliticaDeCancelacion();
@@ -313,6 +328,10 @@ class ReservaTestCase {
 		verify(this.estadoReservaAceptada).concluir(reserva);
 	}
 	
+	@Test
+	void testReservaNoSeEncuentraEnMismoPeriodoQueOtraReserva(){
+		assertFalse(this.reserva.enMismoPeriodoQueReserva(reserva2));
+	}
 	
 	@Test
 	void testReservaSeEncuentraEnMismoPeriodoQueOtraReserva(){

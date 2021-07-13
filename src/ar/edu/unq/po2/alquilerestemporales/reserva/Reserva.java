@@ -184,6 +184,5 @@ public class Reserva {
 
 	public boolean enMismoPeriodoQueReserva(Reserva reserva) {
 		return (fechaIngreso.compareTo(reserva.getFechaDeIngreso())>=0) && (fechaSalida.compareTo(reserva.getFechaDeSalida())<=0);
-		//return fechaIngreso.isAfter(reserva.getFechaDeIngreso()) && fechaSalida.isBefore(reserva.getFechaDeSalida());
 	}
 }
