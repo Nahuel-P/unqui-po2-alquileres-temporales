@@ -31,8 +31,5 @@ public class Aceptada implements EstadoReserva{
 	public boolean estaOcupadaCon(LocalDate fechaIngreso, LocalDate fechaSalida, Reserva reserva) {
 		return (fechaIngreso.compareTo(reserva.getFechaDeIngreso())>=0) && (fechaSalida.compareTo(reserva.getFechaDeSalida())<=0);
 	}
-
-
-	
 	
 }
