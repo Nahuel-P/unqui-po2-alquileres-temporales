@@ -129,7 +129,7 @@ class BibliotecaDeReservasTestCase {
 	
 	@Test
 	void testSeCreaUnaReservaCondicional() {
-		when(this.reserva2.seSuporponeCon(reserva1)).thenReturn(true);
+		when(this.reserva1.seSuporponeCon(reserva2)).thenReturn(true);
 		this.biblioteca.crearReserva(reserva1);
 		this.biblioteca.crearReserva(reserva2);
 		assertTrue(this.biblioteca.estaOcupadaEnFecha(reserva2));
@@ -139,7 +139,7 @@ class BibliotecaDeReservasTestCase {
 	
 	@Test
 	void testUnaReservaPendienteQueSeConcreta() {
-		when(this.reserva2.seSuporponeCon(reserva1)).thenReturn(true);
+		when(this.reserva1.seSuporponeCon(reserva2)).thenReturn(true);
 		when(this.reserva1.enMismoPeriodoQueReserva(reserva2)).thenReturn(true);
 		this.biblioteca.crearReserva(reserva1);
 		this.biblioteca.crearReserva(reserva2);
