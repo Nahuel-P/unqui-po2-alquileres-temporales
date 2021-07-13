@@ -32,7 +32,4 @@ public class Aceptada implements EstadoReserva{
 		return (fechaIngreso.compareTo(reserva.getFechaDeIngreso())>=0) && (fechaSalida.compareTo(reserva.getFechaDeSalida())<=0);
 	}
 
-
-	
-	
 }
