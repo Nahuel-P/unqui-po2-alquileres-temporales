@@ -21,7 +21,6 @@ import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.FormaDePago;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Aceptada;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Cancelada;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Concluida;
-import ar.edu.unq.po2.alquilerestemporales.reserva.Condicional;
 import ar.edu.unq.po2.alquilerestemporales.reserva.EstadoReserva;
 import ar.edu.unq.po2.alquilerestemporales.reserva.IBookingListener;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Pendiente;
@@ -60,7 +59,6 @@ class ReservaTestCase {
 		this.fechaDeSalidaDate = LocalDate.parse(fechaDeSalida);
 		this.estadoReservaAceptada = mock(Aceptada.class);
 		this.estadoReservaRechazada = mock(Rechazada.class);
-		this.estadoReservaCondicional = mock(Condicional.class);
 		this.estadoReservaCancelada = mock(Cancelada.class);
 		this.estadoReservaConcluida = mock(Concluida.class);
 		this.estadoReservaPendiente = mock(Pendiente.class);

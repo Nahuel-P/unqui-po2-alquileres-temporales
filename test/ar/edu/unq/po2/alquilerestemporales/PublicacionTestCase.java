@@ -2,6 +2,7 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -21,12 +22,14 @@ import ar.edu.unq.po2.alquilerestemporales.publicacion.IPriceObserver;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Observer;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.PrecioTemporal;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.CasillaEmail;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Inmueble;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.Credito;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.Debito;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.Efectivo;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.FormaDePago;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 
 class PublicacionTestCase {
 	
@@ -54,8 +57,9 @@ class PublicacionTestCase {
 	LocalDate fechaInicioPublicacion;
 	LocalDate fechaFinPublicacion;
 	private PoliticaDeCancelacion politicaCancelacion;
-	private CancelacionGratuita cancelacionGratuita;
-	private CancelacionRestringida cancelacionRestringida;
+	private PoliticaDeCancelacion cancelacionGratuita;
+	private PoliticaDeCancelacion cancelacionRestringida;
+	private Reserva reserva;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -88,6 +92,7 @@ class PublicacionTestCase {
 		iobservador = mock(IPriceObserver.class);
 		cancelacionGratuita = mock(CancelacionGratuita.class);
 		cancelacionRestringida = mock (CancelacionRestringida.class);
+		reserva = mock(Reserva.class);
 	}
 	
 	@Test
@@ -292,8 +297,21 @@ class PublicacionTestCase {
 	
 	@Test
 	void testPublicacionTienePoliticaDeCancelacion() {
-		
 		assertEquals(this.publicacion.getPoliticaDeCancelacion(), politicaCancelacion);
+	}
+	
+	@Test
+	void testPublicacionSetPoliticaDeCancelacion() {
+		this.publicacion.setPoliticaDeCancelacion(cancelacionGratuita);
+		PoliticaDeCancelacion politicaDePublicacion = this.publicacion.getPoliticaDeCancelacion();
+		assertEquals(politicaDePublicacion, cancelacionGratuita);
+	}
+	
+	@Test
+	void testPoliticaDeCancelacionAplicaCostoEnReserva() {
+		PoliticaDeCancelacion politicaDePublicacion = this.politicaCancelacion;
+		this.publicacion.aplicarPoliticaDeCancelacion(this.reserva);
+		verify(politicaDePublicacion, times(1)).aplicarCostosDeCancelacion(this.reserva);
 	}
 		
 }

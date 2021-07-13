@@ -80,6 +80,6 @@ public class Usuario implements ICalificable{
 
 	public void recibirMail(String mensaje) {
 		this.casillaEmail.recibirMail(mensaje);
-		
-	}		
+	}
+	
 }

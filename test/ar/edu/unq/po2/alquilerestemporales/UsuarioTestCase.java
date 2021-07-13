@@ -2,6 +2,8 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -122,5 +124,13 @@ class UsuarioTestCase {
 		CasillaEmail casillaDeUsuario = this.casillaEmail;
 		assertNotNull(this.usuario.getCasillaEmail());
 		assertEquals(this.usuario.getCasillaEmail(), casillaDeUsuario );
+	}
+	
+	@Test
+	void testUsuarioRecibeMailALaCasillaDeMail() {
+		CasillaEmail casillaDeUsuario = this.casillaEmail;
+		this.usuario.recibirMail("Mensaje de prueba 1");
+		verify(casillaDeUsuario, times(1)).recibirMail("Mensaje de prueba 1");
+		
 	}
 }
