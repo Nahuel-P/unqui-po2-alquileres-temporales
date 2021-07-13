@@ -1,6 +1,5 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -9,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.CancelacionIntermedia;
-import ar.edu.unq.po2.alquilerestemporales.reserva.EstadoReserva;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 
 class CancelacionIntermediaTestCase {
@@ -58,14 +56,4 @@ class CancelacionIntermediaTestCase {
 		assertEquals(1000f, resultado);
 	}
 	
-
-	@Test
-	void testReservaEstaEnPlazoDeCancelacionIntermedia() {
-		when(this.reserva.diasQueFaltan()).thenReturn(5);
-		
-		EstadoReserva resultado = this.reserva.getEstadoDeReserva();
-		
-		assertEquals(resultado, cancelacion);
-	}
-
 }
