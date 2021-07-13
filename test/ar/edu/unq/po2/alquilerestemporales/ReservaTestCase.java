@@ -222,4 +222,45 @@ class ReservaTestCase {
 		Inmueble inmuebleDeReserva = this.reserva.getInmueble();
 		assertEquals(inmuebleDePublicacion, inmuebleDeReserva );
 	}
+	
+	@Test
+	void testBookingListenerRecibeMensajeReservaConcretada() {
+		this.reserva.addListener(bookingListener);
+		this.reserva.notificarConcretada();
+		verify(bookingListener).reservaConcretada(this.reserva, fechaDeIngresoDate, fechaDeSalidaDate);
+	}
+
+	@Test
+	void testBookingListenerRecibeMensajeReservaCancelada() {
+		this.reserva.addListener(bookingListener);
+		this.reserva.notificarCancelada();
+		verify(bookingListener).reservaCancelada(this.reserva, fechaDeIngresoDate, fechaDeSalidaDate);
+	}
+	
+	@Test
+	void testReservaEnEstadoPendienteEsAceptada() {
+		this.reserva.setEstado(estadoReservaPendiente);
+		this.reserva.aceptar();
+		verify(this.estadoReservaPendiente).aceptar(reserva);
+	}
+	
+	@Test
+	void testReservaEnEstadoPendienteEsRechazada() {
+		this.reserva.setEstado(estadoReservaPendiente);
+		this.reserva.rechazar();
+		verify(this.estadoReservaPendiente).rechazar(reserva);
+	}
+	
+	@Test
+	void testReservaEnEstadoConcluidaEsCancelada() {
+		this.reserva.setEstado(estadoReservaConcluida);
+		this.reserva.cancelar();
+		verify(this.estadoReservaConcluida).cancelar(reserva);
+	}
+	
+	@Test
+	void testUsuarioDeReservaCoincideConElUsuarioRecibidoPorParametro() {
+		Usuario usuario = this.inquilino;
+		assertTrue(this.reserva.esReservaDeUsuario(usuario));
+	}
 }
