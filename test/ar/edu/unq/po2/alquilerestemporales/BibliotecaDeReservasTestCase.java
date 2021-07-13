@@ -127,4 +127,26 @@ class BibliotecaDeReservasTestCase {
 		assertEquals(1,resultado);
 	}
 	
+	@Test
+	void testSeCreaUnaReservaCondicional() {
+		when(this.reserva2.seSuporponeCon(reserva1)).thenReturn(true);
+		this.biblioteca.crearReserva(reserva1);
+		this.biblioteca.crearReserva(reserva2);
+		assertTrue(this.biblioteca.estaOcupadaEnFecha(reserva2));
+		int resultado = this.biblioteca.getReservasCondicionales().size();
+		assertEquals(resultado,1);
+	}
+	
+	@Test
+	void testUnaReservaPendienteQueSeConcreta() {
+		when(this.reserva2.seSuporponeCon(reserva1)).thenReturn(true);
+		when(this.reserva1.enMismoPeriodoQueReserva(reserva2)).thenReturn(true);
+		this.biblioteca.crearReserva(reserva1);
+		this.biblioteca.crearReserva(reserva2);
+		this.biblioteca.concretarPendienteALaReserva(reserva1);
+		verify(reserva2).aceptar();
+		int resultado = this.biblioteca.getReservasCondicionales().size();
+		assertEquals(resultado,0);
+	}
+	
 }

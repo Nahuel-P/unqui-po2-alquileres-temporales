@@ -61,7 +61,7 @@ public class BibliotecaDeReservas {
     
     public boolean estaOcupadaEnFecha(Reserva reserva) {
     	return this.getTodasLasReservas().stream().
-    				anyMatch(alquiler-> alquiler.seSuporponeCon(reserva));
+    				anyMatch(alquiler-> reserva.seSuporponeCon(alquiler));
     }
     
     public void concretarReserva(Reserva reserva){
