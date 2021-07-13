@@ -128,12 +128,10 @@ public class Reserva {
 
 	public void cancelar() {
 		this.estadoDeReserva.cancelar(this);
-		
 	}
 
 	public void concluir() {
 		this.estadoDeReserva.concluir(null);
-		
 	}
 
 	public void rechazar() {
@@ -170,7 +168,6 @@ public class Reserva {
 		for(IBookingListener listener : this.listeners) {
 			listener.reservaCancelada(this, this.getFechaDeIngreso(),this.getFechaDeSalida());
 		}
-		
 	}
 
 	public void aplicarPoliticaDeCancelacion() {
@@ -181,8 +178,11 @@ public class Reserva {
 		return this.precioFinal;
 	}
 
-
 	public boolean seSuporponeCon(Reserva reserva) {
 		return this.estadoDeReserva.estaOcupadaCon(this.fechaIngreso,this.fechaSalida,reserva);
+	}
+
+	public boolean enMismoPeriodoQueReserva(Reserva reserva) {
+		return fechaIngreso.isAfter(reserva.getFechaDeIngreso()) && fechaSalida.isBefore(reserva.getFechaDeSalida());
 	}
 }
