@@ -310,7 +310,7 @@ class ReservaTestCase {
 	
 	@Test
 	void testReservaNoEsFutura() {
-		assertFalse(this.reserva.esFutura());
+		assertFalse(this.reserva2.esFutura());
 	}
 	
 	@Test
@@ -331,6 +331,11 @@ class ReservaTestCase {
 	@Test
 	void testReservaNoSeEncuentraEnMismoPeriodoQueOtraReserva(){
 		assertFalse(this.reserva.enMismoPeriodoQueReserva(reserva2));
+	}
+	
+	@Test
+	void testReservaSeEncuentraEnMismoPeriodoQueOtraReserva(){
+		assertTrue(this.reserva.enMismoPeriodoQueReserva(reserva));
 	}
 
 }
