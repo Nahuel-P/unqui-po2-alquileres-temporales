@@ -37,7 +37,7 @@ class AceptadaTestCase {
 		concluida = mock(Concluida.class);
 		propietario = mock(Usuario.class);
 		fecIng = LocalDate.parse("2022-01-15");
-		fecSal = LocalDate.parse("2022-01-17");
+		fecSal = LocalDate.parse("2022-01-18");
 		fechaIngresoDeReserva= LocalDate.parse("2022-01-16");
 		fechaSalidaDeReserva= LocalDate.parse("2022-01-17");
 	}
@@ -77,6 +77,27 @@ class AceptadaTestCase {
         boolean resultado = state.estaOcupadaCon(fecIng, fecSal, reserva);
         assertTrue(resultado);
     }
-
-
+	
+	@Test
+    void testAceptadaConcluida()  {
+		when(this.reserva.getEstadoDeReserva()).thenReturn(concluida);
+		this.state.concluir(reserva);
+		assertTrue(reserva.getEstadoDeReserva().getClass().equals(concluida.getClass()));
+    }
+	
+	@Test
+    void testEstaOcupadaConOtraReservaJustoElMismoDia()  {
+		when(this.reserva.getFechaDeIngreso()).thenReturn(fecIng);
+		when(this.reserva.getFechaDeSalida()).thenReturn(fecSal);
+        boolean resultado = state.estaOcupadaCon(fecIng, fecSal, reserva);
+        assertTrue(resultado);
+	}
+	
+	@Test
+    void testNoEstaOcupadaConOtraReserva()  {
+		when(this.reserva.getFechaDeIngreso()).thenReturn(fecIng);
+		when(this.reserva.getFechaDeSalida()).thenReturn(fechaIngresoDeReserva);
+        boolean resultado = state.estaOcupadaCon(fechaSalidaDeReserva, fecSal, reserva);
+        assertFalse(resultado);
+    }
 }
