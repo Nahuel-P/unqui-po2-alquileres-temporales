@@ -2,11 +2,7 @@ package ar.edu.unq.po2.alquilerestemporales;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,9 +11,7 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.alquilerestemporales.filtro.Filtro;
 import ar.edu.unq.po2.alquilerestemporales.filtro.FiltroBasico;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
-import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Inmueble;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
-import ar.edu.unq.po2.alquilerestemporales.reserva.Concluida;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 import ar.edu.unq.po2.alquilerestemporales.webReservas.BibliotecaDePublicaciones;
 import ar.edu.unq.po2.alquilerestemporales.webReservas.BibliotecaDeReservas;
@@ -35,6 +29,7 @@ class WebReservasTestCase {
 	private Buscador buscador;
 	private FiltroBasico filtroBasico;
 	private ArrayList<Filtro> filtrosExtra;
+	@SuppressWarnings("unused")
 	private ArrayList<Publicacion> resultado;
 	private String ciudad1;
 	

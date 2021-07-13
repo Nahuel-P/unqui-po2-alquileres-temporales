@@ -1,6 +1,5 @@
 package ar.edu.unq.po2.alquilerestemporales.webReservas;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

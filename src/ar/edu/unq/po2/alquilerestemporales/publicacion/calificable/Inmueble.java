@@ -1,6 +1,5 @@
 package ar.edu.unq.po2.alquilerestemporales.publicacion.calificable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Inmueble implements ICalificable{

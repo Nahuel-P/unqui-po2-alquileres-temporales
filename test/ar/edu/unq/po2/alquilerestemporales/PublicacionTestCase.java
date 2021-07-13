@@ -22,7 +22,6 @@ import ar.edu.unq.po2.alquilerestemporales.publicacion.IPriceObserver;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Observer;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.PrecioTemporal;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
-import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.CasillaEmail;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Inmueble;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.Credito;
@@ -58,7 +57,6 @@ class PublicacionTestCase {
 	LocalDate fechaFinPublicacion;
 	private PoliticaDeCancelacion politicaCancelacion;
 	private PoliticaDeCancelacion cancelacionGratuita;
-	private PoliticaDeCancelacion cancelacionRestringida;
 	private Reserva reserva;
 
 	@BeforeEach
@@ -91,7 +89,7 @@ class PublicacionTestCase {
 		observador = new Observer();
 		iobservador = mock(IPriceObserver.class);
 		cancelacionGratuita = mock(CancelacionGratuita.class);
-		cancelacionRestringida = mock (CancelacionRestringida.class);
+		mock (CancelacionRestringida.class);
 		reserva = mock(Reserva.class);
 	}
 	

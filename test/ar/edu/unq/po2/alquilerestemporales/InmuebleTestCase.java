@@ -25,8 +25,7 @@ class InmuebleTestCase {
 	private List <String>servicios;
 	private Calificacion calificacion;
 	private Calificacion calificacion2;
-	private List<String> comentarios;
-		
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		this.inmueble = new Inmueble(superficie, pais, ciudad, direccion, capacidad, tipoDeInmueble, servicios);
@@ -39,7 +38,7 @@ class InmuebleTestCase {
 		servicios = new ArrayList<String>();
 		calificacion = mock(Calificacion.class);
 		calificacion2 = mock(Calificacion.class);
-		comentarios = new ArrayList<String>();
+		new ArrayList<String>();
 	}
 
 	@Test
