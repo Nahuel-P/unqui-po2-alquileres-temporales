@@ -17,7 +17,7 @@ public class BibliotecaDeReservas {
 	
 	public BibliotecaDeReservas() {
 		this.reservas = new ArrayList<Reserva>();
-		this.reservas = new LinkedList<Reserva>();
+		this.reservasCondicionales = new LinkedList<Reserva>();
 	}
 
 	public List<Reserva> getTodasLasReservas() {
@@ -74,9 +74,23 @@ public class BibliotecaDeReservas {
 
     public void declinarReserva(Reserva reserva){
         reserva.cancelar();
+        this.concretarPendienteALaReserva(reserva);
+    }
+    
+    public void concretarPendienteALaReserva(Reserva reserva) {
+    	for(Reserva pendiente : this.getReservasCondicionales()) {
+    		if(reserva.enMismoPeriodoQueReserva(pendiente)) {
+    			pendiente.aceptar();
+    			this.getReservasCondicionales().remove(pendiente);
+    		}
+    	}
     }
 
-    public void concluirReservas(){
+    public Queue<Reserva> getReservasCondicionales() {
+		return this.reservasCondicionales;
+	}
+
+	public void concluirReservas(){
 		for(Reserva reserva : this.getTodasLasReservas()) {
 			if(LocalDate.now().compareTo(reserva.getFechaDeSalida())>=0) {
 				reserva.concluir();
