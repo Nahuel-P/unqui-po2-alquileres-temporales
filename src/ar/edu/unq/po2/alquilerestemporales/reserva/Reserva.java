@@ -181,4 +181,8 @@ public class Reserva {
 		return this.precioFinal;
 	}
 
+
+	public boolean seSuporponeCon(Reserva reserva) {
+		return this.estadoDeReserva.estaOcupadaCon(this.fechaIngreso,this.fechaSalida,reserva);
+	}
 }

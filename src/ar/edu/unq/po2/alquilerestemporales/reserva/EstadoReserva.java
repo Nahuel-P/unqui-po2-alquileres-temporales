@@ -6,4 +6,5 @@ public interface EstadoReserva{
 	public void rechazar(Reserva reserva);
 	public void cancelar(Reserva reserva);
 	public void concluir(Reserva reserva);
+	public boolean estaOcupadaCon(Reserva alquiler);
 }

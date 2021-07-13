@@ -78,11 +78,6 @@ public class Usuario implements ICalificable{
 		return this.bibliotecaDeCalificaciones.getCalificaciones();
 	}
 
-	public void ultimaBusqueda(ArrayList<Publicacion> busqueda) {
-		this.busquedaReciente = busqueda;
-		
-	}
-
 	public void recibirMail(String mensaje) {
 		this.casillaEmail.recibirMail(mensaje);
 		

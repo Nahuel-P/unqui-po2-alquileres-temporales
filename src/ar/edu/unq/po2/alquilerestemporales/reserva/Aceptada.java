@@ -1,5 +1,7 @@
 package ar.edu.unq.po2.alquilerestemporales.reserva;
 
+import java.time.LocalDate;
+
 public class Aceptada implements EstadoReserva{
 
 	@Override
@@ -24,6 +26,13 @@ public class Aceptada implements EstadoReserva{
 	public void concluir(Reserva reserva) {
 		reserva.setEstado(new Concluida());
 	}
+
+	@Override
+	public boolean estaOcupadaCon(LocalDate fechaIngreso, LocalDate fechaSalida, Reserva reserva) {
+		return fechaIngreso.isAfter(reserva.getFechaDeIngreso()) && fechaSalida.isBefore(reserva.getFechaDeSalida());
+	}
+
+
 	
 	
 }

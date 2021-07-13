@@ -2,7 +2,9 @@ package ar.edu.unq.po2.alquilerestemporales.webReservas;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
@@ -11,9 +13,11 @@ import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 public class BibliotecaDeReservas {
 
 	private List<Reserva> reservas;
-
+	private Queue<Reserva> reservasCondicionales;
+	
 	public BibliotecaDeReservas() {
 		this.reservas = new ArrayList<Reserva>();
+		this.reservas = new LinkedList<Reserva>();
 	}
 
 	public List<Reserva> getTodasLasReservas() {
@@ -47,21 +51,28 @@ public class BibliotecaDeReservas {
     }
 
     public void crearReserva(Reserva reserva){
-        this.reservas.add(reserva);
+        if(!estaOcupadaEnFecha(reserva)) {
+        	this.reservas.add(reserva);
+        }
+        else {
+        	this.reservasCondicionales.add(reserva);
+        }
+    }
+    
+    public boolean estaOcupadaEnFecha(Reserva reserva) {
+    	return this.getTodasLasReservas().stream().
+    				anyMatch(alquiler-> alquiler.seSuporponeCon(reserva));
     }
     
     public void concretarReserva(Reserva reserva){
-        //Primero busco, encuentro, acepto
         reserva.aceptar();
     }
 
     public void rechazarReserva(Reserva reserva){
-         //Primero busco, encuentro, rechazo
         reserva.rechazar();
     }
 
     public void declinarReserva(Reserva reserva){
-         //Primero busco, encuentro, declino
         reserva.cancelar();
     }
 
