@@ -9,9 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.CancelacionIntermedia;
-import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.EstadoIntermediaInicial;
-import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.IEstadoCancelacionIntermedia;
-import ar.edu.unq.po2.alquilerestemporales.politicasDeCancelacion.PoliticaDeCancelacion;
 import ar.edu.unq.po2.alquilerestemporales.reserva.EstadoReserva;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 
