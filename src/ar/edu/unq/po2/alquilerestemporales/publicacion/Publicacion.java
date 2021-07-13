@@ -72,14 +72,19 @@ public class Publicacion {
 		return this.getFotos().size() >= 5;
 	}
 	
-	public void mostrarDatos() {
-		System.out.println("La publicacion seleccionada tiene un precio de: $"+ this.getPrecioBase() + 
-				". El inmueble cuenta con "+ this.getInmueble().getServicios() + ". Tiene como horario de"
-						+ "checkIn las "+ this.getCheckIn()+ " hs, y como checkOut las "+this.getCheckOut());
+	public String mostrarDatos() {
+		
+		String mensaje = "";
+		mensaje = "La publicacion seleccionada tiene un precio de: $"+ this.getPrecioBase() ;
+		mensaje	= mensaje + " El inmueble cuenta con "+ this.getInmueble().getServicios();
+		mensaje = mensaje + " Tiene como horario de checkIn las "+ this.getCheckIn()+ " hs";
+		mensaje = mensaje + " y como checkOut las "+ this.getCheckOut()+ "hs";
+		
 		if (!this.getTemporadasEspeciales().isEmpty()) {
-			System.out.println("Actualmente cuenta con "+ this.getTemporadasEspeciales().size()+ " temporadas"
-					+ " con precio especial.");			
+			mensaje = mensaje + "Actualmente cuenta con "+ this.getTemporadasEspeciales().size()+ " temporadas con precio especial.";			
 		}
+		return mensaje;
+		
 	}
 	
 	public void bajarDePrecio(double nuevoPrecio) {
@@ -191,7 +196,5 @@ public class Publicacion {
 	public float aplicarPoliticaDeCancelacion(Reserva reserva) {
 		return this.politicaCancelacion.aplicarCostosDeCancelacion(reserva);
 	}
-
-
 
 }

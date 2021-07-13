@@ -1,5 +1,6 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -263,4 +264,10 @@ class ReservaTestCase {
 		Usuario usuario = this.inquilino;
 		assertTrue(this.reserva.esReservaDeUsuario(usuario));
 	}
+	
+	@Test
+	void testUnaReservaEsFutura() {
+		assertTrue(this.reserva.esFutura());
+	}
+	
 }
