@@ -12,8 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
-import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
-import ar.edu.unq.po2.alquilerestemporales.reserva.Aceptada;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Cancelada;
 import ar.edu.unq.po2.alquilerestemporales.reserva.EstadoReserva;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Pendiente;
@@ -24,12 +22,8 @@ class PendienteTestCase {
 	private Pendiente state;
 	private Reserva reserva;
 	private EstadoReserva cancelada;
-	private EstadoReserva aceptada;
-	private Usuario propietario;
 	private LocalDate fecIng;
 	private LocalDate fecSal;
-	private LocalDate fechaIngresoDeReserva;
-	private LocalDate fechaSalidaDeReserva;
 	private Calificacion calificacionInmueble;
 	private Calificacion calificacionInquilino;
 	private Calificacion calificacionPropietario;
@@ -38,14 +32,9 @@ class PendienteTestCase {
 	void setUp() throws Exception {
 		state = new Pendiente();
 		reserva = mock(Reserva.class);
-		mock(Cancelada.class);
 		cancelada = mock(Cancelada.class);
-		aceptada = mock (Aceptada.class);
-		propietario = mock(Usuario.class);
 		fecIng = LocalDate.parse("2022-01-15");
 		fecSal = LocalDate.parse("2022-01-18");
-		fechaIngresoDeReserva= LocalDate.parse("2022-01-16");
-		fechaSalidaDeReserva= LocalDate.parse("2022-01-17");
 		this.calificacionInmueble = mock(Calificacion.class);
 		this.calificacionInquilino = mock(Calificacion.class);
 		this.calificacionPropietario = mock(Calificacion.class);
