@@ -2,6 +2,8 @@ package ar.edu.unq.po2.alquilerestemporales.reserva;
 
 import java.time.LocalDate;
 
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
+
 public interface EstadoReserva{
 	
 	public void aceptar(Reserva reserva);
@@ -9,4 +11,6 @@ public interface EstadoReserva{
 	public void cancelar(Reserva reserva);
 	public void concluir(Reserva reserva);
 	public boolean estaOcupadaCon(LocalDate fechaIngreso, LocalDate fechaSalida, Reserva reservaNueva);
+	public void calificarPropietario(Reserva reserva, Calificacion calificacionPropietario, Calificacion calificacionInmueble);
+	public void calificarInquilino(Reserva reserva, Calificacion calificacion);
 }

@@ -2,6 +2,8 @@ package ar.edu.unq.po2.alquilerestemporales.reserva;
 
 import java.time.LocalDate;
 
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
+
 public class Concluida implements EstadoReserva{
 
 	@Override
@@ -27,5 +29,17 @@ public class Concluida implements EstadoReserva{
 	@Override
 	public boolean estaOcupadaCon(LocalDate fechaIngreso, LocalDate fechaSalida, Reserva reserva) {
 		return false;
+	}
+
+	@Override
+	public void calificarPropietario(Reserva reserva,Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
+		reserva.calificarPublicacion(calificacionPropietario,calificacionInmueble);
+		
+	}
+
+	@Override
+	public void calificarInquilino(Reserva reserva,Calificacion calificacion) {
+		reserva.calificarInquilino(calificacion);
+		
 	}
 }

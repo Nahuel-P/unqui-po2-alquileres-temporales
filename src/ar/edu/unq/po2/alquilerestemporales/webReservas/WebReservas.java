@@ -6,6 +6,7 @@ import java.util.List;
 import ar.edu.unq.po2.alquilerestemporales.filtro.Filtro;
 import ar.edu.unq.po2.alquilerestemporales.filtro.FiltroBasico;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 
@@ -143,6 +144,14 @@ public class WebReservas {
 
 	public void setBuscador(Buscador buscador) {
 		this.buscador=buscador;
+	}
+	
+	public void calificarPropietario(Reserva reserva, Calificacion calificacionPropietartio, Calificacion calificacionInmueble) {
+		this.bibliotecaDeReservas.calificarPropietario(reserva,calificacionPropietartio,calificacionInmueble);
+	}
+	
+	public void calificarInquilino(Reserva reserva, Calificacion calificacion) {
+		this.bibliotecaDeReservas.calificarInquilino(reserva,calificacion);
 	}
 	
 }

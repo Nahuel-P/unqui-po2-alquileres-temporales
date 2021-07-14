@@ -17,7 +17,6 @@ public class BibliotecaDePublicaciones {
 		if(!estaPublicada(publicacion)) {
 			this.publicaciones.add(publicacion);
 		}
-		
 	}
 	
 	public boolean estaPublicada(Publicacion publicacion) {

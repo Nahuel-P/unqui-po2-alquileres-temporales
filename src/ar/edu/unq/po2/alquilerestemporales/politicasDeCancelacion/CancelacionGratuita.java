@@ -8,15 +8,11 @@ public class CancelacionGratuita implements PoliticaDeCancelacion {
 		float importeAPagar = 0;
 		if(!estaEnPlazoDeCancelacionGratuita(reserva)) {
 			importeAPagar = reserva.costoPorDia() * 2;
-			
 		}
-		
 		return importeAPagar;
-		
 	}
 	
 	private boolean estaEnPlazoDeCancelacionGratuita(Reserva reserva) {
-		
 		return reserva.diasQueFaltan() >= 10;
 	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import ar.edu.unq.po2.alquilerestemporales.publicacion.PrecioTemporal;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Inmueble;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.FormaDePago;
@@ -184,5 +185,14 @@ public class Reserva {
 
 	public boolean enMismoPeriodoQueReserva(Reserva reserva) {
 		return (fechaIngreso.compareTo(reserva.getFechaDeIngreso())>=0) && (fechaSalida.compareTo(reserva.getFechaDeSalida())<=0);
+	}
+
+	public void calificarPublicacion(Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
+		this.getPropietario().addCalificacion(calificacionPropietario);
+		this.getInmueble().addCalificacion(calificacionInmueble);
+	}
+
+	public void calificarInquilino(Calificacion calificacion) {
+		this.getInquilino().addCalificacion(calificacion);
 	}
 }

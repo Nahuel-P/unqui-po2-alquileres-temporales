@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 
@@ -98,4 +99,13 @@ public class BibliotecaDeReservas {
 		}
     }
 
+	public void calificarPropietario(Reserva reserva, Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
+		reserva.getEstadoDeReserva().calificarPropietario(reserva,calificacionPropietario,calificacionInmueble);
+		
+	}
+
+	public void calificarInquilino(Reserva reserva, Calificacion calificacion) {
+		reserva.getEstadoDeReserva().calificarInquilino(reserva, calificacion);
+		
+	}
 }
