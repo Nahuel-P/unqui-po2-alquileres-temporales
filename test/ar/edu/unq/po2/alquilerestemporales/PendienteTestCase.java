@@ -101,5 +101,10 @@ class PendienteTestCase {
 			this.state.calificarEstadia(reserva, calificacionPropietario, calificacionInmueble);
 		});
 	}
+	
+	@Test
+	void testEstadoDeReservaRechazadaNoEstaOcupadaConOtraReserva() {
+		assertFalse(this.state.estaOcupadaCon(fecIng, fecSal, reserva));
+	}
 		
 }
