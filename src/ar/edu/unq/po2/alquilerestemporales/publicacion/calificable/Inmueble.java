@@ -2,7 +2,7 @@ package ar.edu.unq.po2.alquilerestemporales.publicacion.calificable;
 
 import java.util.List;
 
-public class Inmueble implements ICalificable{
+public class Inmueble{
 	
 	private double superficie;
 	private String pais;
@@ -25,17 +25,14 @@ public class Inmueble implements ICalificable{
 		this.bibliotecaDeCalificaciones = new BibliotecaDeCalificaciones();
 	}
 		
-	@Override
 	public float getPromedioCalificacion() {
 		return this.bibliotecaDeCalificaciones.getPromedioCalificacion();
 	}
 
-	@Override
 	public List<String> getComentarios() {
 		return this.bibliotecaDeCalificaciones.getComentarios();
 	}
 
-	@Override
 	public void addCalificacion(Calificacion calificacion) {
 		this.bibliotecaDeCalificaciones.addCalificacion(calificacion);
 	}

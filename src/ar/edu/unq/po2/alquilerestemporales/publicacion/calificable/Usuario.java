@@ -6,7 +6,7 @@ import java.util.List;
 
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
 
-public class Usuario implements ICalificable{
+public class Usuario{
 	
 	
 	private String nombreYApellido;
@@ -55,17 +55,14 @@ public class Usuario implements ICalificable{
 		this.telefono = telefono;
 	}
 
-	@Override
 	public float getPromedioCalificacion() {
 		return this.bibliotecaDeCalificaciones.getPromedioCalificacion();
 	}
 
-	@Override
 	public List<String> getComentarios() {
 		return this.bibliotecaDeCalificaciones.getComentarios();
 	}
 
-	@Override
 	public void addCalificacion(Calificacion calificacion) {
 		this.bibliotecaDeCalificaciones.addCalificacion(calificacion);
 	}
