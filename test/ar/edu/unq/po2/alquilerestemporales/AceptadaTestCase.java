@@ -1,5 +1,6 @@
 package ar.edu.unq.po2.alquilerestemporales;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Aceptada;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Cancelada;
@@ -21,25 +23,30 @@ class AceptadaTestCase {
 	
 	private Aceptada state;
 	private Reserva reserva;
-	private EstadoReserva cancelada;
 	private EstadoReserva concluida;
 	private Usuario propietario;
 	private LocalDate fecIng;
 	private LocalDate fecSal;
 	private LocalDate fechaIngresoDeReserva;
 	private LocalDate fechaSalidaDeReserva;
+	private Calificacion calificacionInmueble;
+	private Calificacion calificacionInquilino;
+	private Calificacion calificacionPropietario;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		state = new Aceptada();
 		reserva = mock(Reserva.class);
-		cancelada = mock(Cancelada.class);
+		mock(Cancelada.class);
 		concluida = mock(Concluida.class);
 		propietario = mock(Usuario.class);
 		fecIng = LocalDate.parse("2022-01-15");
 		fecSal = LocalDate.parse("2022-01-18");
 		fechaIngresoDeReserva= LocalDate.parse("2022-01-16");
 		fechaSalidaDeReserva= LocalDate.parse("2022-01-17");
+		this.calificacionInmueble = mock(Calificacion.class);
+		this.calificacionInquilino = mock(Calificacion.class);
+		this.calificacionPropietario = mock(Calificacion.class);
 	}
 	
 	@Test
@@ -100,4 +107,18 @@ class AceptadaTestCase {
         boolean resultado = state.estaOcupadaCon(fechaSalidaDeReserva, fecSal, reserva);
         assertFalse(resultado);
     }
+	
+	@Test
+	void testEstadoDeReservaAceptadaCalificaPropietario() {
+		assertThrows(Exception.class, () -> {
+			this.state.calificarInquilino(reserva, calificacionInquilino);
+		});
+	}
+	
+	@Test
+	void testEstadoDeReservaAceptadaCalificaInquilino() {
+		assertThrows(Exception.class, () -> {
+			this.state.calificarPropietario(reserva, calificacionPropietario, calificacionInmueble);
+		});
+	}
 }

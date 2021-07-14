@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Cancelada;
 import ar.edu.unq.po2.alquilerestemporales.reserva.EstadoReserva;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
@@ -21,6 +22,9 @@ class EstadoDeReservaCanceladaTestCase {
 	private String fechaDeSalida;
 	private LocalDate fechaDeIngresoDate;
 	private LocalDate fechaDeSalidaDate;
+	private Calificacion calificacionInmueble;
+	private Calificacion calificacionInquilino;
+	private Calificacion calificacionPropietario;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -30,6 +34,9 @@ class EstadoDeReservaCanceladaTestCase {
 		this.fechaDeSalida = "2022-01-30";
 		this.fechaDeIngresoDate = LocalDate.parse(fechaDeIngreso);
 		this.fechaDeSalidaDate = LocalDate.parse(fechaDeSalida);
+		this.calificacionInmueble = mock(Calificacion.class);
+		this.calificacionInquilino = mock(Calificacion.class);
+		this.calificacionPropietario = mock(Calificacion.class);
 	}
 	
 	@Test
@@ -64,4 +71,19 @@ class EstadoDeReservaCanceladaTestCase {
 	void testEstadoDeReservaRechazadaNoEstaOcupadaConOtraReserva() {
 		assertFalse(this.estadoReservaCancelada.estaOcupadaCon(fechaDeIngresoDate, fechaDeSalidaDate, reserva));
 	}
+	
+	@Test
+	void testEstadoDeReservaCanceladaCalificaPropietario() {
+		assertThrows(Exception.class, () -> {
+			this.estadoReservaCancelada.calificarInquilino(reserva, calificacionInquilino);
+		});
+	}
+	
+	@Test
+	void testEstadoDeReservaCanceladaCalificaInquilino() {
+		assertThrows(Exception.class, () -> {
+			this.estadoReservaCancelada.calificarPropietario(reserva, calificacionPropietario, calificacionInmueble);
+		});
+	}
+	
 }
