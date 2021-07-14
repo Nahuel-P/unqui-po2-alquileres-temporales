@@ -21,13 +21,7 @@ class CancelacionIntermediaTestCase {
 		reserva= mock(Reserva.class);
 		
 	}
-	
-	@Test 
-	void testCancelacionIntermediaTieneUnEstado() {
 		
-		assertNotNull(this.cancelacion.getEstado());
-	}
-	
 	@Test
 	void testCancelacionIntermediaEnPlazoEsGratis() {
 		when(this.reserva.diasQueFaltan()).thenReturn(25);
