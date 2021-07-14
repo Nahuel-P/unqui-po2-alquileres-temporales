@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.alquilerestemporales.filtro.Filtro;
 import ar.edu.unq.po2.alquilerestemporales.filtro.FiltroBasico;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 import ar.edu.unq.po2.alquilerestemporales.webReservas.BibliotecaDePublicaciones;
@@ -34,6 +35,9 @@ class WebReservasTestCase {
 	@SuppressWarnings("unused")
 	private ArrayList<Publicacion> resultado;
 	private String ciudad1;
+	private Calificacion calificacionInquilino;
+	private Calificacion calificacionPropietario;
+	private Calificacion calificacionInmueble;
 	
 	
 	@BeforeEach
@@ -53,6 +57,9 @@ class WebReservasTestCase {
 		resultado = new ArrayList<Publicacion>();
 		filtrosExtra = new ArrayList<Filtro>();
 		ciudad1="Fondo de Bikini";
+		this.calificacionInmueble = mock(Calificacion.class);
+		this.calificacionInquilino = mock(Calificacion.class);
+		this.calificacionPropietario = mock(Calificacion.class);
 	}
 	
 	@Test
@@ -210,6 +217,18 @@ class WebReservasTestCase {
 	void testReservasEnLaCiudadPorElUsuario() {
 		web.reservasDeUsuarioEnCiudad(usu1,ciudad1);
 		verify(this.bibliotecaDeReserva).getReservasEnCiudadDelUsuario(usu1,ciudad1);
+	}
+	
+	@Test
+	void testWebReservasCalificaPropietario() {
+		web.calificarPropietario(reserva1, calificacionPropietario, calificacionInmueble);
+		verify(this.bibliotecaDeReserva).calificarPropietario(reserva1, calificacionPropietario, calificacionInmueble);
+	}
+	
+	@Test
+	void testWebReservasCalificaInquilino() {
+		web.calificarInquilino(reserva1, calificacionInquilino);
+		verify(this.bibliotecaDeReserva).calificarInquilino(reserva1, calificacionInquilino);
 	}
 
 }
