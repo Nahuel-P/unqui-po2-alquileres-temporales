@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.alquilerestemporales.publicacion.PrecioTemporal;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.Publicacion;
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Inmueble;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.formasDePago.Credito;
@@ -54,6 +55,10 @@ class ReservaTestCase {
 	private EstadoReserva estadoReservaPendiente;
 	private IBookingListener bookingListener;
 	private IBookingListener bookingListener2;
+	private Calificacion calificacionInquilino;
+	private Calificacion calificacionPropietario;
+	private Calificacion calificacionInmueble;
+	private Inmueble inmueble;
 	
 	
 	@BeforeEach
@@ -81,7 +86,11 @@ class ReservaTestCase {
 		this.precioTemporal = mock(PrecioTemporal.class);
 		this.temporadasEspeciales = new ArrayList<PrecioTemporal>();
 		this.reserva = new Reserva(fecha1, inquilino, fechaDeIngresoDate, fechaDeSalidaDate, estadoReservaPendiente, publicacion, credito);
-		this.reserva2 = new Reserva(fecha1, inquilino, fechaDeIngresoDate2, fechaDeSalidaDate2, estadoReservaPendiente, publicacion, credito);		
+		this.reserva2 = new Reserva(fecha1, inquilino, fechaDeIngresoDate2, fechaDeSalidaDate2, estadoReservaPendiente, publicacion, credito);
+		this.calificacionInmueble = mock(Calificacion.class);
+		this.calificacionInquilino = mock(Calificacion.class);
+		this.calificacionPropietario = mock(Calificacion.class);
+		this.inmueble = mock(Inmueble.class);
 	}
 	
 	@Test
@@ -336,6 +345,22 @@ class ReservaTestCase {
 	@Test
 	void testReservaSeEncuentraEnMismoPeriodoQueOtraReserva(){
 		assertTrue(this.reserva.enMismoPeriodoQueReserva(reserva));
+	}
+	
+	@Test
+	void testUsuarioDeReservaRecibeCalificacion() {
+		this.reserva.calificarInquilino(calificacionInquilino);
+		verify(this.inquilino).addCalificacion(calificacionInquilino);
+	}
+	
+	@Test
+	void testUsuarioEInmuebleDeReservaRecibeCalificacion() {
+		when(this.publicacion.getPropietario()).thenReturn(propietario);
+		when(this.publicacion.getInmueble()).thenReturn(inmueble);
+		this.reserva.calificarPublicacion(calificacionPropietario, calificacionInmueble);
+		
+		verify(this.propietario).addCalificacion(calificacionPropietario);
+		verify(this.inmueble).addCalificacion(calificacionInmueble);
 	}
 
 }
