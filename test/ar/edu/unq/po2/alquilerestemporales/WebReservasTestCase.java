@@ -222,13 +222,13 @@ class WebReservasTestCase {
 	@Test
 	void testWebReservasCalificaPropietario() {
 		web.calificarPropietario(reserva1, calificacionPropietario, calificacionInmueble);
-		verify(this.bibliotecaDeReserva).calificarPropietario(reserva1, calificacionPropietario, calificacionInmueble);
+		verify(this.bibliotecaDeReserva).calificarEstadia(reserva1, calificacionPropietario, calificacionInmueble);
 	}
 	
 	@Test
 	void testWebReservasCalificaInquilino() {
 		web.calificarInquilino(reserva1, calificacionInquilino);
-		verify(this.bibliotecaDeReserva).calificarInquilino(reserva1, calificacionInquilino);
+		verify(this.bibliotecaDeReserva).calificarInquilinato(reserva1, calificacionInquilino);
 	}
 
 }

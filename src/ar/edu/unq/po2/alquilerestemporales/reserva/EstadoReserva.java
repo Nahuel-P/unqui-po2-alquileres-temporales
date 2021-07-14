@@ -11,6 +11,6 @@ public interface EstadoReserva{
 	public void cancelar(Reserva reserva);
 	public void concluir(Reserva reserva);
 	public boolean estaOcupadaCon(LocalDate fechaIngreso, LocalDate fechaSalida, Reserva reservaNueva);
-	public void calificarPropietario(Reserva reserva, Calificacion calificacionPropietario, Calificacion calificacionInmueble);
-	public void calificarInquilino(Reserva reserva, Calificacion calificacion);
+	public void calificarEstadia(Reserva reserva, Calificacion calificacionPropietario, Calificacion calificacionInmueble);
+	public void calificarInquilinato(Reserva reserva, Calificacion calificacion);
 }

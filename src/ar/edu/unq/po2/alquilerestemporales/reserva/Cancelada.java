@@ -32,12 +32,12 @@ public class Cancelada implements EstadoReserva{
 	}
 
 	@Override
-	public void calificarPropietario(Reserva reserva,Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
+	public void calificarEstadia(Reserva reserva,Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
 		throw new RuntimeException("La reserva no se llevo a cabo, no se puede calificar");
 	}
 
 	@Override
-	public void calificarInquilino(Reserva reserva,Calificacion calificacion) {
+	public void calificarInquilinato(Reserva reserva,Calificacion calificacion) {
 		throw new RuntimeException("La reserva no se llevo a cabo, no se puede calificar");
 	}
 }

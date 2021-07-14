@@ -348,16 +348,28 @@ class ReservaTestCase {
 	}
 	
 	@Test
-	void testUsuarioDeReservaRecibeCalificacion() {
-		this.reserva.calificarInquilino(calificacionInquilino);
+	void testCalificarInquilinatoDeUnaReserva() {
+		this.reserva.aceptar();
+		this.reserva.concluir();
+		this.reserva.calificarInquilinato(calificacionInquilino);
 		verify(this.inquilino).addCalificacion(calificacionInquilino);
 	}
 	
 	@Test
-	void testUsuarioEInmuebleDeReservaRecibeCalificacion() {
+	void testUnaReservaNoConcluidaNoCalificaInquilinos() {
+		//this.reserva.aceptar();
+		//this.reserva.calificarInquilinato(calificacionInquilino);
+		//TESTEAR EXCEPCION
+	}
+	
+	@Test
+	void testCalificarUnaEstadiaDeUnaReserva() {
+		
 		when(this.publicacion.getPropietario()).thenReturn(propietario);
 		when(this.publicacion.getInmueble()).thenReturn(inmueble);
-		this.reserva.calificarPublicacion(calificacionPropietario, calificacionInmueble);
+		this.reserva.aceptar();
+		this.reserva.concluir();
+		this.reserva.calificarEstadia(calificacionPropietario, calificacionInmueble);
 		
 		verify(this.propietario).addCalificacion(calificacionPropietario);
 		verify(this.inmueble).addCalificacion(calificacionInmueble);

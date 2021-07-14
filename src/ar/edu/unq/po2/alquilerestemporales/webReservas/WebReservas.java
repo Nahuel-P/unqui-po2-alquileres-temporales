@@ -147,11 +147,11 @@ public class WebReservas {
 	}
 	
 	public void calificarPropietario(Reserva reserva, Calificacion calificacionPropietartio, Calificacion calificacionInmueble) {
-		this.bibliotecaDeReservas.calificarPropietario(reserva,calificacionPropietartio,calificacionInmueble);
+		this.bibliotecaDeReservas.calificarEstadia(reserva, calificacionPropietartio, calificacionInmueble);
 	}
 	
 	public void calificarInquilino(Reserva reserva, Calificacion calificacion) {
-		this.bibliotecaDeReservas.calificarInquilino(reserva,calificacion);
+		this.bibliotecaDeReservas.calificarInquilinato(reserva,calificacion);
 	}
 	
 }

@@ -32,14 +32,13 @@ public class Concluida implements EstadoReserva{
 	}
 
 	@Override
-	public void calificarPropietario(Reserva reserva,Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
-		reserva.calificarPublicacion(calificacionPropietario,calificacionInmueble);
-		
+	public void calificarEstadia(Reserva reserva,Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
+		reserva.calificarPropietario(calificacionPropietario);
+		reserva.calificarInmueble(calificacionInmueble);
 	}
 
 	@Override
-	public void calificarInquilino(Reserva reserva,Calificacion calificacion) {
+	public void calificarInquilinato(Reserva reserva,Calificacion calificacion) {
 		reserva.calificarInquilino(calificacion);
-		
 	}
 }

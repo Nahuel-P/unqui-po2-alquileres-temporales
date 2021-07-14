@@ -111,14 +111,14 @@ class AceptadaTestCase {
 	@Test
 	void testEstadoDeReservaAceptadaCalificaPropietario() {
 		assertThrows(Exception.class, () -> {
-			this.state.calificarInquilino(reserva, calificacionInquilino);
+			this.state.calificarInquilinato(reserva, calificacionInquilino);
 		});
 	}
 	
 	@Test
 	void testEstadoDeReservaAceptadaCalificaInquilino() {
 		assertThrows(Exception.class, () -> {
-			this.state.calificarPropietario(reserva, calificacionPropietario, calificacionInmueble);
+			this.state.calificarEstadia(reserva, calificacionPropietario, calificacionInmueble);
 		});
 	}
 }

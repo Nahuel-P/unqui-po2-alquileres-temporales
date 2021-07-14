@@ -91,14 +91,14 @@ class PendienteTestCase {
 	@Test
 	void testEstadoDeReservaPendienteCalificaPropietario() {
 		assertThrows(Exception.class, () -> {
-			this.state.calificarInquilino(reserva, calificacionInquilino);
+			this.state.calificarInquilinato(reserva, calificacionInquilino);
 		});
 	}
 	
 	@Test
 	void testEstadoDeReservaPendienteCalificaInquilino() {
 		assertThrows(Exception.class, () -> {
-			this.state.calificarPropietario(reserva, calificacionPropietario, calificacionInmueble);
+			this.state.calificarEstadia(reserva, calificacionPropietario, calificacionInmueble);
 		});
 	}
 		

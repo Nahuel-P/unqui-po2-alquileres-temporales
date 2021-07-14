@@ -3,6 +3,7 @@ package ar.edu.unq.po2.alquilerestemporales;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
 
@@ -10,13 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
-import ar.edu.unq.po2.alquilerestemporales.reserva.Cancelada;
+import ar.edu.unq.po2.alquilerestemporales.reserva.Concluida;
 import ar.edu.unq.po2.alquilerestemporales.reserva.EstadoReserva;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 
-class EstadoDeReservaCanceladaTestCase {
+class ConcluidaTestCaseTest {
 
-	private EstadoReserva estadoReservaCancelada;
+	private EstadoReserva estadoReservaConcluida;
 	private Reserva reserva;
 	private String fechaDeIngreso;
 	private String fechaDeSalida;
@@ -28,7 +29,7 @@ class EstadoDeReservaCanceladaTestCase {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		estadoReservaCancelada = new Cancelada();
+		estadoReservaConcluida = new Concluida();
 		reserva = mock(Reserva.class);
 		this.fechaDeIngreso = "2022-01-28";
 		this.fechaDeSalida = "2022-01-30";
@@ -40,50 +41,49 @@ class EstadoDeReservaCanceladaTestCase {
 	}
 	
 	@Test
-	void testEstadoDeReservaCanceladaAceptaReserva() {
+	void testEstadoDeReservaRechazadaAceptaReserva() {
 		assertThrows(Exception.class, () -> {
-			this.estadoReservaCancelada.aceptar(reserva);
+			this.estadoReservaConcluida.aceptar(reserva);
 		});
 	}
 	
 	@Test
-	void testEstadoDeReservaCanceladaRechazaReserva() {
+	void testEstadoDeReservaRechazadaRechazaReserva() {
 		assertThrows(Exception.class, () -> {
-			this.estadoReservaCancelada.rechazar(reserva);
+			this.estadoReservaConcluida.rechazar(reserva);
 		});
 	}
 	
 	@Test
-	void testEstadoDeReservaCanceladaCancelaReserva() {
+	void testEstadoDeReservaRechazadaCancelaReserva() {
 		assertThrows(Exception.class, () -> {
-			this.estadoReservaCancelada.cancelar(reserva);
+			this.estadoReservaConcluida.cancelar(reserva);
 		});
 	}
 	
 	@Test
-	void testEstadoDeReservaCanceladaConcluirReserva() {
+	void testEstadoDeReservaRechazadaConcluirReserva() {
 		assertThrows(Exception.class, () -> {
-			this.estadoReservaCancelada.concluir(reserva);
+			this.estadoReservaConcluida.concluir(reserva);
 		});
 	}
 	
 	@Test
 	void testEstadoDeReservaRechazadaNoEstaOcupadaConOtraReserva() {
-		assertFalse(this.estadoReservaCancelada.estaOcupadaCon(fechaDeIngresoDate, fechaDeSalidaDate, reserva));
+		assertFalse(this.estadoReservaConcluida.estaOcupadaCon(fechaDeIngresoDate, fechaDeSalidaDate, reserva));
 	}
 	
 	@Test
-	void testEstadoDeReservaCanceladaCalificaPropietario() {
-		assertThrows(Exception.class, () -> {
-			this.estadoReservaCancelada.calificarInquilino(reserva, calificacionInquilino);
-		});
+	void testEstadoDeReservaConcluidaCalificaInqulino() {
+		this.estadoReservaConcluida.calificarInquilinato(reserva, calificacionInquilino);
+		verify(reserva).calificarInquilino(calificacionInquilino);
+
 	}
 	
 	@Test
-	void testEstadoDeReservaCanceladaCalificaInquilino() {
-		assertThrows(Exception.class, () -> {
-			this.estadoReservaCancelada.calificarPropietario(reserva, calificacionPropietario, calificacionInmueble);
-		});
+	void testEstadoDeReservaConcluidaCalificaEstadia() {
+		this.estadoReservaConcluida.calificarEstadia(reserva, calificacionPropietario, calificacionInmueble);
+		verify(reserva).calificarPropietario(calificacionPropietario);
+		verify(reserva).calificarInmueble(calificacionInmueble);
 	}
-	
 }

@@ -99,13 +99,11 @@ public class BibliotecaDeReservas {
 		}
     }
 
-	public void calificarPropietario(Reserva reserva, Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
-		reserva.getEstadoDeReserva().calificarPropietario(reserva,calificacionPropietario,calificacionInmueble);
-		
+	public void calificarEstadia(Reserva reserva, Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
+		reserva.calificarEstadia(calificacionPropietario,calificacionInmueble);
 	}
 
-	public void calificarInquilino(Reserva reserva, Calificacion calificacion) {
-		reserva.getEstadoDeReserva().calificarInquilino(reserva, calificacion);
-		
+	public void calificarInquilinato(Reserva reserva, Calificacion calificacion) {
+		reserva.calificarInquilinato(calificacion);
 	}
 }

@@ -10,6 +10,8 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Calificacion;
 import ar.edu.unq.po2.alquilerestemporales.publicacion.calificable.Usuario;
 import ar.edu.unq.po2.alquilerestemporales.reserva.Reserva;
 import ar.edu.unq.po2.alquilerestemporales.webReservas.BibliotecaDeReservas;
@@ -24,6 +26,9 @@ class BibliotecaDeReservasTestCase {
 	private String ciudad2;
 	private LocalDate hoy;
 	private LocalDate mañana;
+	private Calificacion calificacionInquilino;
+	private Calificacion calificacionPropietario;
+	private Calificacion calificacionInmueble;
 	
 	
 	@BeforeEach
@@ -36,6 +41,9 @@ class BibliotecaDeReservasTestCase {
 		ciudad2 = "Mar del Plata";
 		hoy = LocalDate.now();
 		mañana = hoy.plusDays(1);
+		calificacionInquilino = mock(Calificacion.class);
+		calificacionPropietario = mock(Calificacion.class);
+		calificacionInmueble = mock(Calificacion.class);
 	}
 	
 	@Test
@@ -148,5 +156,18 @@ class BibliotecaDeReservasTestCase {
 		int resultado = this.biblioteca.getReservasCondicionales().size();
 		assertEquals(resultado,0);
 	}
+	
+	@Test
+	void testCalificarAEstadiaEnUnaReserva() {
+		this.biblioteca.calificarEstadia(reserva1, calificacionPropietario, calificacionInmueble);
+		verify(reserva1).calificarEstadia(calificacionPropietario, calificacionInmueble);
+	}
+	
+	@Test
+	void testCalificarElInquilinatoDeUnaReserva() {
+		this.biblioteca.calificarInquilinato(reserva1, calificacionInquilino);
+		verify(reserva1).calificarInquilinato(calificacionInquilino);
+	}
+	
 	
 }

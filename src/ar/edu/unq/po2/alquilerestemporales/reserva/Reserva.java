@@ -187,8 +187,19 @@ public class Reserva {
 		return (fechaIngreso.compareTo(reserva.getFechaDeIngreso())>=0) && (fechaSalida.compareTo(reserva.getFechaDeSalida())<=0);
 	}
 
-	public void calificarPublicacion(Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
+	public void calificarEstadia(Calificacion calificacionPropietario, Calificacion calificacionInmueble) {
+		this.estadoDeReserva.calificarEstadia(this,calificacionPropietario, calificacionInmueble);
+	}
+
+	public void calificarInquilinato(Calificacion calificacion) {
+		this.estadoDeReserva.calificarInquilinato(this,calificacion);
+	}
+
+	public void calificarPropietario(Calificacion calificacionPropietario) {
 		this.getPropietario().addCalificacion(calificacionPropietario);
+	}
+
+	public void calificarInmueble(Calificacion calificacionInmueble) {
 		this.getInmueble().addCalificacion(calificacionInmueble);
 	}
 
