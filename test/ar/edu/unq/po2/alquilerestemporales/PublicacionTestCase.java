@@ -36,7 +36,7 @@ class PublicacionTestCase {
 	private static LocalTime checkIn;
 	private static LocalTime checkOut;
 	private static LocalTime checkOut2;
-	private double precioBase;
+	private float precioBase;
 	private Inmueble inmueble;
 	private List <Foto> fotos;
 	private Foto foto1;
@@ -80,7 +80,7 @@ class PublicacionTestCase {
 		efectivo = mock(Efectivo.class);
 		formasDePago = new ArrayList <FormaDePago>(); 
 		fotos = new ArrayList <Foto>() ;
-		precioBase = 500;
+		precioBase = 500f;
 		politicaCancelacion = mock(PoliticaDeCancelacion.class);
 		publicacion = new Publicacion(inmueble, usuario, precioBase, checkIn, checkOut, fotos, 
 				formasDePago, fechaInicioPublicacion,fechaFinPublicacion, politicaCancelacion);

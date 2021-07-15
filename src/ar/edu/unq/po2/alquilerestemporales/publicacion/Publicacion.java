@@ -17,7 +17,7 @@ public class Publicacion {
 	private LocalTime checkOut;
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
-	private double precioBase;
+	private float precioBase;
 	private Inmueble inmueble;
 	private List <Foto> fotos;
 	private Usuario usuario;
@@ -26,7 +26,7 @@ public class Publicacion {
 	private Observer observador;
 	private PoliticaDeCancelacion politicaCancelacion;
 	
-	public Publicacion(Inmueble inmueble, Usuario usuario, double precioBase, LocalTime checkIn, 
+	public Publicacion(Inmueble inmueble, Usuario usuario, float precioBase, LocalTime checkIn, 
 			LocalTime checkOut, List<Foto> fotos, List <FormaDePago> formasDePago,
 			LocalDate fecIni, LocalDate fecFin, PoliticaDeCancelacion politCancelacion) {
 		
@@ -87,7 +87,7 @@ public class Publicacion {
 		
 	}
 	
-	public void bajarDePrecio(double nuevoPrecio) {
+	public void bajarDePrecio(float nuevoPrecio) {
 		if (nuevoPrecio < this.getPrecioBase()) { //Cumple estrictamente la funcion de bajar, caso contrario 
 			this.setPrecioBase(nuevoPrecio);      //se deberia utilizar otro metodo.
 			this.notificar();	
@@ -139,10 +139,10 @@ public class Publicacion {
 	}
 
 	public float getPrecioBase() {
-		return (float) precioBase;
+		return precioBase;
 	}
 
-	public void setPrecioBase(double precioBase) {
+	public void setPrecioBase(float precioBase) {
 		this.precioBase = precioBase;
 	}
 	

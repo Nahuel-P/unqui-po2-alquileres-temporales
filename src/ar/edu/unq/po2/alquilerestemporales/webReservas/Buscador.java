@@ -11,9 +11,9 @@ public class Buscador {
 
     public Buscador(){}
 
-    public ArrayList<Publicacion> buscar (List<Publicacion> publicaciones, FiltroBasico filtroBasico, List<Filtro> filtrosExtra){
+    public List<Publicacion> buscar (List<Publicacion> publicaciones, FiltroBasico filtroBasico, List<Filtro> filtrosExtra){
         
-        ArrayList<Publicacion> filtradas = new ArrayList<Publicacion>();
+        List<Publicacion> filtradas = new ArrayList<Publicacion>();
         for(Publicacion publicacion : publicaciones){
             if(this.pasaFiltros(publicacion, filtroBasico, filtrosExtra)){
                 filtradas.add(publicacion);
